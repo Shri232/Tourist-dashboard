@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import MapView from "../components/MapView";
+import DashboardOverview from "../components/DashboardOverview";
+import AnalyticsReportingDashboard from "../components/AnalyticsReportingDashboard";
 
-export default function Dashboard() {
-  const [selectedMenu, setSelectedMenu] = useState("Live Map");
+export default function Dashboard({ onLogout }) {
+  const [selectedMenu, setSelectedMenu] = useState("Dashboard");
 
   // tourists state (so we can update dynamically)
   const [tourists, setTourists] = useState([
@@ -29,12 +31,14 @@ export default function Dashboard() {
 
   return (
     <div style={styles.container}>
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <div style={styles.mainWrapper}>
         <Sidebar selected={selectedMenu} setSelected={setSelectedMenu} />
         <main style={styles.main}>
+          {selectedMenu === "Dashboard" && <DashboardOverview />}
           {selectedMenu === "Live Map" && <MapView tourists={tourists} />}
-          {selectedMenu !== "Live Map" && <h2>{selectedMenu} Page</h2>}
+          {selectedMenu === "Reports & Analytics" && <AnalyticsReportingDashboard />}
+          {selectedMenu !== "Live Map" && selectedMenu !== "Dashboard" && selectedMenu !== "Reports & Analytics" && <h2>{selectedMenu} Page</h2>}
         </main>
       </div>
     </div>
@@ -44,5 +48,10 @@ export default function Dashboard() {
 const styles = {
   container: { display: "flex", flexDirection: "column", height: "100vh" },
   mainWrapper: { display: "flex", flex: 1 },
-  main: { flex: 1, padding: "16px" },
+  main: { 
+    flex: 1, 
+    padding: "0", 
+    backgroundColor: "#f9fafb",
+    overflowY: "auto"
+  },
 };
