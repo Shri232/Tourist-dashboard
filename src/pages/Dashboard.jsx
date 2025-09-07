@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar";
 import MapView from "../components/MapView";
 import DashboardOverview from "../components/DashboardOverview";
 import AnalyticsReportingDashboard from "../components/AnalyticsReportingDashboard";
+import TouristRegistryManagement from "../components/TouristRegistryManagement";
+import AlertsNotificationCenter from "../components/AlertsNotificationCenter";
 
 export default function Dashboard({ onLogout }) {
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
@@ -37,8 +39,10 @@ export default function Dashboard({ onLogout }) {
         <main style={styles.main}>
           {selectedMenu === "Dashboard" && <DashboardOverview />}
           {selectedMenu === "Live Map" && <MapView tourists={tourists} />}
+          {selectedMenu === "Tourist Registry" && <TouristRegistryManagement />}
+          {selectedMenu === "Alerts" && <AlertsNotificationCenter />}
           {selectedMenu === "Reports & Analytics" && <AnalyticsReportingDashboard />}
-          {selectedMenu !== "Live Map" && selectedMenu !== "Dashboard" && selectedMenu !== "Reports & Analytics" && <h2>{selectedMenu} Page</h2>}
+          {selectedMenu !== "Live Map" && selectedMenu !== "Dashboard" && selectedMenu !== "Tourist Registry" && selectedMenu !== "Alerts" && selectedMenu !== "Reports & Analytics" && <h2>{selectedMenu} Page</h2>}
         </main>
       </div>
     </div>
