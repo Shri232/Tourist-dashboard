@@ -1,5 +1,8 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000"); // replace with your backend URL
+// Change URL if backend is deployed elsewhere
+const socket = io("http://localhost:5000", {
+  transports: ["websocket"],
+});
 
 export default socket;

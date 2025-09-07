@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import AdminLogin from "./pages/AdminLogin";
+import "leaflet/dist/leaflet.css";
+
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
