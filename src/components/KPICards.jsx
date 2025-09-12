@@ -1,182 +1,199 @@
 import React from "react";
 
-export default function KPICards() {
-  const kpiData = [
+const KPICards = () => {
+  const cards = [
     {
-      title: "Total Tourists",
-      value: "1,247",
-      trend: "+12%",
-      trendDirection: "up",
+      id: 1,
+      title: "Active Tourists",
+      value: "2,847",
+      change: "+12.5%",
+      positive: true,
       icon: "👥",
-      color: "#3b82f6",
-      bgColor: "rgba(59, 130, 246, 0.1)"
+      color: "#10b981",
+      secondaryColor: "#dcfce7"
     },
     {
-      title: "Active Alerts",
-      value: "3",
-      trend: "-2",
-      trendDirection: "down",
+      id: 2,
+      title: "Restricted Zone Alerts",
+      value: "37",
+      change: "-5.2%",
+      positive: true,
+      icon: "⚠️",
+      color: "#f59e0b",
+      secondaryColor: "#fef3c7"
+    },
+    {
+      id: 3,
+      title: "Emergency Responses",
+      value: "18",
+      change: "+3.1%",
+      positive: false,
       icon: "🚨",
       color: "#ef4444",
-      bgColor: "rgba(239, 68, 68, 0.1)"
+      secondaryColor: "#fee2e2"
     },
     {
-      title: "Response Teams Available",
-      value: "8/12",
-      trend: "67%",
-      trendDirection: "neutral",
-      icon: "🚑",
-      color: "#10b981",
-      bgColor: "rgba(16, 185, 129, 0.1)"
-    },
-    {
-      title: "Average Response Time",
-      value: "3.2 min",
-      trend: "Target: 5 min",
-      trendDirection: "up",
-      icon: "⏱️",
+      id: 4,
+      title: "Satisfaction Score",
+      value: "96%",
+      change: "+2.4%",
+      positive: true,
+      icon: "⭐",
       color: "#8b5cf6",
-      bgColor: "rgba(139, 92, 246, 0.1)"
+      secondaryColor: "#f3e8ff"
     }
   ];
 
-  const getTrendIcon = (direction) => {
-    switch (direction) {
-      case "up": return "📈";
-      case "down": return "📉";
-      default: return "📊";
-    }
-  };
-
-  const getTrendColor = (direction) => {
-    switch (direction) {
-      case "up": return "#10b981";
-      case "down": return "#ef4444";
-      default: return "#6b7280";
-    }
-  };
-
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Key Performance Indicators</h2>
-      <div style={styles.grid}>
-        {kpiData.map((kpi, index) => (
-          <div key={index} style={{...styles.card, backgroundColor: kpi.bgColor}}>
+      {cards.map((card) => (
+        <div key={card.id} style={styles.card}>
+          <div style={styles.cardContent}>
             <div style={styles.cardHeader}>
-              <div style={styles.iconContainer}>
-                <span style={{...styles.icon, color: kpi.color}}>{kpi.icon}</span>
-              </div>
-              <h3 style={styles.cardTitle}>{kpi.title}</h3>
-            </div>
-            
-            <div style={styles.cardBody}>
-              <div style={styles.valueContainer}>
-                <span style={{...styles.value, color: kpi.color}}>{kpi.value}</span>
-                <div style={styles.trendContainer}>
-                  <span style={styles.trendIcon}>{getTrendIcon(kpi.trendDirection)}</span>
-                  <span style={{...styles.trend, color: getTrendColor(kpi.trendDirection)}}>
-                    {kpi.trend}
-                  </span>
-                </div>
+              <h3 style={styles.cardTitle}>{card.title}</h3>
+              <div 
+                style={{
+                  ...styles.iconBadge,
+                  backgroundColor: card.secondaryColor,
+                  color: card.color
+                }}
+              >
+                <span style={styles.icon}>{card.icon}</span>
               </div>
             </div>
             
-            <div style={styles.cardFooter}>
-              <div style={{...styles.progressBar, backgroundColor: kpi.color}}>
-                <div style={{...styles.progress, width: kpi.trendDirection === "up" ? "75%" : "60%"}}></div>
-              </div>
+            <div style={styles.valueContainer}>
+              <h2 style={styles.cardValue}>{card.value}</h2>
+              <span 
+                style={{
+                  ...styles.changeIndicator,
+                  color: card.positive ? "#10b981" : "#ef4444",
+                  backgroundColor: card.positive ? "rgba(16, 185, 129, 0.12)" : "rgba(239, 68, 68, 0.12)"
+                }}
+              >
+                {card.positive ? "↑" : "↓"} {card.change}
+              </span>
+            </div>
+            
+            <div 
+              style={{
+                ...styles.progressBar,
+                backgroundColor: card.secondaryColor
+              }}
+            >
+              <div 
+                style={{
+                  ...styles.progressFill,
+                  backgroundColor: card.color,
+                  width: `${Math.min(Math.abs(parseFloat(card.change)) * 3, 100)}%`
+                }}
+              />
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 const styles = {
   container: {
-    marginBottom: "32px"
-  },
-  title: {
-    fontSize: "24px",
-    fontWeight: "700",
-    color: "#1f2937",
-    marginBottom: "20px"
-  },
-  grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "20px"
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: "24px",
+    marginBottom: "12px",
+    position: "relative",
+    zIndex: 1
   },
   card: {
+    backgroundColor: "#ffffff",
+    borderRadius: "16px",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)",
     padding: "24px",
-    borderRadius: "12px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.05)",
-    border: "1px solid rgba(0, 0, 0, 0.1)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease"
+    transition: "all 0.3s ease",
+    "&:hover": {
+      transform: "translateY(-5px)",
+      boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05)"
+    }
+  },
+  cardContent: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%"
   },
   cardHeader: {
     display: "flex",
-    alignItems: "center",
-    marginBottom: "16px",
-    gap: "12px"
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: "16px"
   },
-  iconContainer: {
-    width: "48px",
-    height: "48px",
-    borderRadius: "12px",
+  cardTitle: {
+    fontSize: "15px",
+    fontWeight: "500",
+    color: "#64748b",
+    margin: "0",
+    letterSpacing: "0.3px"
+  },
+  iconBadge: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.8)"
+    width: "36px",
+    height: "36px",
+    borderRadius: "12px",
+    padding: "8px"
   },
   icon: {
-    fontSize: "24px"
-  },
-  cardTitle: {
     fontSize: "16px",
-    fontWeight: "600",
-    color: "#374151",
-    margin: 0
-  },
-  cardBody: {
-    marginBottom: "16px"
+    lineHeight: "1"
   },
   valueContainer: {
     display: "flex",
     alignItems: "baseline",
-    justifyContent: "space-between"
+    gap: "10px",
+    marginBottom: "16px"
   },
-  value: {
-    fontSize: "36px",
-    fontWeight: "800",
-    lineHeight: "1"
+  cardValue: {
+    fontSize: "28px",
+    fontWeight: "700",
+    color: "#0f172a",
+    margin: "0",
+    letterSpacing: "-0.5px"
   },
-  trendContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px"
-  },
-  trendIcon: {
-    fontSize: "16px"
-  },
-  trend: {
-    fontSize: "14px",
-    fontWeight: "600"
-  },
-  cardFooter: {
-    marginTop: "16px"
+  changeIndicator: {
+    fontSize: "13px",
+    fontWeight: "600",
+    padding: "3px 8px",
+    borderRadius: "6px",
+    display: "inline-block"
   },
   progressBar: {
-    height: "4px",
-    borderRadius: "2px",
-    opacity: 0.2,
-    position: "relative"
+    height: "6px",
+    borderRadius: "3px",
+    overflow: "hidden",
+    marginTop: "auto"
   },
-  progress: {
+  progressFill: {
     height: "100%",
-    borderRadius: "2px",
-    backgroundColor: "currentColor",
-    opacity: 1
+    borderRadius: "3px"
+  },
+  
+  // Responsive design
+  "@media (max-width: 1280px)": {
+    container: {
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "20px"
+    }
+  },
+  "@media (max-width: 640px)": {
+    container: {
+      gridTemplateColumns: "1fr",
+      gap: "16px"
+    },
+    card: {
+      padding: "20px"
+    }
   }
 };
+
+export default KPICards;

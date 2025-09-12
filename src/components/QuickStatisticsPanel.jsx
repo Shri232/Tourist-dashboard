@@ -1,288 +1,389 @@
 import React from "react";
 
-export default function QuickStatisticsPanel() {
-  const todayStats = [
-    {
-      title: "Today's Registrations",
-      value: "145",
-      icon: "📝",
-      trend: "+23",
-      trendType: "positive",
-      color: "#3b82f6"
-    },
-    {
-      title: "Panic Button Activations",
-      value: "3",
-      icon: "🆘",
-      trend: "-2",
-      trendType: "positive",
-      color: "#ef4444"
-    },
-    {
-      title: "Incidents Resolved",
-      value: "12",
-      icon: "✅",
-      trend: "+5",
-      trendType: "positive",
-      color: "#10b981"
-    },
-    {
-      title: "Tourist Satisfaction Score",
-      value: "4.2/5",
-      icon: "⭐",
-      trend: "+0.3",
-      trendType: "positive",
-      color: "#f59e0b"
-    }
-  ];
-
-  const detailedStats = [
-    {
-      category: "Tourist Activity",
-      stats: [
-        { label: "Check-ins Today", value: "287", change: "+15%" },
-        { label: "Active Tours", value: "24", change: "+2" },
-        { label: "Guided Groups", value: "18", change: "stable" },
-        { label: "Solo Travelers", value: "169", change: "+12%" }
-      ]
-    },
-    {
-      category: "Safety Metrics",
-      stats: [
-        { label: "Safety Score", value: "94%", change: "+2%" },
-        { label: "Response Rate", value: "97%", change: "stable" },
-        { label: "Incident Prevention", value: "89%", change: "+5%" },
-        { label: "Equipment Status", value: "92%", change: "-1%" }
-      ]
-    },
-    {
-      category: "Resource Utilization",
-      stats: [
-        { label: "Staff Deployment", value: "85%", change: "+8%" },
-        { label: "Vehicle Usage", value: "67%", change: "+3%" },
-        { label: "Communication Channels", value: "98%", change: "stable" },
-        { label: "Emergency Readiness", value: "100%", change: "stable" }
-      ]
-    }
-  ];
-
-  const getChangeColor = (change) => {
-    if (change.includes("+")) return "#10b981";
-    if (change.includes("-")) return "#ef4444";
-    return "#6b7280";
+const QuickStatisticsPanel = () => {
+  const statsData = {
+    touristsPerState: [
+      { name: "Madhya Pradesh", value: 2543, color: "#3b82f6" },
+      { name: "Tamil Nadu", value: 1876, color: "#f59e0b" },
+      { name: "Kerala", value: 1245, color: "#10b981" },
+      { name: "Rajasthan", value: 945, color: "#8b5cf6" },
+      { name: "Goa", value: 721, color: "#ec4899" }
+    ],
+    trafficSources: [
+      { source: "Direct", percentage: 42 },
+      { source: "Website", percentage: 28 },
+      { source: "Partner Apps", percentage: 18 },
+      { source: "Social Media", percentage: 12 }
+    ],
+    recentActivity: [
+      { time: "10:32 AM", event: "Tourist group entered Bandipur Reserve" },
+      { time: "10:15 AM", event: "Medical assistance requested in Goa" },
+      { time: "09:48 AM", event: "New restricted zone created in Tamil Nadu" },
+      { time: "09:22 AM", event: "Weather alert issued for Manali region" }
+    ]
   };
 
-  const getChangeIcon = (change) => {
-    if (change.includes("+")) return "📈";
-    if (change.includes("-")) return "📉";
-    return "➡️";
+  // Format large numbers with commas
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat('en-US').format(num);
   };
+  
+  // Calculate the maximum value for scaling the bars
+  const maxTouristValue = Math.max(...statsData.touristsPerState.map(state => state.value));
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Quick Statistics Overview</h2>
-      
-      {/* Main Stats Cards */}
-      <div style={styles.mainStatsGrid}>
-        {todayStats.map((stat, index) => (
-          <div key={index} style={styles.statCard}>
-            <div style={styles.statHeader}>
-              <span style={{...styles.statIcon, color: stat.color}}>{stat.icon}</span>
-              <div style={styles.trendBadge}>
-                <span style={{color: getChangeColor(stat.trend)}}>{stat.trend}</span>
-              </div>
-            </div>
-            <div style={styles.statValue}>
-              <span style={{color: stat.color}}>{stat.value}</span>
-            </div>
-            <div style={styles.statTitle}>{stat.title}</div>
-          </div>
-        ))}
+      <div style={styles.header}>
+        <h2 style={styles.title}>Quick Statistics</h2>
+        <div style={styles.timeFilter}>
+          <button style={{...styles.timeButton, ...styles.timeButtonActive}}>Today</button>
+          <button style={styles.timeButton}>Week</button>
+          <button style={styles.timeButton}>Month</button>
+        </div>
       </div>
 
-      {/* Detailed Statistics Grid */}
-      <div style={styles.detailedGrid}>
-        {detailedStats.map((category, categoryIndex) => (
-          <div key={categoryIndex} style={styles.categoryCard}>
-            <h3 style={styles.categoryTitle}>{category.category}</h3>
-            <div style={styles.categoryStats}>
-              {category.stats.map((stat, statIndex) => (
-                <div key={statIndex} style={styles.detailStatRow}>
-                  <div style={styles.statLabelContainer}>
-                    <span style={styles.statLabel}>{stat.label}</span>
-                    <div style={styles.changeContainer}>
-                      <span style={styles.changeIcon}>{getChangeIcon(stat.change)}</span>
-                      <span style={{...styles.changeValue, color: getChangeColor(stat.change)}}>
-                        {stat.change}
-                      </span>
-                    </div>
+      <div style={styles.content}>
+        <div style={styles.section}>
+          <h3 style={styles.sectionTitle}>
+            <span style={styles.sectionIcon}>📊</span> Tourists by State
+          </h3>
+          <div style={styles.stateBars}>
+            {statsData.touristsPerState.map((state, index) => (
+              <div key={index} style={styles.stateRow}>
+                <div style={styles.stateNameContainer}>
+                  <div style={{...styles.colorDot, backgroundColor: state.color}}></div>
+                  <span style={styles.stateName}>{state.name}</span>
+                </div>
+                <div style={styles.barContainer}>
+                  <div 
+                    style={{
+                      ...styles.bar,
+                      width: `${(state.value / maxTouristValue) * 100}%`,
+                      backgroundColor: state.color
+                    }}
+                  ></div>
+                </div>
+                <span style={styles.stateValue}>{formatNumber(state.value)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={styles.divider}></div>
+
+        <div style={styles.twoColSection}>
+          <div style={styles.trafficSection}>
+            <h3 style={styles.sectionTitle}>
+              <span style={styles.sectionIcon}>🔍</span> Traffic Sources
+            </h3>
+            <div style={styles.donutChartContainer}>
+              <div style={styles.donutChart}>
+                {statsData.trafficSources.map((source, index) => {
+                  // Calculate the segment position in the donut
+                  const prevSegmentsTotal = statsData.trafficSources
+                    .slice(0, index)
+                    .reduce((acc, curr) => acc + curr.percentage, 0);
+                  
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        ...styles.donutSegment,
+                        backgroundColor: getTrafficSourceColor(source.source),
+                        transform: `rotate(${prevSegmentsTotal * 3.6}deg)`,
+                        clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((source.percentage * 3.6) * Math.PI / 180)}% ${50 - 50 * Math.sin((source.percentage * 3.6) * Math.PI / 180)}%, 50% 50%)`
+                      }}
+                    ></div>
+                  );
+                })}
+                <div style={styles.donutHole}>
+                  <span style={styles.donutTotal}>100%</span>
+                </div>
+              </div>
+              <div style={styles.trafficLegend}>
+                {statsData.trafficSources.map((source, index) => (
+                  <div key={index} style={styles.legendItem}>
+                    <div style={{
+                      ...styles.legendDot,
+                      backgroundColor: getTrafficSourceColor(source.source)
+                    }}></div>
+                    <span style={styles.legendText}>{source.source}</span>
+                    <span style={styles.legendValue}>{source.percentage}%</span>
                   </div>
-                  <div style={styles.statValueContainer}>
-                    <span style={styles.detailStatValue}>{stat.value}</span>
-                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div style={styles.activitySection}>
+            <h3 style={styles.sectionTitle}>
+              <span style={styles.sectionIcon}>🕒</span> Recent Activity
+            </h3>
+            <div style={styles.activityList}>
+              {statsData.recentActivity.map((activity, index) => (
+                <div key={index} style={styles.activityItem}>
+                  <div style={styles.activityTime}>{activity.time}</div>
+                  <div style={styles.activityEvent}>{activity.event}</div>
                 </div>
               ))}
             </div>
+            <button style={styles.viewMoreButton}>View All Activity</button>
           </div>
-        ))}
-      </div>
-
-      {/* Real-time Updates Footer */}
-      <div style={styles.footer}>
-        <div style={styles.updateInfo}>
-          <span style={styles.liveIndicator}>🟢</span>
-          <span>Live data - Last updated: {new Date().toLocaleTimeString()}</span>
         </div>
-        <button style={styles.refreshButton}>
-          🔄 Refresh Data
-        </button>
       </div>
     </div>
   );
-}
+};
+
+// Helper function to get color for traffic source
+const getTrafficSourceColor = (source) => {
+  switch (source) {
+    case "Direct":
+      return "#3b82f6";
+    case "Website":
+      return "#10b981";
+    case "Partner Apps":
+      return "#f59e0b";
+    case "Social Media":
+      return "#8b5cf6";
+    default:
+      return "#64748b";
+  }
+};
 
 const styles = {
   container: {
-    marginBottom: "32px"
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    padding: "24px",
+    backgroundColor: "#ffffff"
   },
-  title: {
-    fontSize: "24px",
-    fontWeight: "700",
-    color: "#1f2937",
-    marginBottom: "24px"
-  },
-  mainStatsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "16px",
-    marginBottom: "32px"
-  },
-  statCard: {
-    padding: "20px",
-    backgroundColor: "white",
-    borderRadius: "12px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    border: "1px solid #e5e7eb",
-    textAlign: "center",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease"
-  },
-  statHeader: {
+  header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "12px"
-  },
-  statIcon: {
-    fontSize: "32px"
-  },
-  trendBadge: {
-    backgroundColor: "#f3f4f6",
-    padding: "4px 8px",
-    borderRadius: "12px",
-    fontSize: "12px",
-    fontWeight: "600"
-  },
-  statValue: {
-    fontSize: "36px",
-    fontWeight: "800",
-    marginBottom: "8px"
-  },
-  statTitle: {
-    fontSize: "14px",
-    color: "#6b7280",
-    fontWeight: "500"
-  },
-  detailedGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "20px",
     marginBottom: "24px"
   },
-  categoryCard: {
-    backgroundColor: "white",
-    borderRadius: "12px",
-    padding: "20px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    border: "1px solid #e5e7eb"
-  },
-  categoryTitle: {
+  title: {
     fontSize: "18px",
-    fontWeight: "600",
-    color: "#1f2937",
-    marginBottom: "16px",
-    paddingBottom: "8px",
-    borderBottom: "2px solid #e5e7eb"
+    fontWeight: "700",
+    color: "#0f172a",
+    margin: 0
   },
-  categoryStats: {
+  timeFilter: {
+    display: "flex",
+    backgroundColor: "#f1f5f9",
+    borderRadius: "8px",
+    padding: "4px"
+  },
+  timeButton: {
+    padding: "6px 12px",
+    border: "none",
+    borderRadius: "6px",
+    backgroundColor: "transparent",
+    color: "#64748b",
+    fontSize: "13px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "all 0.2s ease"
+  },
+  timeButtonActive: {
+    backgroundColor: "#ffffff",
+    color: "#0f172a",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)"
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1
+  },
+  section: {
+    marginBottom: "24px"
+  },
+  sectionTitle: {
+    fontSize: "15px",
+    fontWeight: "600",
+    color: "#334155",
+    margin: "0 0 16px 0",
+    display: "flex",
+    alignItems: "center"
+  },
+  sectionIcon: {
+    fontSize: "16px",
+    marginRight: "8px"
+  },
+  stateBars: {
     display: "flex",
     flexDirection: "column",
     gap: "12px"
   },
-  detailStatRow: {
+  stateRow: {
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
-    padding: "8px 0"
+    gap: "12px"
   },
-  statLabelContainer: {
+  stateNameContainer: {
     display: "flex",
-    flexDirection: "column",
-    gap: "4px"
+    alignItems: "center",
+    width: "140px"
   },
-  statLabel: {
+  colorDot: {
+    width: "10px",
+    height: "10px",
+    borderRadius: "50%",
+    marginRight: "8px"
+  },
+  stateName: {
     fontSize: "14px",
-    color: "#374151",
-    fontWeight: "500"
+    color: "#475569",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis"
   },
-  changeContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px"
+  barContainer: {
+    flex: 1,
+    height: "8px",
+    backgroundColor: "#f1f5f9",
+    borderRadius: "4px",
+    overflow: "hidden"
   },
-  changeIcon: {
-    fontSize: "12px"
+  bar: {
+    height: "100%",
+    borderRadius: "4px"
   },
-  changeValue: {
-    fontSize: "12px",
-    fontWeight: "600"
-  },
-  statValueContainer: {
+  stateValue: {
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#0f172a",
+    width: "60px",
     textAlign: "right"
   },
-  detailStatValue: {
-    fontSize: "18px",
+  divider: {
+    height: "1px",
+    backgroundColor: "#e2e8f0",
+    margin: "8px 0 24px"
+  },
+  twoColSection: {
+    display: "flex",
+    flex: 1,
+    gap: "24px"
+  },
+  trafficSection: {
+    flex: 1
+  },
+  activitySection: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column"
+  },
+  donutChartContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "24px"
+  },
+  donutChart: {
+    position: "relative",
+    width: "120px",
+    height: "120px",
+    borderRadius: "50%",
+    backgroundColor: "#f1f5f9"
+  },
+  donutSegment: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    borderRadius: "50%",
+    clipPath: "polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%)"
+  },
+  donutHole: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "60%",
+    height: "60%",
+    borderRadius: "50%",
+    backgroundColor: "#ffffff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  donutTotal: {
+    fontSize: "16px",
     fontWeight: "700",
-    color: "#1f2937"
+    color: "#0f172a"
   },
-  footer: {
+  trafficLegend: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 20px",
-    backgroundColor: "#f9fafb",
-    borderRadius: "8px",
-    border: "1px solid #e5e7eb"
-  },
-  updateInfo: {
-    display: "flex",
-    alignItems: "center",
+    flexDirection: "column",
     gap: "8px",
-    fontSize: "14px",
-    color: "#6b7280"
+    flex: 1
   },
-  liveIndicator: {
+  legendItem: {
+    display: "flex",
+    alignItems: "center"
+  },
+  legendDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    marginRight: "8px"
+  },
+  legendText: {
+    fontSize: "13px",
+    color: "#475569",
+    flex: 1
+  },
+  legendValue: {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: "#0f172a"
+  },
+  activityList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    flex: 1
+  },
+  activityItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+    padding: "8px",
+    borderRadius: "8px",
+    backgroundColor: "#f8fafc",
+    transition: "background-color 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#f1f5f9"
+    }
+  },
+  activityTime: {
     fontSize: "12px",
-    animation: "pulse 2s infinite"
+    fontWeight: "600",
+    color: "#64748b",
+    whiteSpace: "nowrap"
   },
-  refreshButton: {
-    padding: "8px 16px",
-    backgroundColor: "#3b82f6",
-    color: "white",
+  activityEvent: {
+    fontSize: "13px",
+    color: "#334155",
+    lineHeight: "1.4"
+  },
+  viewMoreButton: {
+    marginTop: "16px",
+    padding: "8px 0",
+    backgroundColor: "transparent",
+    color: "#3b82f6",
     border: "none",
-    borderRadius: "6px",
-    fontSize: "14px",
-    fontWeight: "500",
+    borderTop: "1px solid #e2e8f0",
+    fontSize: "13px",
+    fontWeight: "600",
     cursor: "pointer",
-    transition: "background-color 0.2s"
+    transition: "color 0.2s ease",
+    "&:hover": {
+      color: "#2563eb"
+    }
   }
 };
+
+export default QuickStatisticsPanel;

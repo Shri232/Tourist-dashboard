@@ -453,33 +453,18 @@ export default function AlertsNotificationCenter() {
 
         {/* Bulk Actions */}
         {selectedAlerts.length > 0 && (
-          <div style={styles.bulkActionsContainer}>
-            <span style={styles.bulkActionsLabel}>
-              {selectedAlerts.length} alerts selected
-            </span>
+          <div style={styles.bulkActions}>
             <button 
-              style={styles.bulkActionButton}
-              onClick={() => handleBulkAction('resolve-all')}
+              style={styles.bulkActionButtonPrimary} 
+              onClick={handleResolveSelected}
             >
-              ✅ Resolve All
+              Resolve Selected ({selectedAlerts.length})
             </button>
             <button 
-              style={styles.bulkActionButton}
-              onClick={() => handleBulkAction('escalate')}
+              style={{...styles.bulkActionButtonPrimary, backgroundColor: "#dc2626", marginLeft: "8px"}} 
+              onClick={handleDeleteSelected}
             >
-              🔺 Escalate
-            </button>
-            <button 
-              style={styles.bulkActionButton}
-              onClick={() => handleBulkAction('assign')}
-            >
-              👤 Assign
-            </button>
-            <button 
-              style={styles.bulkActionButton}
-              onClick={() => handleBulkAction('export')}
-            >
-              📥 Export
+              Delete Selected
             </button>
           </div>
         )}
@@ -785,7 +770,7 @@ const styles = {
     backgroundColor: "white",
     cursor: "pointer"
   },
-  bulkActionsContainer: {
+  bulkActions: {
     display: "flex",
     alignItems: "center",
     gap: "12px",
@@ -795,18 +780,12 @@ const styles = {
     border: "1px solid #fecaca",
     flexWrap: "wrap"
   },
-  bulkActionsLabel: {
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "#dc2626"
-  },
-  bulkActionButton: {
-    padding: "6px 12px",
-    backgroundColor: "#ef4444",
+  bulkActionButtonPrimary: {
+    padding: "10px 16px",
+    backgroundColor: "#3b82f6",
     color: "white",
     border: "none",
-    borderRadius: "6px",
-    fontSize: "12px",
+    borderRadius: "4px",
     fontWeight: "500",
     cursor: "pointer"
   },
@@ -1012,13 +991,12 @@ const styles = {
     flexWrap: "wrap"
   },
   actionButton: {
-    padding: "10px 16px",
-    backgroundColor: "#ef4444",
+    padding: "8px 12px",
+    backgroundColor: "#3b82f6",
     color: "white",
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "4px",
     fontSize: "14px",
-    fontWeight: "500",
     cursor: "pointer"
   }
 };

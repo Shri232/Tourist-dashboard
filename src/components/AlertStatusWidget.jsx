@@ -6,138 +6,145 @@ export default function AlertStatusWidget() {
   const alerts = [
     {
       id: 1,
-      type: "critical",
-      title: "Tourist Missing in Restricted Zone",
-      location: "Zone A-7",
-      timestamp: "2 min ago",
-      description: "Tourist ID: TR-2024-0891 last seen near cliff area"
+      type: "Restricted Zone",
+      location: "Bandipur Tiger Reserve",
+      tourists: 3,
+      severity: "high",
+      time: "12 min ago"
     },
     {
       id: 2,
-      type: "warning",
-      title: "Weather Alert - Heavy Rain Expected",
-      location: "All Zones",
-      timestamp: "15 min ago",
-      description: "Monsoon warning issued for next 3 hours"
+      type: "Medical",
+      location: "Goa Beach Area 4",
+      tourists: 1,
+      severity: "medium",
+      time: "34 min ago"
     },
     {
       id: 3,
-      type: "info",
-      title: "High Tourist Density Detected",
-      location: "Zone B-3",
-      timestamp: "32 min ago",
-      description: "Crowd management may be required"
+      type: "Weather",
+      location: "Manali Ridge Pass",
+      tourists: 8,
+      severity: "high",
+      time: "52 min ago"
     },
     {
       id: 4,
-      type: "warning",
-      title: "Equipment Malfunction",
-      location: "Checkpoint 5",
-      timestamp: "1 hour ago",
-      description: "Security camera #12 offline"
+      type: "Transportation",
+      location: "Darjeeling Railway",
+      tourists: 12,
+      severity: "low",
+      time: "1h 17m ago"
     }
   ];
 
-  const getAlertColor = (type) => {
-    switch (type) {
-      case "critical": return "#ef4444";
-      case "warning": return "#f59e0b";
-      case "info": return "#3b82f6";
-      default: return "#6b7280";
-    }
-  };
-
-  const getAlertBgColor = (type) => {
-    switch (type) {
-      case "critical": return "rgba(239, 68, 68, 0.1)";
-      case "warning": return "rgba(245, 158, 11, 0.1)";
-      case "info": return "rgba(59, 130, 246, 0.1)";
-      default: return "rgba(107, 114, 128, 0.1)";
+  // Helper to get severity color
+  const getSeverityStyles = (severity) => {
+    switch (severity) {
+      case "high":
+        return {
+          color: "#ef4444",
+          backgroundColor: "rgba(239, 68, 68, 0.12)",
+          border: "1px solid rgba(239, 68, 68, 0.3)"
+        };
+      case "medium":
+        return {
+          color: "#f59e0b",
+          backgroundColor: "rgba(245, 158, 11, 0.12)",
+          border: "1px solid rgba(245, 158, 11, 0.3)"
+        };
+      case "low":
+        return {
+          color: "#3b82f6",
+          backgroundColor: "rgba(59, 130, 246, 0.12)",
+          border: "1px solid rgba(59, 130, 246, 0.3)"
+        };
+      default:
+        return {
+          color: "#6b7280",
+          backgroundColor: "rgba(107, 114, 128, 0.12)",
+          border: "1px solid rgba(107, 114, 128, 0.3)"
+        };
     }
   };
 
   const getAlertIcon = (type) => {
     switch (type) {
-      case "critical": return "🚨";
-      case "warning": return "⚠️";
-      case "info": return "ℹ️";
-      default: return "📋";
+      case "Restricted Zone":
+        return "🚫";
+      case "Medical":
+        return "🏥";
+      case "Weather":
+        return "⛈️";
+      case "Transportation":
+        return "🚌";
+      default:
+        return "⚠️";
     }
-  };
-
-  const handleAction = (alertId, action) => {
-    console.log(`${action} action taken for alert ${alertId}`);
-    // In a real app, this would make API calls
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <h2 style={styles.title}>Emergency Alert Panel</h2>
-        <div style={styles.controls}>
-          <button 
-            style={{...styles.soundButton, backgroundColor: soundEnabled ? "#10b981" : "#6b7280"}}
-            onClick={() => setSoundEnabled(!soundEnabled)}
-          >
-            {soundEnabled ? "🔊" : "🔇"} Sound {soundEnabled ? "ON" : "OFF"}
+        <h2 style={styles.title}>
+          Recent Alerts 
+          <span className="alert-badge" style={styles.alertBadge}>
+            {alerts.length}
+          </span>
+        </h2>
+        <div style={styles.actions}>
+          <button style={styles.actionButton}>
+            View All
           </button>
-          <div style={styles.alertCount}>
-            <span style={styles.countBadge}>{alerts.filter(a => a.type === "critical").length}</span>
-            Critical
-          </div>
+          <button style={styles.iconButton}>
+            <span style={{ fontSize: "20px" }}>⚙️</span>
+          </button>
         </div>
       </div>
 
-      <div style={styles.alertList}>
+      <div style={styles.alertsList}>
         {alerts.map((alert) => (
-          <div 
-            key={alert.id} 
-            style={{
-              ...styles.alertCard,
-              backgroundColor: getAlertBgColor(alert.type),
-              borderLeftColor: getAlertColor(alert.type)
-            }}
-          >
-            <div style={styles.alertHeader}>
-              <div style={styles.alertInfo}>
-                <span style={styles.alertIcon}>{getAlertIcon(alert.type)}</span>
-                <div>
-                  <h4 style={styles.alertTitle}>{alert.title}</h4>
-                  <div style={styles.alertMeta}>
-                    <span style={styles.location}>📍 {alert.location}</span>
-                    <span style={styles.timestamp}>🕒 {alert.timestamp}</span>
-                  </div>
-                </div>
-              </div>
-              <div style={{...styles.alertPriority, color: getAlertColor(alert.type)}}>
-                {alert.type.toUpperCase()}
+          <div key={alert.id} style={styles.alertItem}>
+            <div style={styles.alertIconContainer}>
+              <div style={{
+                ...styles.alertIcon,
+                ...getSeverityStyles(alert.severity)
+              }}>
+                {getAlertIcon(alert.type)}
               </div>
             </div>
-            
-            <p style={styles.alertDescription}>{alert.description}</p>
-            
-            <div style={styles.actionButtons}>
-              <button 
-                style={{...styles.actionBtn, ...styles.respondBtn}}
-                onClick={() => handleAction(alert.id, "respond")}
-              >
-                🚑 Respond
-              </button>
-              <button 
-                style={{...styles.actionBtn, ...styles.escalateBtn}}
-                onClick={() => handleAction(alert.id, "escalate")}
-              >
-                📢 Escalate
-              </button>
-              <button 
-                style={{...styles.actionBtn, ...styles.dismissBtn}}
-                onClick={() => handleAction(alert.id, "dismiss")}
-              >
-                ✅ Dismiss
-              </button>
+            <div style={styles.alertContent}>
+              <div style={styles.alertHeader}>
+                <h4 style={styles.alertType}>{alert.type}</h4>
+                <span style={{
+                  ...styles.severityBadge,
+                  ...getSeverityStyles(alert.severity)
+                }}>
+                  {alert.severity}
+                </span>
+              </div>
+              <p style={styles.alertLocation}>{alert.location}</p>
+              <div style={styles.alertFooter}>
+                <span style={styles.touristCount}>
+                  <span style={{ marginRight: "4px" }}>👥</span>
+                  {alert.tourists} tourist{alert.tourists !== 1 ? 's' : ''}
+                </span>
+                <span style={styles.timestamp}>{alert.time}</span>
+              </div>
             </div>
           </div>
         ))}
+      </div>
+
+      <div style={styles.footer}>
+        <div style={styles.allClearStatus}>
+          <div style={styles.statusIndicator}></div>
+          All systems operational
+        </div>
+        <button style={styles.refreshButton}>
+          <span style={{ marginRight: "6px", fontSize: "12px" }}>🔄</span>
+          Refresh
+        </button>
       </div>
     </div>
   );
@@ -145,135 +152,192 @@ export default function AlertStatusWidget() {
 
 const styles = {
   container: {
-    marginBottom: "32px"
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    padding: "24px",
+    backgroundColor: "#ffffff"
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    paddingBottom: "16px",
+    borderBottom: "1px solid rgba(226, 232, 240, 0.8)"
   },
   title: {
-    fontSize: "24px",
+    fontSize: "18px",
     fontWeight: "700",
-    color: "#1f2937"
-  },
-  controls: {
+    color: "#0f172a",
+    margin: 0,
     display: "flex",
     alignItems: "center",
-    gap: "16px"
+    gap: "8px"
   },
-  soundButton: {
-    padding: "8px 16px",
-    borderRadius: "8px",
+  alertBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ef4444",
+    color: "#ffffff",
+    fontSize: "12px",
+    fontWeight: "700",
+    width: "22px",
+    height: "22px",
+    borderRadius: "50%",
+    marginLeft: "8px"
+  },
+  actions: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px"
+  },
+  actionButton: {
+    padding: "8px 12px",
+    backgroundColor: "#f1f5f9",
+    color: "#475569",
     border: "none",
-    color: "white",
-    fontSize: "14px",
+    borderRadius: "8px",
+    fontSize: "13px",
     fontWeight: "500",
     cursor: "pointer",
-    transition: "background-color 0.2s"
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#e2e8f0",
+      color: "#334155"
+    }
   },
-  alertCount: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "#374151"
-  },
-  countBadge: {
-    backgroundColor: "#ef4444",
-    color: "white",
-    borderRadius: "50%",
-    width: "24px",
-    height: "24px",
+  iconButton: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "12px",
-    fontWeight: "700"
+    width: "32px",
+    height: "32px",
+    backgroundColor: "#f1f5f9",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#e2e8f0"
+    }
   },
-  alertList: {
+  alertsList: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px"
+    gap: "16px",
+    flex: 1,
+    overflowY: "auto",
+    paddingRight: "6px",
+    marginBottom: "20px"
   },
-  alertCard: {
-    padding: "20px",
+  alertItem: {
+    display: "flex",
+    backgroundColor: "#f8fafc",
     borderRadius: "12px",
-    borderLeft: "4px solid",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease"
+    overflow: "hidden",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#f1f5f9",
+      transform: "translateY(-2px)"
+    }
+  },
+  alertIconContainer: {
+    padding: "16px 0 16px 16px",
+    display: "flex",
+    alignItems: "flex-start"
+  },
+  alertIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "40px",
+    height: "40px",
+    borderRadius: "10px",
+    fontSize: "18px"
+  },
+  alertContent: {
+    flex: 1,
+    padding: "16px"
   },
   alertHeader: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: "12px"
+    alignItems: "center",
+    marginBottom: "6px"
   },
-  alertInfo: {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "12px"
-  },
-  alertIcon: {
-    fontSize: "24px"
-  },
-  alertTitle: {
-    fontSize: "16px",
+  alertType: {
+    fontSize: "15px",
     fontWeight: "600",
-    color: "#1f2937",
-    margin: "0 0 8px 0"
+    color: "#0f172a",
+    margin: 0
   },
-  alertMeta: {
-    display: "flex",
-    gap: "16px",
-    fontSize: "12px",
-    color: "#6b7280"
-  },
-  location: {
-    fontWeight: "500"
-  },
-  timestamp: {
-    fontWeight: "500"
-  },
-  alertPriority: {
-    fontSize: "12px",
-    fontWeight: "700",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    backgroundColor: "rgba(255, 255, 255, 0.7)"
-  },
-  alertDescription: {
-    fontSize: "14px",
-    color: "#4b5563",
-    marginBottom: "16px",
-    lineHeight: "1.5"
-  },
-  actionButtons: {
-    display: "flex",
-    gap: "8px",
-    flexWrap: "wrap"
-  },
-  actionBtn: {
-    padding: "8px 16px",
-    borderRadius: "6px",
-    border: "none",
+  severityBadge: {
     fontSize: "12px",
     fontWeight: "500",
-    cursor: "pointer",
-    transition: "all 0.2s ease"
+    padding: "2px 8px",
+    borderRadius: "20px"
   },
-  respondBtn: {
+  alertLocation: {
+    fontSize: "14px",
+    color: "#64748b",
+    margin: "0 0 8px 0"
+  },
+  alertFooter: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: "8px"
+  },
+  touristCount: {
+    fontSize: "13px",
+    color: "#64748b",
+    display: "flex",
+    alignItems: "center"
+  },
+  timestamp: {
+    fontSize: "12px",
+    color: "#94a3b8",
+    fontWeight: "500"
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: "16px",
+    borderTop: "1px solid rgba(226, 232, 240, 0.8)"
+  },
+  allClearStatus: {
+    display: "flex",
+    alignItems: "center",
+    fontSize: "14px",
+    color: "#10b981",
+    fontWeight: "500"
+  },
+  statusIndicator: {
+    width: "8px",
+    height: "8px",
     backgroundColor: "#10b981",
-    color: "white"
+    borderRadius: "50%",
+    marginRight: "8px"
   },
-  escalateBtn: {
-    backgroundColor: "#f59e0b",
-    color: "white"
-  },
-  dismissBtn: {
-    backgroundColor: "#6b7280",
-    color: "white"
+  refreshButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "6px 12px",
+    backgroundColor: "#f1f5f9",
+    color: "#475569",
+    border: "none",
+    borderRadius: "6px",
+    fontSize: "13px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#e2e8f0",
+      color: "#334155"
+    }
   }
 };

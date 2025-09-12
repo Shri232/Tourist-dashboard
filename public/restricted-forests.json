@@ -1,0 +1,2212 @@
+[
+  {
+    "id": 1,
+    "name": "Sundarbans Protected Forest",
+    "description": "Home to Bengal tigers and mangrove ecosystems",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 21.9497, "lng": 88.7391},
+      {"lat": 22.1014, "lng": 88.8943},
+      {"lat": 21.7016, "lng": 89.1846},
+      {"lat": 21.5839, "lng": 88.9111}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bandipur Tiger Reserve",
+    "description": "Protected tiger reserve with strict access control",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.6432, "lng": 76.5051},
+      {"lat": 11.7673, "lng": 76.7093},
+      {"lat": 11.6267, "lng": 76.8050},
+      {"lat": 11.5117, "lng": 76.6272}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Silent Valley National Park",
+    "description": "Pristine evergreen tropical forest ecosystem",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.1023, "lng": 76.4197},
+      {"lat": 11.1456, "lng": 76.5218},
+      {"lat": 11.0512, "lng": 76.5357},
+      {"lat": 11.0241, "lng": 76.4344}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Nagarhole National Park",
+    "description": "Protected wildlife sanctuary with limited access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.1576, "lng": 76.1487},
+      {"lat": 12.2425, "lng": 76.2840},
+      {"lat": 12.0184, "lng": 76.3938},
+      {"lat": 11.9736, "lng": 76.2213}
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Kanha Tiger Reserve",
+    "description": "Critical tiger habitat with controlled tourism",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.1631, "lng": 80.5815},
+      {"lat": 22.3731, "lng": 80.7927},
+      {"lat": 22.2431, "lng": 81.0199},
+      {"lat": 22.0109, "lng": 80.8523}
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Siachen Glacier Military Zone",
+    "description": "Restricted military area with extreme weather conditions",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 35.4217, "lng": 77.0729},
+      {"lat": 35.6587, "lng": 77.2156},
+      {"lat": 35.3983, "lng": 77.4582},
+      {"lat": 35.2019, "lng": 77.2843}
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Hampi Archaeological Buffer Zone",
+    "description": "Protected UNESCO World Heritage site with restricted access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 15.3350, "lng": 76.4600},
+      {"lat": 15.3650, "lng": 76.4950},
+      {"lat": 15.3200, "lng": 76.5200},
+      {"lat": 15.2950, "lng": 76.4800}
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Great Nicobar Biosphere Reserve",
+    "description": "Pristine tribal area with strict entry regulations",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 7.0379, "lng": 93.7665},
+      {"lat": 7.2541, "lng": 93.8923},
+      {"lat": 6.9876, "lng": 94.1234},
+      {"lat": 6.8123, "lng": 93.9567}
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Bhabha Atomic Research Centre",
+    "description": "High-security nuclear research facility - strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 19.0176, "lng": 72.9062},
+      {"lat": 19.0276, "lng": 72.9162},
+      {"lat": 19.0076, "lng": 72.9262},
+      {"lat": 18.9976, "lng": 72.9062}
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Nanda Devi National Park Core Zone",
+    "description": "Fragile high-altitude ecosystem with complete tourist ban",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 30.3748, "lng": 79.9665},
+      {"lat": 30.4123, "lng": 80.0234},
+      {"lat": 30.3456, "lng": 80.0876},
+      {"lat": 30.3012, "lng": 80.0123}
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Pokhran Test Range",
+    "description": "Former nuclear testing site with radiation monitoring",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.0951, "lng": 71.7540},
+      {"lat": 27.1451, "lng": 71.8040},
+      {"lat": 27.0451, "lng": 71.8540},
+      {"lat": 27.0051, "lng": 71.8040}
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Andaman Tribal Reserve",
+    "description": "Protected indigenous tribal territory - entry prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.5569, "lng": 92.6797},
+      {"lat": 11.6869, "lng": 92.7597},
+      {"lat": 11.4869, "lng": 92.8297},
+      {"lat": 11.3969, "lng": 92.7197}
+    ]
+  },
+  {
+    "id": 13,
+    "name": "INS Vikramaditya Naval Base",
+    "description": "Classified naval facility with restricted airspace",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 15.4589, "lng": 73.8194},
+      {"lat": 15.4789, "lng": 73.8394},
+      {"lat": 15.4389, "lng": 73.8594},
+      {"lat": 15.4189, "lng": 73.8294}
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Kaziranga Rhino Sanctuary",
+    "description": "Critical one-horned rhino habitat with tourist restrictions",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 26.5764, "lng": 93.1713},
+      {"lat": 26.6764, "lng": 93.2713},
+      {"lat": 26.5164, "lng": 93.3513},
+      {"lat": 26.4564, "lng": 93.2313}
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Dras War Memorial Restricted Zone",
+    "description": "Military memorial area with security restrictions",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 34.4268, "lng": 75.7512},
+      {"lat": 34.4468, "lng": 75.7712},
+      {"lat": 34.4068, "lng": 75.7912},
+      {"lat": 34.3868, "lng": 75.7612}
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Ajanta Caves Buffer Zone",
+    "description": "Archaeological protection zone around ancient Buddhist caves",
+    "restrictionLevel": "low",
+    "boundaries": [
+      {"lat": 20.5519, "lng": 75.7033},
+      {"lat": 20.5719, "lng": 75.7233},
+      {"lat": 20.5319, "lng": 75.7433},
+      {"lat": 20.5119, "lng": 75.7133}
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Gir Forest Lion Sanctuary",
+    "description": "Last habitat of Asiatic lions with controlled access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 21.1247, "lng": 70.7973},
+      {"lat": 21.2547, "lng": 70.8773},
+      {"lat": 21.0647, "lng": 70.9573},
+      {"lat": 20.9947, "lng": 70.8373}
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Leh Military Airport Zone",
+    "description": "Strategic military airfield with civilian restrictions",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 34.1358, "lng": 77.5460},
+      {"lat": 34.1558, "lng": 77.5660},
+      {"lat": 34.1158, "lng": 77.5860},
+      {"lat": 34.0958, "lng": 77.5560}
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Rann of Kutch Border Zone",
+    "description": "Indo-Pakistan border area with BSF restrictions",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 23.8315, "lng": 68.8375},
+      {"lat": 23.9315, "lng": 68.9375},
+      {"lat": 23.7715, "lng": 69.0175},
+      {"lat": 23.6915, "lng": 68.9075}
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Arunachal Pradesh Sensitive Border",
+    "description": "China border area requiring special permits",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.7172, "lng": 96.1294},
+      {"lat": 27.8172, "lng": 96.2294},
+      {"lat": 27.6572, "lng": 96.3094},
+      {"lat": 27.5772, "lng": 96.2094}
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Coimbatore Special Zone 1",
+    "description": "Restricted area with limited tourist access due to ecological sensitivity",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.918113710285766, "lng": 76.99177416316894},
+      {"lat": 10.918227591569462, "lng": 76.99173862070069},
+      {"lat": 10.918256980281356, "lng": 76.99186582532462},
+      {"lat": 10.918150446188761, "lng": 76.99190885041838},
+      {"lat": 10.918113710285766, "lng": 76.99177977513915}
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Coimbatore Special Zone 2",
+    "description": "Protected environmental research area - entry requires permits",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.91778135860362, "lng": 76.98652556177791},
+      {"lat": 10.91882324883126, "lng": 76.98946860703217},
+      {"lat": 10.917574945954684, "lng": 76.98996912493135},
+      {"lat": 10.917250582931018, "lng": 76.98928842058774},
+      {"lat": 10.91635612548599, "lng": 76.98847758158854},
+      {"lat": 10.917791187773247, "lng": 76.98644547891382},
+      {"lat": 10.917525800064652, "lng": 76.98720626612288}
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Coimbatore Protected Reserve 3",
+    "description": "Archaeological site with limited access to protect ancient ruins",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.913168764196755, "lng": 76.98222242070204},
+      {"lat": 10.913414890842006, "lng": 76.98388063217794},
+      {"lat": 10.912089591116214, "lng": 76.98393847676397},
+      {"lat": 10.91184346337468, "lng": 76.98187535318459},
+      {"lat": 10.913168764196755, "lng": 76.98222242070204},
+      {"lat": 10.912657577437088, "lng": 76.98239595446142}
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Coimbatore Small Restricted Zone 4",
+    "description": "Scientific research monitoring station with controlled access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.917897151244503, "lng": 76.99128801128819},
+      {"lat": 10.918373022604882, "lng": 76.99120807001157},
+      {"lat": 10.918443340301067, "lng": 76.99157613297422},
+      {"lat": 10.918041057441314, "lng": 76.99169604488918},
+      {"lat": 10.917897151226384, "lng": 76.99128967671822}
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Nilgiris Mountain Restricted Area",
+    "description": "Sensitive ecological zone in Western Ghats with rare species",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.302834980686058, "lng": 76.71178534434665},
+      {"lat": 11.304714041584205, "lng": 76.71336065201103},
+      {"lat": 11.304817793053488, "lng": 76.71399547748752}
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Nilgiris Large Protected Zone",
+    "description": "Extensive wildlife corridor with stringent protection measures",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.302846508704732, "lng": 76.71179710037342},
+      {"lat": 11.304725569526596, "lng": 76.71338416406616},
+      {"lat": 11.304829320992468, "lng": 76.71406601365118},
+      {"lat": 11.305693915078919, "lng": 76.71452449871845},
+      {"lat": 11.306178086628492, "lng": 76.71445396255467},
+      {"lat": 11.306247253925505, "lng": 76.71510054405792},
+      {"lat": 11.306961981688175, "lng": 76.71530039652384},
+      {"lat": 11.307134899427126, "lng": 76.71557078515184},
+      {"lat": 11.307031148795943, "lng": 76.7167346318592},
+      {"lat": 11.30741156759278, "lng": 76.71659355953187},
+      {"lat": 11.307503790255296, "lng": 76.71637019501242},
+      {"lat": 11.307607540715338, "lng": 76.71587644186332},
+      {"lat": 11.307250177862358, "lng": 76.71511230008628},
+      {"lat": 11.307134899427126, "lng": 76.71490069159358},
+      {"lat": 11.307261705702672, "lng": 76.71490069159358},
+      {"lat": 11.307688235491256, "lng": 76.71546498090629},
+      {"lat": 11.307953375309822, "lng": 76.71578239364453},
+      {"lat": 11.30782656934035, "lng": 76.71648775528627},
+      {"lat": 11.307204066493995, "lng": 76.7168404361064},
+      {"lat": 11.307376984086886, "lng": 76.71725189706336},
+      {"lat": 11.307688235491256, "lng": 76.71867437637201},
+      {"lat": 11.30771129113782, "lng": 76.71974417486052},
+      {"lat": 11.306051279873458, "lng": 76.72067290102177},
+      {"lat": 11.306500867206864, "lng": 76.71983822307936},
+      {"lat": 11.306051279873458, "lng": 76.71977944294406},
+      {"lat": 11.304218339598236, "lng": 76.7194385181507},
+      {"lat": 11.303976252271127, "lng": 76.71936798198539},
+      {"lat": 11.304183755706987, "lng": 76.71821589130639},
+      {"lat": 11.302039546289208, "lng": 76.71785145445801},
+      {"lat": 11.302823452667667, "lng": 76.71570010145246},
+      {"lat": 11.302431499745978, "lng": 76.71533566460567},
+      {"lat": 11.302316219373424, "lng": 76.71621736665668},
+      {"lat": 11.301958849922087, "lng": 76.71571185748081},
+      {"lat": 11.3020971865365, "lng": 76.71505351994932},
+      {"lat": 11.301866625475398, "lng": 76.71483015542987},
+      {"lat": 11.301393974721009, "lng": 76.7147008391292},
+      {"lat": 11.300852154603646, "lng": 76.7140895257063},
+      {"lat": 11.302327747412207, "lng": 76.71243192584978},
+      {"lat": 11.302604420218287, "lng": 76.71226734146734},
+      {"lat": 11.302685116403708, "lng": 76.71165602804433},
+      {"lat": 11.302834980686058, "lng": 76.71183236845525}
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Coimbatore Micro Restricted Zone 7",
+    "description": "Small-scale botanical research plot with restricted entry",
+    "restrictionLevel": "low",
+    "boundaries": [
+      {"lat": 10.917942558852786, "lng": 76.99204447759746},
+      {"lat": 10.918011437875961, "lng": 76.9921781986759},
+      {"lat": 10.917951168731975, "lng": 76.99223957884374},
+      {"lat": 10.917860764991943, "lng": 76.99211024206267},
+      {"lat": 10.917938253913633, "lng": 76.99205324619214}
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Coimbatore Protected Square 8",
+    "description": "Security zone with controlled access for safety reasons",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.918502886518723, "lng": 76.99248659824394},
+      {"lat": 10.918297342554496, "lng": 76.99251730046518},
+      {"lat": 10.918311045489418, "lng": 76.99290805601339},
+      {"lat": 10.91853851412381, "lng": 76.99289968268022},
+      {"lat": 10.918533032954414, "lng": 76.99248380713243},
+      {"lat": 10.918311045489418, "lng": 76.9925256737983}
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Coimbatore Polygon Area",
+    "description": "User restricted area with limited access for conservation",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.918114, "lng": 76.991774},
+      {"lat": 10.918114, "lng": 76.99178},
+      {"lat": 10.91815, "lng": 76.991909},
+      {"lat": 10.918257, "lng": 76.991866},
+      {"lat": 10.918228, "lng": 76.991739},
+      {"lat": 10.918114, "lng": 76.991774}
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Coimbatore Access Path 10",
+    "description": "Limited entry corridor to protected wildlife areas",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.91800345884512, "lng": 76.99042910432735},
+      {"lat": 10.918326699123384, "lng": 76.99110944935711},
+      {"lat": 10.917998071503732, "lng": 76.99137280872372},
+      {"lat": 10.917690992907907, "lng": 76.99065954377323},
+      {"lat": 10.917674830867853, "lng": 76.99046751090191},
+      {"lat": 10.91797113479737, "lng": 76.99040715771315}
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Ladakh Military Installation",
+    "description": "High security border installation - strictly no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 34.0812, "lng": 77.5692},
+      {"lat": 34.0952, "lng": 77.5898},
+      {"lat": 34.0732, "lng": 77.6112},
+      {"lat": 34.0612, "lng": 77.5852}
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Thar Desert Restricted Zone",
+    "description": "Dangerous terrain with unexploded ordnance - no tourist access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.0351, "lng": 70.6234},
+      {"lat": 27.1254, "lng": 70.7563},
+      {"lat": 27.0124, "lng": 70.8764},
+      {"lat": 26.9541, "lng": 70.7214}
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Goa Protected Marine Reserve",
+    "description": "Sensitive coral reef ecosystem with restricted diving access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 15.2421, "lng": 73.7156},
+      {"lat": 15.2812, "lng": 73.7456},
+      {"lat": 15.2325, "lng": 73.7812},
+      {"lat": 15.2015, "lng": 73.7454}
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Western Ghats Landslide Risk Zone",
+    "description": "Area prone to severe landslides during monsoon - dangerous for tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.1456, "lng": 77.0623},
+      {"lat": 10.1967, "lng": 77.0912},
+      {"lat": 10.1356, "lng": 77.1245},
+      {"lat": 10.0986, "lng": 77.0823}
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Chilika Lake Bird Sanctuary Core Zone",
+    "description": "Critical migratory bird habitat - limited access during breeding season",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 19.6982, "lng": 85.2734},
+      {"lat": 19.7256, "lng": 85.3123},
+      {"lat": 19.6745, "lng": 85.3345},
+      {"lat": 19.6423, "lng": 85.2967}
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Kodaikanal Bear Sanctuary",
+    "description": "Protected habitat for sloth bears - dangerous for tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.2391, "lng": 77.4689},
+      {"lat": 10.2635, "lng": 77.4912},
+      {"lat": 10.2421, "lng": 77.5189},
+      {"lat": 10.2176, "lng": 77.4931}
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Auroville Sacred Grove",
+    "description": "Spiritual retreat with restricted access to preserve tranquility",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.0056, "lng": 79.8076},
+      {"lat": 12.0132, "lng": 79.8156},
+      {"lat": 12.0043, "lng": 79.8235},
+      {"lat": 11.9958, "lng": 79.8167}
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Varanasi Cremation Ghats",
+    "description": "Sacred funeral sites where photography and tourist visits are prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.3050, "lng": 83.0144},
+      {"lat": 25.3065, "lng": 83.0161},
+      {"lat": 25.3042, "lng": 83.0174},
+      {"lat": 25.3029, "lng": 83.0155}
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Satara Landslide Danger Zone",
+    "description": "Unstable terrain with high risk of landslides - tourist entry prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 17.6840, "lng": 73.8245},
+      {"lat": 17.6967, "lng": 73.8389},
+      {"lat": 17.6765, "lng": 73.8512},
+      {"lat": 17.6632, "lng": 73.8321}
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Gangtok Military Outpost",
+    "description": "Sensitive border area with restricted access for national security",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.3326, "lng": 88.6214},
+      {"lat": 27.3456, "lng": 88.6342},
+      {"lat": 27.3289, "lng": 88.6478},
+      {"lat": 27.3167, "lng": 88.6312}
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Corbett Tiger Reserve Core Area",
+    "description": "Critical tiger habitat with complete ban on tourism",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 29.5363, "lng": 78.7724},
+      {"lat": 29.5578, "lng": 78.7945},
+      {"lat": 29.5289, "lng": 78.8126},
+      {"lat": 29.5124, "lng": 78.7867}
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Rann of Kutch Flooding Zone",
+    "description": "Area prone to flash floods during monsoon - extremely dangerous for visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.7650, "lng": 69.5230},
+      {"lat": 23.8156, "lng": 69.5578},
+      {"lat": 23.7834, "lng": 69.5967},
+      {"lat": 23.7321, "lng": 69.5634}
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Shimla Avalanche Risk Area",
+    "description": "High mountain terrain with severe avalanche risk during winter months",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 31.1245, "lng": 77.1670},
+      {"lat": 31.1387, "lng": 77.1823},
+      {"lat": 31.1156, "lng": 77.1956},
+      {"lat": 31.1034, "lng": 77.1791}
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Kochi Naval Base Perimeter",
+    "description": "Military naval zone with strict access controls - no civilian entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.9456, "lng": 76.2541},
+      {"lat": 9.9578, "lng": 76.2645},
+      {"lat": 9.9423, "lng": 76.2734},
+      {"lat": 9.9312, "lng": 76.2623}
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Munnar Elephant Corridor",
+    "description": "Active elephant migration route - dangerous for tourists due to elephant encounters",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.0812, "lng": 77.0634},
+      {"lat": 10.0975, "lng": 77.0789},
+      {"lat": 10.0765, "lng": 77.0912},
+      {"lat": 10.0623, "lng": 77.0745}
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Chennai Coastal Restricted Zone",
+    "description": "Naval security area with prohibited access for civilian boats and drones",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.0521, "lng": 80.2837},
+      {"lat": 13.0734, "lng": 80.3102},
+      {"lat": 13.0456, "lng": 80.3234},
+      {"lat": 13.0287, "lng": 80.2965}
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Agra Fort Military Area",
+    "description": "Active military installation adjacent to tourist site - no photography or entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.1824, "lng": 78.0234},
+      {"lat": 27.1901, "lng": 78.0312},
+      {"lat": 27.1789, "lng": 78.0387},
+      {"lat": 27.1734, "lng": 78.0291}
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Manali Avalanche Prone Region",
+    "description": "High-altitude area with extreme avalanche risk during winter",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 32.2698, "lng": 77.1754},
+      {"lat": 32.2845, "lng": 77.1902},
+      {"lat": 32.2612, "lng": 77.2089},
+      {"lat": 32.2534, "lng": 77.1876}
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Rameshwaram Coastal Military Zone",
+    "description": "Navy surveillance area with strict no-entry policy for visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.2812, "lng": 79.3156},
+      {"lat": 9.2956, "lng": 79.3278},
+      {"lat": 9.2723, "lng": 79.3389},
+      {"lat": 9.2645, "lng": 79.3234}
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Lakshadweep Protected Marine Ecosystem",
+    "description": "Fragile coral reef with restricted access to prevent environmental damage",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.5623, "lng": 72.6234},
+      {"lat": 10.5912, "lng": 72.6512},
+      {"lat": 10.5489, "lng": 72.6789},
+      {"lat": 10.5267, "lng": 72.6456}
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Jim Corbett Reserve Inner Core",
+    "description": "Protected breeding ground for endangered species - strictly no visitors allowed",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 29.5312, "lng": 78.7698},
+      {"lat": 29.5543, "lng": 78.7923},
+      {"lat": 29.5246, "lng": 78.8156},
+      {"lat": 29.5087, "lng": 78.7876}
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Darjeeling Military Outpost",
+    "description": "Border security installation with restricted perimeter",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 27.0412, "lng": 88.2634},
+      {"lat": 27.0567, "lng": 88.2798},
+      {"lat": 27.0389, "lng": 88.2934},
+      {"lat": 27.0256, "lng": 88.2734}
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Himachal Flash Flood Zone",
+    "description": "Valley prone to deadly flash floods during monsoon season",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 32.1234, "lng": 76.3098},
+      {"lat": 32.1456, "lng": 76.3289},
+      {"lat": 32.1187, "lng": 76.3512},
+      {"lat": 32.0987, "lng": 76.3298}
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Bhuj Earthquake Unstable Zone",
+    "description": "Area with unstable structures following earthquake damage - dangerous for visitors",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 23.2534, "lng": 69.6723},
+      {"lat": 23.2765, "lng": 69.6912},
+      {"lat": 23.2498, "lng": 69.7123},
+      {"lat": 23.2343, "lng": 69.6845}
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Cherrapunji Sinkhole Risk Area",
+    "description": "Region with karst topography and sudden sinkhole formation - hazardous to tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.2834, "lng": 91.7212},
+      {"lat": 25.3012, "lng": 91.7456},
+      {"lat": 25.2745, "lng": 91.7687},
+      {"lat": 25.2587, "lng": 91.7398}
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Amarnath Cave Lightning Risk Zone",
+    "description": "High-altitude area with extreme lightning strike risk during pilgrimage season",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 34.2134, "lng": 75.5012},
+      {"lat": 34.2287, "lng": 75.5187},
+      {"lat": 34.2089, "lng": 75.5345},
+      {"lat": 34.1956, "lng": 75.5134}
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Mumbai Coastal Security Zone",
+    "description": "High-security naval area with restricted access and no-photography policy",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 18.8956, "lng": 72.8012},
+      {"lat": 18.9123, "lng": 72.8178},
+      {"lat": 18.8878, "lng": 72.8345},
+      {"lat": 18.8734, "lng": 72.8145}
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Dehradun Landslip Danger Area",
+    "description": "Hillside prone to sudden landslips during rainy season - extremely hazardous",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 30.3421, "lng": 78.0456},
+      {"lat": 30.3598, "lng": 78.0612},
+      {"lat": 30.3321, "lng": 78.0789},
+      {"lat": 30.3187, "lng": 78.0567}
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Ooty Toxic Plant Research Zone",
+    "description": "Botanical research area with dangerous toxic plants - strictly no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.4123, "lng": 76.6987},
+      {"lat": 11.4245, "lng": 76.7112},
+      {"lat": 11.4089, "lng": 76.7234},
+      {"lat": 11.3978, "lng": 76.7078}
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Sundarbans Crocodile Zone",
+    "description": "Area with high concentration of saltwater crocodiles - extremely dangerous",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 21.8123, "lng": 88.8123},
+      {"lat": 21.8345, "lng": 88.8345},
+      {"lat": 21.8045, "lng": 88.8534},
+      {"lat": 21.7878, "lng": 88.8287}
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Andaman Sea Volcanic Vent Zone",
+    "description": "Active underwater volcanic vents with toxic gas emissions - dangerous for boats",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.3456, "lng": 92.9876},
+      {"lat": 12.3789, "lng": 93.0123},
+      {"lat": 12.3345, "lng": 93.0456},
+      {"lat": 12.3123, "lng": 92.9987}
+    ]
+  },
+  {
+    "id": 62,
+    "name": "Allahabad Kumbh Mela Restricted Zone",
+    "description": "Security perimeter with limited access during major religious gatherings",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 25.4312, "lng": 81.8734},
+      {"lat": 25.4478, "lng": 81.8912},
+      {"lat": 25.4187, "lng": 81.9087},
+      {"lat": 25.4056, "lng": 81.8867}
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Bangalore Military Research Facility",
+    "description": "Defense research installation with strict security perimeter - no public access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.9712, "lng": 77.5934},
+      {"lat": 12.9845, "lng": 77.6078},
+      {"lat": 12.9645, "lng": 77.6189},
+      {"lat": 12.9534, "lng": 77.6023}
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Chilka Lake Naval Testing Range",
+    "description": "Naval weapons testing area with unexploded ordnance risk - strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 19.7123, "lng": 85.3456},
+      {"lat": 19.7345, "lng": 85.3678},
+      {"lat": 19.6987, "lng": 85.3912},
+      {"lat": 19.6756, "lng": 85.3678}
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Gujarat Nuclear Facility Buffer Zone",
+    "description": "Security perimeter around nuclear installation - no stopping or photography",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.5634, "lng": 70.3567},
+      {"lat": 22.5823, "lng": 70.3789},
+      {"lat": 22.5478, "lng": 70.3956},
+      {"lat": 22.5312, "lng": 70.3712}
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Rajasthan Desert Quicksand Area",
+    "description": "Remote desert region with dangerous quicksand formations - fatal to visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.9123, "lng": 71.1234},
+      {"lat": 26.9345, "lng": 71.1456},
+      {"lat": 26.8987, "lng": 71.1678},
+      {"lat": 26.8765, "lng": 71.1345}
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Mahabaleshwar Wild Tiger Territory",
+    "description": "Forest area with aggressive territorial tigers - extremely dangerous",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 17.9234, "lng": 73.6456},
+      {"lat": 17.9456, "lng": 73.6678},
+      {"lat": 17.9123, "lng": 73.6912},
+      {"lat": 17.8956, "lng": 73.6678}
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Kolkata Toxic Industrial Zone",
+    "description": "Area with dangerous chemical contamination - hazardous to health",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.5678, "lng": 88.3456},
+      {"lat": 22.5823, "lng": 88.3612},
+      {"lat": 22.5534, "lng": 88.3789},
+      {"lat": 22.5412, "lng": 88.3567}
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Kashmir Border Security Perimeter",
+    "description": "Military installation with shoot-on-sight authorization - extreme danger",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 33.7345, "lng": 74.8567},
+      {"lat": 33.7567, "lng": 74.8789},
+      {"lat": 33.7234, "lng": 74.8956},
+      {"lat": 33.7089, "lng": 74.8712}
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Coorg Venomous Snake Research Area",
+    "description": "Scientific research facility housing highly venomous snakes - no public access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.4234, "lng": 75.7456},
+      {"lat": 12.4389, "lng": 75.7612},
+      {"lat": 12.4123, "lng": 75.7789},
+      {"lat": 12.3987, "lng": 75.7567}
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Goa Monsoon Cliff Danger Zone",
+    "description": "Coastal cliffs prone to collapse during heavy monsoon rains - fatal risk to visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 15.5012, "lng": 73.7634},
+      {"lat": 15.5187, "lng": 73.7823},
+      {"lat": 15.4867, "lng": 73.7978},
+      {"lat": 15.4723, "lng": 73.7789}
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Madhya Pradesh Abandoned Mine Area",
+    "description": "Unstable abandoned mining shafts with toxic gas pockets - extremely hazardous",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.1845, "lng": 77.4587},
+      {"lat": 23.2012, "lng": 77.4756},
+      {"lat": 23.1756, "lng": 77.4923},
+      {"lat": 23.1612, "lng": 77.4734}
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Kerala Backwaters Restricted Naval Zone",
+    "description": "Naval testing area with strict no-entry policy for tourist boats",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.8745, "lng": 76.3214},
+      {"lat": 9.8912, "lng": 76.3389},
+      {"lat": 9.8612, "lng": 76.3534},
+      {"lat": 9.8456, "lng": 76.3312}
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Delhi Diplomatic High-Security Zone",
+    "description": "Government security area with anti-terrorism measures - no tourist access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 28.5923, "lng": 77.1867},
+      {"lat": 28.6034, "lng": 77.1978},
+      {"lat": 28.5845, "lng": 77.2087},
+      {"lat": 28.5756, "lng": 77.1956}
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Gulmarg Avalanche Hazard Zone",
+    "description": "Alpine skiing area with frequent deadly avalanches - off-limits during winter",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 34.0345, "lng": 74.3587},
+      {"lat": 34.0478, "lng": 74.3712},
+      {"lat": 34.0256, "lng": 74.3867},
+      {"lat": 34.0145, "lng": 74.3712}
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Andhra Pradesh Nuclear Facility",
+    "description": "High-security nuclear research installation with armed perimeter",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 14.4586, "lng": 79.9856},
+      {"lat": 14.4723, "lng": 79.9978},
+      {"lat": 14.4498, "lng": 80.0123},
+      {"lat": 14.4387, "lng": 79.9967}
+    ]
+  },
+  {
+    "id": 77,
+    "name": "Sikkim Earthquake Risk Zone",
+    "description": "Area with ongoing seismic activity and unstable structures - dangerous for tourists",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 27.3278, "lng": 88.5654},
+      {"lat": 27.3412, "lng": 88.5789},
+      {"lat": 27.3187, "lng": 88.5923},
+      {"lat": 27.3056, "lng": 88.5789}
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Jammu Border Military Installation",
+    "description": "Sensitive military post with anti-infiltration measures - strictly no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 32.7234, "lng": 74.8345},
+      {"lat": 32.7378, "lng": 74.8512},
+      {"lat": 32.7156, "lng": 74.8687},
+      {"lat": 32.7023, "lng": 74.8512}
+    ]
+  },
+  {
+    "id": 79,
+    "name": "Ranthambore Core Tiger Territory",
+    "description": "Area with multiple aggressive tigers - extremely dangerous for visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.0156, "lng": 76.4587},
+      {"lat": 26.0287, "lng": 76.4723},
+      {"lat": 26.0078, "lng": 76.4867},
+      {"lat": 25.9956, "lng": 76.4723}
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Patna Flood Risk Zone",
+    "description": "Low-lying area with sudden flash flooding during monsoon - death risk",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.6123, "lng": 85.1534},
+      {"lat": 25.6287, "lng": 85.1678},
+      {"lat": 25.6056, "lng": 85.1823},
+      {"lat": 25.5923, "lng": 85.1678}
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Nagaland Insurgent Risk Zone",
+    "description": "Area with active insurgent groups - kidnapping risk for tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.1534, "lng": 94.5678},
+      {"lat": 26.1712, "lng": 94.5823},
+      {"lat": 26.1387, "lng": 94.5967},
+      {"lat": 26.1256, "lng": 94.5812}
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Kargil Border Control Zone",
+    "description": "Militarized border area with active surveillance - strict no-entry policy",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 34.5534, "lng": 76.1278},
+      {"lat": 34.5712, "lng": 76.1423},
+      {"lat": 34.5387, "lng": 76.1589},
+      {"lat": 34.5234, "lng": 76.1412}
+    ]
+  },
+  {
+    "id": 83,
+    "name": "Vembanad Lake Toxic Algae Zone",
+    "description": "Area with dangerous toxic algal blooms - skin contact can be fatal",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 9.5745, "lng": 76.3534},
+      {"lat": 9.5923, "lng": 76.3678},
+      {"lat": 9.5612, "lng": 76.3823},
+      {"lat": 9.5456, "lng": 76.3645}
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Assam Forest Malaria Risk Zone",
+    "description": "Area with extremely dangerous drug-resistant malaria strains - fatal to tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.1845, "lng": 91.7534},
+      {"lat": 26.2023, "lng": 91.7689},
+      {"lat": 26.1712, "lng": 91.7867},
+      {"lat": 26.1567, "lng": 91.7712}
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Hyderabad Military Intelligence Facility",
+    "description": "Defense intelligence facility with security perimeter - photography prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 17.4356, "lng": 78.4478},
+      {"lat": 17.4489, "lng": 78.4612},
+      {"lat": 17.4267, "lng": 78.4745},
+      {"lat": 17.4145, "lng": 78.4612}
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Madurai Meenakshi Temple Restricted Area",
+    "description": "Sacred inner sanctum with strict access limitations for non-Hindus",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.9195, "lng": 78.1193},
+      {"lat": 9.9210, "lng": 78.1210},
+      {"lat": 9.9185, "lng": 78.1225},
+      {"lat": 9.9175, "lng": 78.1205}
+    ]
+  },
+  {
+    "id": 87,
+    "name": "Chennai Atomic Power Station Buffer Zone",
+    "description": "Nuclear facility security perimeter - strictly no entry or photography",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.5584, "lng": 80.1701},
+      {"lat": 12.5684, "lng": 80.1801},
+      {"lat": 12.5484, "lng": 80.1901},
+      {"lat": 12.5384, "lng": 80.1801}
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Nilgiris Forest Leopard Territory",
+    "description": "Dense forest with high concentration of territorial leopards - dangerous for humans",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.4052, "lng": 76.6982},
+      {"lat": 11.4152, "lng": 76.7082},
+      {"lat": 11.3952, "lng": 76.7182},
+      {"lat": 11.3852, "lng": 76.7082}
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Coimbatore Military Airbase Restricted Zone",
+    "description": "Air force base with strict security perimeter - no civilian access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.0320, "lng": 77.0437},
+      {"lat": 11.0420, "lng": 77.0537},
+      {"lat": 11.0220, "lng": 77.0637},
+      {"lat": 11.0120, "lng": 77.0537}
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Point Calimere Wildlife Sanctuary Core",
+    "description": "Restricted inner sanctuary with dangerous wildlife - no tourist access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.2912, "lng": 79.8516},
+      {"lat": 10.3012, "lng": 79.8616},
+      {"lat": 10.2812, "lng": 79.8716},
+      {"lat": 10.2712, "lng": 79.8616}
+    ]
+  },
+  {
+    "id": 91,
+    "name": "Tuticorin Harbor Restricted Naval Zone",
+    "description": "Naval security zone with no civilian boat access - strictly enforced",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 8.7542, "lng": 78.1935},
+      {"lat": 8.7642, "lng": 78.2035},
+      {"lat": 8.7442, "lng": 78.2135},
+      {"lat": 8.7342, "lng": 78.2035}
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Palani Temple Inner Sanctum",
+    "description": "Sacred area with strict entry restrictions for non-Hindus and photography ban",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.4398, "lng": 77.5207},
+      {"lat": 10.4408, "lng": 77.5217},
+      {"lat": 10.4388, "lng": 77.5227},
+      {"lat": 10.4378, "lng": 77.5217}
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Thanjavur Palace Restricted Archives",
+    "description": "Ancient manuscript repository with strict no-access policy for tourists",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.7825, "lng": 79.1317},
+      {"lat": 10.7835, "lng": 79.1327},
+      {"lat": 10.7815, "lng": 79.1337},
+      {"lat": 10.7805, "lng": 79.1327}
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Mudumalai Tiger Reserve Core Zone",
+    "description": "Critical tiger breeding area - strictly off-limits to tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.5912, "lng": 76.5336},
+      {"lat": 11.6012, "lng": 76.5436},
+      {"lat": 11.5812, "lng": 76.5536},
+      {"lat": 11.5712, "lng": 76.5436}
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Rameswaram Dhanushkodi Danger Zone",
+    "description": "Cyclone-prone coastal area with dangerous rip currents and quicksand",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.1789, "lng": 79.4186},
+      {"lat": 9.1889, "lng": 79.4286},
+      {"lat": 9.1689, "lng": 79.4386},
+      {"lat": 9.1589, "lng": 79.4286}
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Kanniyakumari Naval Surveillance Zone",
+    "description": "Strategic naval monitoring area with restricted access - no photography",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 8.0823, "lng": 77.5476},
+      {"lat": 8.0923, "lng": 77.5576},
+      {"lat": 8.0723, "lng": 77.5676},
+      {"lat": 8.0623, "lng": 77.5576}
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Chidambaram Temple Inner Sanctum",
+    "description": "Sacred Nataraja shrine with strict access limitations for non-Hindus",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 11.3997, "lng": 79.6953},
+      {"lat": 11.4007, "lng": 79.6963},
+      {"lat": 11.3987, "lng": 79.6973},
+      {"lat": 11.3977, "lng": 79.6963}
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Mahabalipuram Restricted Archaeological Site",
+    "description": "Delicate ancient structures under restoration - no public access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.6156, "lng": 80.1934},
+      {"lat": 12.6166, "lng": 80.1944},
+      {"lat": 12.6146, "lng": 80.1954},
+      {"lat": 12.6136, "lng": 80.1944}
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Tirunelveli Kalakkad Tiger Reserve Core",
+    "description": "Critical tiger habitat with strict no-entry policy for tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 8.5156, "lng": 77.4823},
+      {"lat": 8.5256, "lng": 77.4923},
+      {"lat": 8.5056, "lng": 77.5023},
+      {"lat": 8.4956, "lng": 77.4923}
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Salem Dangerous Mining Area",
+    "description": "Unstable abandoned mining site with toxic materials - fatal risk",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.6689, "lng": 78.1278},
+      {"lat": 11.6789, "lng": 78.1378},
+      {"lat": 11.6589, "lng": 78.1478},
+      {"lat": 11.6489, "lng": 78.1378}
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Vellore Fort Restricted Military Zone",
+    "description": "Active military installation adjacent to historic fort - no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.9212, "lng": 79.1312},
+      {"lat": 12.9312, "lng": 79.1412},
+      {"lat": 12.9112, "lng": 79.1512},
+      {"lat": 12.9012, "lng": 79.1412}
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Tiruppur Industrial Toxic Zone",
+    "description": "Area with dangerous chemical pollution from textile industry - health hazard",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.0823, "lng": 77.3467},
+      {"lat": 11.0923, "lng": 77.3567},
+      {"lat": 11.0723, "lng": 77.3667},
+      {"lat": 11.0623, "lng": 77.3567}
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Yelagiri Hills Landslide Risk Area",
+    "description": "Unstable hillside with frequent landslides during monsoon - extreme danger",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.5823, "lng": 78.6378},
+      {"lat": 12.5923, "lng": 78.6478},
+      {"lat": 12.5723, "lng": 78.6578},
+      {"lat": 12.5623, "lng": 78.6478}
+    ]
+  },
+  {
+    "id": 104,
+    "name": "Thiruchirappalli Rockfort Unstable Zone",
+    "description": "Area with dangerous rock formations prone to collapse - restricted access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.8253, "lng": 78.6967},
+      {"lat": 10.8263, "lng": 78.6977},
+      {"lat": 10.8243, "lng": 78.6987},
+      {"lat": 10.8233, "lng": 78.6977}
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Nagapattinam Tsunami High-Risk Zone",
+    "description": "Coastal area with high tsunami vulnerability - dangerous during alerts",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.7656, "lng": 79.8478},
+      {"lat": 10.7756, "lng": 79.8578},
+      {"lat": 10.7556, "lng": 79.8678},
+      {"lat": 10.7456, "lng": 79.8578}
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Theni Forest Fire Danger Zone",
+    "description": "Area prone to devastating forest fires during summer months - extreme danger",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.0123, "lng": 77.5478},
+      {"lat": 10.0223, "lng": 77.5578},
+      {"lat": 10.0023, "lng": 77.5678},
+      {"lat": 9.9923, "lng": 77.5578}
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Kodaikanal Shola Forest Restricted Area",
+    "description": "Protected rare ecosystem with strict conservation measures - limited access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.2356, "lng": 77.4978},
+      {"lat": 10.2456, "lng": 77.5078},
+      {"lat": 10.2256, "lng": 77.5178},
+      {"lat": 10.2156, "lng": 77.5078}
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Cuddalore Chemical Plant Buffer Zone",
+    "description": "Industrial area with toxic emissions - respiratory hazard for visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.7156, "lng": 79.7689},
+      {"lat": 11.7256, "lng": 79.7789},
+      {"lat": 11.7056, "lng": 79.7889},
+      {"lat": 11.6956, "lng": 79.7789}
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Velankanni Church Restricted Sanctuary",
+    "description": "Sacred inner chapel with limited access during religious ceremonies",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.6823, "lng": 79.8512},
+      {"lat": 10.6833, "lng": 79.8522},
+      {"lat": 10.6813, "lng": 79.8532},
+      {"lat": 10.6803, "lng": 79.8522}
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Kolli Hills Dangerous Hairpin Bends",
+    "description": "Mountain road with extreme accident risk during foggy conditions - avoid at night",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 11.2789, "lng": 78.3356},
+      {"lat": 11.2889, "lng": 78.3456},
+      {"lat": 11.2689, "lng": 78.3556},
+      {"lat": 11.2589, "lng": 78.3456}
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Erode Textile Chemical Waste Area",
+    "description": "Zone with dangerous chemical contaminants in soil and water - health hazard",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.3456, "lng": 77.7123},
+      {"lat": 11.3556, "lng": 77.7223},
+      {"lat": 11.3356, "lng": 77.7323},
+      {"lat": 11.3256, "lng": 77.7223}
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Pollachi Elephant Attack Risk Zone",
+    "description": "Area with frequent wild elephant encounters - multiple fatalities reported",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.6623, "lng": 77.0123},
+      {"lat": 10.6723, "lng": 77.0223},
+      {"lat": 10.6523, "lng": 77.0323},
+      {"lat": 10.6423, "lng": 77.0223}
+    ]
+  },
+  {
+    "id": 113,
+    "name": "Dindigul Military Training Facility",
+    "description": "Armed forces training ground with live firing exercises - strictly no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.3612, "lng": 77.9523},
+      {"lat": 10.3712, "lng": 77.9623},
+      {"lat": 10.3512, "lng": 77.9723},
+      {"lat": 10.3412, "lng": 77.9623}
+    ]
+  },
+  {
+    "id": 114,
+    "name": "Thoothukudi Coastal Erosion Risk Zone",
+    "description": "Beach area with sudden land collapse risk - multiple tourist casualties reported",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 8.7823, "lng": 78.1356},
+      {"lat": 8.7923, "lng": 78.1456},
+      {"lat": 8.7723, "lng": 78.1556},
+      {"lat": 8.7623, "lng": 78.1456}
+    ]
+  },
+  {
+    "id": 115,
+    "name": "Coonoor Dangerous Cliff Area",
+    "description": "Unstable cliff edges with fatal fall risk - no barriers or safety measures",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.3512, "lng": 76.7923},
+      {"lat": 11.3612, "lng": 76.8023},
+      {"lat": 11.3412, "lng": 76.8123},
+      {"lat": 11.3312, "lng": 76.8023}
+    ]
+  },
+  {
+    "id": 116,
+    "name": "Courtallam Sacred Waterfall Inner Pool",
+    "description": "Restricted sacred bathing area with dangerous undercurrents during monsoon",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 8.9312, "lng": 77.2767},
+      {"lat": 8.9322, "lng": 77.2777},
+      {"lat": 8.9302, "lng": 77.2787},
+      {"lat": 8.9292, "lng": 77.2777}
+    ]
+  },
+  {
+    "id": 117,
+    "name": "Sivaganga Archaeological Excavation Site",
+    "description": "Active archaeological dig with unstable ground - no public access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 9.8423, "lng": 78.4867},
+      {"lat": 9.8433, "lng": 78.4877},
+      {"lat": 9.8413, "lng": 78.4887},
+      {"lat": 9.8403, "lng": 78.4877}
+    ]
+  },
+  {
+    "id": 118,
+    "name": "Krishnagiri Dam Restricted Zone",
+    "description": "Critical water infrastructure with security perimeter - strictly no access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.5312, "lng": 78.2145},
+      {"lat": 12.5412, "lng": 78.2245},
+      {"lat": 12.5212, "lng": 78.2345},
+      {"lat": 12.5112, "lng": 78.2245}
+    ]
+  },
+  {
+    "id": 119,
+    "name": "Ramanathapuram Coastal Military Installation",
+    "description": "Naval intelligence facility with strict security - photography prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.2867, "lng": 78.8912},
+      {"lat": 9.2967, "lng": 78.9012},
+      {"lat": 9.2767, "lng": 78.9112},
+      {"lat": 9.2667, "lng": 78.9012}
+    ]
+  },
+  {
+    "id": 120,
+    "name": "Karur Toxic River Segment",
+    "description": "River section with extreme industrial pollution - skin contact hazardous",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.9567, "lng": 78.0712},
+      {"lat": 10.9667, "lng": 78.0812},
+      {"lat": 10.9467, "lng": 78.0912},
+      {"lat": 10.9367, "lng": 78.0812}
+    ]
+  },
+  {
+    "id": 121,
+    "name": "Mettupalayam Crocodile Attack Zone",
+    "description": "River section with aggressive crocodiles - multiple attacks on tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.2867, "lng": 76.9423},
+      {"lat": 11.2967, "lng": 76.9523},
+      {"lat": 11.2767, "lng": 76.9623},
+      {"lat": 11.2667, "lng": 76.9523}
+    ]
+  },
+  {
+    "id": 122,
+    "name": "Kumbakonam Temple Inner Chamber",
+    "description": "Sacred shrine with restricted access for religious purposes only",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 10.9623, "lng": 79.3745},
+      {"lat": 10.9633, "lng": 79.3755},
+      {"lat": 10.9613, "lng": 79.3765},
+      {"lat": 10.9603, "lng": 79.3755}
+    ]
+  },
+  {
+    "id": 123,
+    "name": "Tiruvannamalai Temple Restricted Section",
+    "description": "Sacred fire ceremony area with limited access to devotees only",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.2323, "lng": 79.0656},
+      {"lat": 12.2333, "lng": 79.0666},
+      {"lat": 12.2313, "lng": 79.0676},
+      {"lat": 12.2303, "lng": 79.0666}
+    ]
+  },
+  {
+    "id": 124,
+    "name": "Virudhunagar Black Magic Site",
+    "description": "Dangerous occult practices location - tourist visits strongly discouraged",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 9.5823, "lng": 77.9623},
+      {"lat": 9.5923, "lng": 77.9723},
+      {"lat": 9.5723, "lng": 77.9823},
+      {"lat": 9.5623, "lng": 77.9723}
+    ]
+  },
+  {
+    "id": 125,
+    "name": "Pudukottai Tribal Restricted Area",
+    "description": "Protected indigenous territory - no tourist access permitted",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.3823, "lng": 78.8234},
+      {"lat": 10.3923, "lng": 78.8334},
+      {"lat": 10.3723, "lng": 78.8434},
+      {"lat": 10.3623, "lng": 78.8334}
+    ]
+  },
+  {
+    "id": 126,
+    "name": "Nagercoil Flash Flood Zone",
+    "description": "Area with sudden deadly flash floods during monsoon - extreme danger",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 8.1923, "lng": 77.4156},
+      {"lat": 8.2023, "lng": 77.4256},
+      {"lat": 8.1823, "lng": 77.4356},
+      {"lat": 8.1723, "lng": 77.4256}
+    ]
+  },
+  {
+    "id": 127,
+    "name": "Hogenakkal Falls Dangerous Whirlpool",
+    "description": "River section with deadly underwater currents - multiple drowning incidents",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.1189, "lng": 77.7834},
+      {"lat": 12.1289, "lng": 77.7934},
+      {"lat": 12.1089, "lng": 77.8034},
+      {"lat": 12.0989, "lng": 77.7934}
+    ]
+  },
+  {
+    "id": 128,
+    "name": "Javadi Hills Restricted Tribal Land",
+    "description": "Protected tribal territory with no-access policy for outsiders",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.3523, "lng": 78.9123},
+      {"lat": 12.3623, "lng": 78.9223},
+      {"lat": 12.3423, "lng": 78.9323},
+      {"lat": 12.3323, "lng": 78.9223}
+    ]
+  },
+  {
+    "id": 129,
+    "name": "Namakkal Rock Fort Unstable Area",
+    "description": "Ancient fort with dangerous structural instability - risk of collapse",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 11.2745, "lng": 78.1689},
+      {"lat": 11.2755, "lng": 78.1699},
+      {"lat": 11.2735, "lng": 78.1709},
+      {"lat": 11.2725, "lng": 78.1699}
+    ]
+  },
+  {
+    "id": 130,
+    "name": "Dharmapuri Mining Hazard Zone",
+    "description": "Abandoned quarries with toxic dust and unstable edges - fatal risk",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.1345, "lng": 78.1578},
+      {"lat": 12.1445, "lng": 78.1678},
+      {"lat": 12.1245, "lng": 78.1778},
+      {"lat": 12.1145, "lng": 78.1678}
+    ]
+  },
+  {
+    "id": 131,
+    "name": "Chennai Port Restricted Security Zone",
+    "description": "High-security shipping area with strict no-entry policy for civilians",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.0987, "lng": 80.2945},
+      {"lat": 13.1087, "lng": 80.3045},
+      {"lat": 13.0887, "lng": 80.3145},
+      {"lat": 13.0787, "lng": 80.3045}
+    ]
+  },
+  {
+    "id": 132,
+    "name": "Guindy National Park Core Reserve",
+    "description": "Protected inner sanctuary with endangered species - strictly no public access",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.0045, "lng": 80.2234},
+      {"lat": 13.0145, "lng": 80.2334},
+      {"lat": 13.0045, "lng": 80.2434},
+      {"lat": 12.9945, "lng": 80.2334}
+    ]
+  },
+  {
+    "id": 133,
+    "name": "Vedanthangal Bird Sanctuary Restricted Zone",
+    "description": "Critical nesting area for endangered birds - no tourist access during breeding",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.5456, "lng": 79.8567},
+      {"lat": 12.5556, "lng": 79.8667},
+      {"lat": 12.5356, "lng": 79.8767},
+      {"lat": 12.5256, "lng": 79.8667}
+    ]
+  },
+  {
+    "id": 134,
+    "name": "Ennore Creek Toxic Industrial Zone",
+    "description": "Heavily polluted waterway with dangerous chemical waste - health hazard",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.2145, "lng": 80.3256},
+      {"lat": 13.2245, "lng": 80.3356},
+      {"lat": 13.2045, "lng": 80.3456},
+      {"lat": 13.1945, "lng": 80.3356}
+    ]
+  },
+  {
+    "id": 135,
+    "name": "Vandalur Zoo Dangerous Animal Enclosure",
+    "description": "Restricted high-security area housing aggressive predators - staff only",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.8745, "lng": 80.0867},
+      {"lat": 12.8845, "lng": 80.0967},
+      {"lat": 12.8645, "lng": 80.1067},
+      {"lat": 12.8545, "lng": 80.0967}
+    ]
+  },
+  {
+    "id": 136,
+    "name": "IIT Madras Forest Leopard Sighting Area",
+    "description": "Campus section with recent leopard attacks - entry strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.9923, "lng": 80.2356},
+      {"lat": 13.0023, "lng": 80.2456},
+      {"lat": 12.9823, "lng": 80.2556},
+      {"lat": 12.9723, "lng": 80.2456}
+    ]
+  },
+  {
+    "id": 137,
+    "name": "Kanchipuram Temple Innermost Sanctuary",
+    "description": "Sacred shrine with strict access limitations based on religious tradition",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.8345, "lng": 79.7056},
+      {"lat": 12.8355, "lng": 79.7066},
+      {"lat": 12.8335, "lng": 79.7076},
+      {"lat": 12.8325, "lng": 79.7066}
+    ]
+  },
+  {
+    "id": 138,
+    "name": "Pichavaram Mangrove Quicksand Zone",
+    "description": "Dangerous tidal area with quicksand pockets - multiple fatalities reported",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.4323, "lng": 79.7923},
+      {"lat": 11.4423, "lng": 79.8023},
+      {"lat": 11.4223, "lng": 79.8123},
+      {"lat": 11.4123, "lng": 79.8023}
+    ]
+  },
+  {
+    "id": 139,
+    "name": "Sriharikota Launch Security Perimeter",
+    "description": "Space center with strict security zone during rocket launches - no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.7245, "lng": 80.2356},
+      {"lat": 13.7345, "lng": 80.2456},
+      {"lat": 13.7145, "lng": 80.2556},
+      {"lat": 13.7045, "lng": 80.2456}
+    ]
+  },
+  {
+    "id": 140,
+    "name": "Tiruvannamalai Sacred Hill Inner Path",
+    "description": "Restricted pathway used only for special religious ceremonies - no tourists",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 12.2345, "lng": 79.0645},
+      {"lat": 12.2355, "lng": 79.0655},
+      {"lat": 12.2335, "lng": 79.0665},
+      {"lat": 12.2325, "lng": 79.0655}
+    ]
+  },
+  {
+    "id": 141,
+    "name": "Chennai Adyar Estuary Bird Sanctuary",
+    "description": "Protected wetland ecosystem with limited access to prevent disturbance",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 13.0123, "lng": 80.2645},
+      {"lat": 13.0223, "lng": 80.2745},
+      {"lat": 13.0023, "lng": 80.2845},
+      {"lat": 12.9923, "lng": 80.2745}
+    ]
+  },
+  {
+    "id": 142,
+    "name": "Mahabalipuram Shore Temple Underwater Research",
+    "description": "Active marine archaeological site - diving strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 12.6167, "lng": 80.1978},
+      {"lat": 12.6267, "lng": 80.2078},
+      {"lat": 12.6067, "lng": 80.2178},
+      {"lat": 12.5967, "lng": 80.2078}
+    ]
+  },
+  {
+    "id": 143,
+    "name": "Pulicat Lake Military Testing Range",
+    "description": "Naval weapons testing area with unexploded ordnance - strictly no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 13.4845, "lng": 80.3245},
+      {"lat": 13.4945, "lng": 80.3345},
+      {"lat": 13.4745, "lng": 80.3445},
+      {"lat": 13.4645, "lng": 80.3345}
+    ]
+  },
+  {
+    "id": 144,
+    "name": "Yercaud Dangerous Cliff Segment",
+    "description": "Unstable cliff edge with fatal falls - safety barriers compromised",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 11.7845, "lng": 78.2134},
+      {"lat": 11.7945, "lng": 78.2234},
+      {"lat": 11.7745, "lng": 78.2334},
+      {"lat": 11.7645, "lng": 78.2234}
+    ]
+  },
+  {
+    "id": 145,
+    "name": "Thanjavur Ancient Tunnel Collapse Risk",
+    "description": "Unstable historical tunnels with structural instability - entry prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 10.7856, "lng": 79.1345},
+      {"lat": 10.7866, "lng": 79.1355},
+      {"lat": 10.7846, "lng": 79.1365},
+      {"lat": 10.7836, "lng": 79.1355}
+    ]
+  },
+  {
+    "id": 146,
+    "name": "Bhopal Military Research Zone",
+    "description": "High-security defense research facility with strict no-access policy",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.2156, "lng": 77.4123},
+      {"lat": 23.2256, "lng": 77.4223},
+      {"lat": 23.2056, "lng": 77.4323},
+      {"lat": 23.1956, "lng": 77.4223}
+    ]
+  },
+  {
+    "id": 147,
+    "name": "Kanha Tiger Reserve Inner Core",
+    "description": "Critical tiger breeding ground - strictly off-limits to all visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.2845, "lng": 80.6345},
+      {"lat": 22.2945, "lng": 80.6445},
+      {"lat": 22.2745, "lng": 80.6545},
+      {"lat": 22.2645, "lng": 80.6445}
+    ]
+  },
+  {
+    "id": 148,
+    "name": "Chambal River Restricted Valley",
+    "description": "Area with active dacoit gangs and dangerous wildlife - extreme risk to tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.5634, "lng": 78.2345},
+      {"lat": 26.5734, "lng": 78.2445},
+      {"lat": 26.5534, "lng": 78.2545},
+      {"lat": 26.5434, "lng": 78.2445}
+    ]
+  },
+  {
+    "id": 149,
+    "name": "Bandhavgarh Dangerous Cave System",
+    "description": "Unexplored ancient caves with structural instability and poisonous gas",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.6845, "lng": 81.0234},
+      {"lat": 23.6945, "lng": 81.0334},
+      {"lat": 23.6745, "lng": 81.0434},
+      {"lat": 23.6645, "lng": 81.0334}
+    ]
+  },
+  {
+    "id": 150,
+    "name": "Pench Tiger Reserve Restricted Core",
+    "description": "Protected tiger territory with aggressive territorial males - deadly encounters",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 21.7623, "lng": 79.3523},
+      {"lat": 21.7723, "lng": 79.3623},
+      {"lat": 21.7523, "lng": 79.3723},
+      {"lat": 21.7423, "lng": 79.3623}
+    ]
+  },
+  {
+    "id": 151,
+    "name": "Jabalpur Marble Rocks Dangerous Rapids",
+    "description": "River section with deadly whirlpools and sharp underwater rocks",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.1245, "lng": 79.8634},
+      {"lat": 23.1345, "lng": 79.8734},
+      {"lat": 23.1145, "lng": 79.8834},
+      {"lat": 23.1045, "lng": 79.8734}
+    ]
+  },
+  {
+    "id": 152,
+    "name": "Gwalior Fort Unstable Section",
+    "description": "Ancient fortification with dangerous structural collapse risk - no entry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 26.2312, "lng": 78.1678},
+      {"lat": 26.2412, "lng": 78.1778},
+      {"lat": 26.2212, "lng": 78.1878},
+      {"lat": 26.2112, "lng": 78.1778}
+    ]
+  },
+  {
+    "id": 153,
+    "name": "Indore Underground Toxic Waste Site",
+    "description": "Industrial area with dangerous chemical contamination - severe health risk",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.7345, "lng": 75.8967},
+      {"lat": 22.7445, "lng": 75.9067},
+      {"lat": 22.7245, "lng": 75.9167},
+      {"lat": 22.7145, "lng": 75.9067}
+    ]
+  },
+  {
+    "id": 154,
+    "name": "Pachmarhi Military Installation",
+    "description": "Army training facility with active firing exercises - strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.4712, "lng": 78.4345},
+      {"lat": 22.4812, "lng": 78.4445},
+      {"lat": 22.4612, "lng": 78.4545},
+      {"lat": 22.4512, "lng": 78.4445}
+    ]
+  },
+  {
+    "id": 155,
+    "name": "Satpura Tiger Reserve Core Zone",
+    "description": "Protected wilderness with high concentration of dangerous predators",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.5634, "lng": 78.1234},
+      {"lat": 22.5734, "lng": 78.1334},
+      {"lat": 22.5534, "lng": 78.1434},
+      {"lat": 22.5434, "lng": 78.1334}
+    ]
+  },
+  {
+    "id": 156,
+    "name": "Bhimbetka Fragile Rock Art Section",
+    "description": "Ancient cave paintings under preservation - access strictly controlled",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 22.9412, "lng": 77.6145},
+      {"lat": 22.9512, "lng": 77.6245},
+      {"lat": 22.9312, "lng": 77.6345},
+      {"lat": 22.9212, "lng": 77.6245}
+    ]
+  },
+  {
+    "id": 157,
+    "name": "Ujjain Temple Inner Sanctum",
+    "description": "Sacred area with strict religious access restrictions for non-Hindus",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 23.1823, "lng": 75.7689},
+      {"lat": 23.1833, "lng": 75.7699},
+      {"lat": 23.1813, "lng": 75.7709},
+      {"lat": 23.1803, "lng": 75.7699}
+    ]
+  },
+  {
+    "id": 158,
+    "name": "Amarkantak Sacred Spring Source",
+    "description": "Holy water source with religious restrictions - limited access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 22.6734, "lng": 81.7523},
+      {"lat": 22.6744, "lng": 81.7533},
+      {"lat": 22.6724, "lng": 81.7543},
+      {"lat": 22.6714, "lng": 81.7533}
+    ]
+  },
+  {
+    "id": 159,
+    "name": "Mandla Bear Attack Zone",
+    "description": "Forest area with aggressive sloth bears - multiple fatal attacks reported",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.5987, "lng": 80.3712},
+      {"lat": 22.6087, "lng": 80.3812},
+      {"lat": 22.5887, "lng": 80.3912},
+      {"lat": 22.5787, "lng": 80.3812}
+    ]
+  },
+  {
+    "id": 160,
+    "name": "Omkareshwar Dam Dangerous Spillway",
+    "description": "Sudden water release zone with fatal drowning risk - no swimming",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.2445, "lng": 76.1534},
+      {"lat": 22.2545, "lng": 76.1634},
+      {"lat": 22.2345, "lng": 76.1734},
+      {"lat": 22.2245, "lng": 76.1634}
+    ]
+  },
+  {
+    "id": 161,
+    "name": "Orchha Temple Sacred Inner Chamber",
+    "description": "Sacred ritual area restricted to priests only - strictly no tourists",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 25.3512, "lng": 78.6412},
+      {"lat": 25.3522, "lng": 78.6422},
+      {"lat": 25.3502, "lng": 78.6432},
+      {"lat": 25.3492, "lng": 78.6422}
+    ]
+  },
+  {
+    "id": 162,
+    "name": "Khajuraho Temple Restricted Section",
+    "description": "Ancient temple area under restoration - no public access permitted",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 24.8523, "lng": 79.9212},
+      {"lat": 24.8533, "lng": 79.9222},
+      {"lat": 24.8513, "lng": 79.9232},
+      {"lat": 24.8503, "lng": 79.9222}
+    ]
+  },
+  {
+    "id": 163,
+    "name": "Raisen Fort Dangerous Cliff Edge",
+    "description": "Unstable historic ramparts with fatal fall risk - barriers compromised",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.3312, "lng": 77.7823},
+      {"lat": 23.3412, "lng": 77.7923},
+      {"lat": 23.3212, "lng": 77.8023},
+      {"lat": 23.3112, "lng": 77.7923}
+    ]
+  },
+  {
+    "id": 164,
+    "name": "Bhedaghat Dangerous Waterfall Base",
+    "description": "River area with powerful undertow and drowning risk - swimming prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.1278, "lng": 79.8023},
+      {"lat": 23.1378, "lng": 79.8123},
+      {"lat": 23.1178, "lng": 79.8223},
+      {"lat": 23.1078, "lng": 79.8123}
+    ]
+  },
+  {
+    "id": 165,
+    "name": "Rewa White Tiger Sanctuary Inner Zone",
+    "description": "Protected breeding area for rare white tigers - strict no-entry policy",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 24.5323, "lng": 81.2934},
+      {"lat": 24.5423, "lng": 81.3034},
+      {"lat": 24.5223, "lng": 81.3134},
+      {"lat": 24.5123, "lng": 81.3034}
+    ]
+  },
+  {
+    "id": 166,
+    "name": "Mandu Unstable Palace Ruins",
+    "description": "Ancient palace with collapsing structures - danger of falling masonry",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.3412, "lng": 75.4212},
+      {"lat": 22.3512, "lng": 75.4312},
+      {"lat": 22.3312, "lng": 75.4412},
+      {"lat": 22.3212, "lng": 75.4312}
+    ]
+  },
+  {
+    "id": 167,
+    "name": "Shivpuri Military Training Ground",
+    "description": "Active military exercise area with live ammunition - strictly prohibited",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.4245, "lng": 77.6634},
+      {"lat": 25.4345, "lng": 77.6734},
+      {"lat": 25.4145, "lng": 77.6834},
+      {"lat": 25.4045, "lng": 77.6734}
+    ]
+  },
+  {
+    "id": 168,
+    "name": "Kuno National Park Restricted Lion Zone",
+    "description": "Protected area for newly introduced Asiatic lions - dangerous for tourists",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.5623, "lng": 77.4134},
+      {"lat": 25.5723, "lng": 77.4234},
+      {"lat": 25.5523, "lng": 77.4334},
+      {"lat": 25.5423, "lng": 77.4234}
+    ]
+  },
+  {
+    "id": 169,
+    "name": "Bhopal Gas Tragedy Contamination Zone",
+    "description": "Area with lingering toxic contamination - health hazard for visitors",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 23.2723, "lng": 77.4023},
+      {"lat": 23.2823, "lng": 77.4123},
+      {"lat": 23.2623, "lng": 77.4223},
+      {"lat": 23.2523, "lng": 77.4123}
+    ]
+  },
+  {
+    "id": 170,
+    "name": "Sanchi Stupa Fragile Section",
+    "description": "Ancient Buddhist monument under restoration - no tourist access",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 23.4812, "lng": 77.7356},
+      {"lat": 23.4822, "lng": 77.7366},
+      {"lat": 23.4802, "lng": 77.7376},
+      {"lat": 23.4792, "lng": 77.7366}
+    ]
+  },
+  {
+    "id": 171,
+    "name": "Chanderi Fort Unstable Walls",
+    "description": "Historic fortress with crumbling defensive walls - collapse risk",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 24.7123, "lng": 78.1356},
+      {"lat": 24.7223, "lng": 78.1456},
+      {"lat": 24.7023, "lng": 78.1556},
+      {"lat": 24.6923, "lng": 78.1456}
+    ]
+  },
+  {
+    "id": 172,
+    "name": "Chitrakoot Sacred Cave Temple",
+    "description": "Religious site with restricted access based on traditional practices",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 25.1634, "lng": 80.8723},
+      {"lat": 25.1644, "lng": 80.8733},
+      {"lat": 25.1624, "lng": 80.8743},
+      {"lat": 25.1614, "lng": 80.8733}
+    ]
+  },
+  {
+    "id": 173,
+    "name": "Ken River Crocodile Territory",
+    "description": "River section with high concentration of aggressive mugger crocodiles",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 24.7345, "lng": 80.0123},
+      {"lat": 24.7445, "lng": 80.0223},
+      {"lat": 24.7245, "lng": 80.0323},
+      {"lat": 24.7145, "lng": 80.0223}
+    ]
+  },
+  {
+    "id": 174,
+    "name": "Maihar Temple Dangerous Cliff Path",
+    "description": "Steep pilgrimage route with fatal falls - no safety railings",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 24.2678, "lng": 80.7523},
+      {"lat": 24.2778, "lng": 80.7623},
+      {"lat": 24.2578, "lng": 80.7723},
+      {"lat": 24.2478, "lng": 80.7623}
+    ]
+  },
+  {
+    "id": 175,
+    "name": "Betwa River Quicksand Zone",
+    "description": "Treacherous river banks with deadly quicksand pockets - multiple fatalities",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 25.4234, "lng": 78.3456},
+      {"lat": 25.4334, "lng": 78.3556},
+      {"lat": 25.4134, "lng": 78.3656},
+      {"lat": 25.4034, "lng": 78.3556}
+    ]
+  },
+  {
+    "id": 176,
+    "name": "Ujjain Simhastha Kumbh Restricted Area",
+    "description": "Holy site with limited access during major religious gatherings",
+    "restrictionLevel": "medium",
+    "boundaries": [
+      {"lat": 23.1956, "lng": 75.7812},
+      {"lat": 23.2056, "lng": 75.7912},
+      {"lat": 23.1856, "lng": 75.8012},
+      {"lat": 23.1756, "lng": 75.7912}
+    ]
+  },
+  {
+    "id": 177,
+    "name": "Dhar Fort Lightning Strike Zone",
+    "description": "Historic structure with frequent deadly lightning strikes - extreme danger",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.6012, "lng": 75.3045},
+      {"lat": 22.6112, "lng": 75.3145},
+      {"lat": 22.5912, "lng": 75.3245},
+      {"lat": 22.5812, "lng": 75.3145}
+    ]
+  },
+  {
+    "id": 178,
+    "name": "Alirajpur Tribal Restricted Territory",
+    "description": "Protected indigenous area with strict no-entry policy for outsiders",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.3123, "lng": 74.3567},
+      {"lat": 22.3223, "lng": 74.3667},
+      {"lat": 22.3023, "lng": 74.3767},
+      {"lat": 22.2923, "lng": 74.3667}
+    ]
+  },
+  {
+    "id": 179,
+    "name": "Gandhi Sagar Dam Dangerous Undertow",
+    "description": "Lake area with powerful underwater currents - multiple drownings reported",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 24.7234, "lng": 75.5567},
+      {"lat": 24.7334, "lng": 75.5667},
+      {"lat": 24.7134, "lng": 75.5767},
+      {"lat": 24.7034, "lng": 75.5667}
+    ]
+  },
+  {
+    "id": 180,
+    "name": "Patalkot Valley Dangerous Trail",
+    "description": "Remote valley with treacherous paths and poisonous snake habitat",
+    "restrictionLevel": "high",
+    "boundaries": [
+      {"lat": 22.4567, "lng": 78.7512},
+      {"lat": 22.4667, "lng": 78.7612},
+      {"lat": 22.4467, "lng": 78.7712},
+      {"lat": 22.4367, "lng": 78.7612}
+    ]
+  }
+]

@@ -9,10 +9,11 @@
 html, body, #root {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   font-family: 'Inter', sans-serif; /* 👈 neat default font */
   background: #f9fafb; /* light neutral bg */
   color: #111827;      /* dark gray text */
+  scroll-behavior: smooth;
 }
 
 /* Loading spinner animation */

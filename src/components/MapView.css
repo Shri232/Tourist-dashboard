@@ -1,0 +1,523 @@
+/* Custom styles for heatmap visualization */
+.map-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  min-width: 220px;
+}
+
+.hex-grid-controls {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-range {
+  width: 100%;
+  margin: 8px 0;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.restricted-legend-zone {
+  background-color: rgba(255, 0, 0, 0.25) !important;
+  border: 2px dashed #ff0000 !important;
+  border-radius: 3px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.intensity-scale {
+  height: 20px;
+  margin: 10px 0 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, 
+    #0000ff 0%, 
+    #00ffff 20%, 
+    #00ff00 40%, 
+    #ffff00 60%, 
+    #ff8800 80%, 
+    #ff0000 100%
+  );
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Add tick marks to the intensity scale */
+.intensity-scale-with-ticks {
+  position: relative;
+  padding-bottom: 15px;
+  width: 100%;
+  height: 20px;
+  border-radius: 4px;
+  margin: 10px 0;
+  background: linear-gradient(to right, 
+    #000080 0%,    /* Very dark blue */
+    #0000ff 20%,   /* Blue */
+    #4b0082 30%,   /* Indigo */
+    #800080 40%,   /* Purple */
+    #990000 50%,   /* Dark red */
+    #cc0000 60%,   /* Medium red */
+    #ff0000 70%,   /* Bright red */
+    #990000 80%,   /* Dark red */
+    #660000 90%,   /* Deeper red */
+    #330000 100%   /* Very dark red */
+  );
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.intensity-scale-with-ticks::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-image: linear-gradient(90deg, 
+    #000 1px, transparent 1px,
+    transparent 19%, #000 19%, #000 21%, transparent 21%,
+    transparent 39%, #000 39%, #000 41%, transparent 41%,
+    transparent 59%, #000 59%, #000 61%, transparent 61%,
+    transparent 79%, #000 79%, #000 81%, transparent 81%,
+    transparent 99%, #000 99%
+  );
+}
+
+/* Forest restricted zones styling */
+/* Animation removed to make zones static */
+
+.restricted-forest-zone {
+  fill: rgba(255, 0, 0, 0.25);
+  stroke: #ff0000;
+  stroke-width: 2;
+  stroke-dasharray: 5, 5;
+  pointer-events: all;
+  /* Completely disable all transformations and animations */
+  transform: none !important; 
+  will-change: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+.restricted-forest-zone:hover {
+  fill: rgba(255, 0, 0, 0.5);
+  stroke-width: 3;
+}
+
+.restricted-forest-label {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #ff0000;
+  border-radius: 3px;
+  color: #ff0000;
+  font-weight: bold;
+  padding: 2px 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Static warning dots for forest boundaries */
+/* Animation and movement completely removed */
+
+.pulsating-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
+  /* prevent any type of movement or animation */
+  transform: none !important;
+  will-change: none !important;
+  transition: none !important;
+}
+
+/* New class for warning icon markers to ensure stability */
+.static-warning-icon {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  transition: none !important;
+  will-change: none !important;
+}
+
+/* Info tooltip styling */
+.info-tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1500;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.info-tooltip-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-left: 5px solid #17a2b8;
+}
+
+.info-tooltip h4 {
+  color: #17a2b8;
+  margin-top: 0;
+}
+
+.info-tooltip ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.info-tooltip button {
+  margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.map-controls h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.form-check {
+  margin-bottom: 8px;
+}
+
+.form-check-input {
+  margin-right: 6px;
+}
+
+.important-toggle:checked {
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+
+.important-toggle:not(:checked) {
+  border-color: #ff0000 !important;
+}
+
+.emergency-legend {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.intensity-scale {
+  margin-top: 10px;
+  height: 15px;
+  width: 100%;
+  background: linear-gradient(to right, blue, cyan, lime, yellow, orange, red);
+  border-radius: 2px;
+  position: relative;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.custom-marker {
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Improve popup styles */
+.leaflet-popup-content {
+  min-width: 200px;
+}
+
+.leaflet-popup-content strong {
+  display: inline-block;
+  width: 120px;
+}
+
+/* Additional fixes to ensure map renders correctly */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Map controls visibility - fixed version */
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 300px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.map-controls.hidden {
+  transform: translateX(320px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map-controls.visible {
+  transform: translateX(0);
+  opacity: 1;
+  display: block !important;
+}
+
+.map-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btn-close {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  font-weight: bold;
+  color: #555;
+}
+
+.btn-close:hover {
+  opacity: 1;
+  background: #eaeaea;
+  color: #333;
+}
+
+.show-controls-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1001; /* Higher than controls to ensure visibility */
+  background: white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  width: auto;
+  height: auto;
+  font-weight: bold;
+}
+
+.show-controls-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.controls-icon {
+  font-style: normal;
+  margin-right: 5px;
+}
+
+.controls-text {
+  display: inline-block;
+}
+
+/* Fix for polygon rendering */
+.leaflet-pane svg path {
+  pointer-events: auto !important;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Prevent all animations on leaflet elements */
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Custom styles for the drawing tools */
+.leaflet-draw-toolbar a {
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+.leaflet-draw-toolbar a:hover {
+  background-color: #f4f4f4;
+}
+
+.leaflet-draw-tooltip {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.edit-zone-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.edit-zone-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Pulsating warning markers for high-restriction zones */
+.pulsating-dot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.8);
+  position: relative;
+}
+
+/* Static warning markers */
+.static-warning-icon {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Legend styles for restricted zones */
+.restricted-legend-zone {
+  border: 2px dashed #ff0000;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* Loading indicator styles */
+.ms-2 {
+  margin-left: 0.5rem;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+/* Global styles to enforce controls visibility */
+body.controls-enabled .map-controls.visible {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Ensure map container allows positioning */
+.map-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Updated intensity scale with vibrant colors */
+.intensity-scale-with-ticks {
+  width: 100%;
+  height: 20px;
+  border-radius: 4px;
+  margin: 10px 0;
+  background: linear-gradient(to right, 
+    rgba(0, 0, 255, 0.5) 0%,    /* Transparent blue */
+    rgba(0, 255, 255, 0.5) 20%, /* Cyan */
+    rgba(0, 255, 0, 0.5) 40%,   /* Green */
+    rgba(255, 255, 0, 0.7) 60%, /* Yellow */
+    rgba(255, 128, 0, 0.8) 80%, /* Orange */
+    rgba(255, 0, 0, 0.9) 100%   /* Red */
+  );
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* Remove the tick marks */
+.intensity-scale-with-ticks::after {
+  display: none;
+}
+
+/* Hide the scale labels */
+.intensity-scale-container h3 {
+  display: none;
+}
+
+.scale-labels {
+  display: none;
+}

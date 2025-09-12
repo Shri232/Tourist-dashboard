@@ -209,7 +209,7 @@ export default function DataTable({
                 <th
                   key={column.key}
                   style={{
-                    ...styles.tableHeader,
+                    ...styles.tableHeaderCell,
                     ...(column.sortable !== false ? styles.sortableHeader : {})
                   }}
                   onClick={() => column.sortable !== false && handleSort(column.key)}
@@ -486,7 +486,7 @@ const styles = {
   tableHead: {
     backgroundColor: "#f9fafb"
   },
-  tableHeader: {
+  tableHeaderCell: {
     padding: "12px 16px",
     textAlign: "left",
     fontSize: "14px",
