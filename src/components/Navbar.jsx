@@ -72,8 +72,13 @@ export default function Navbar({ onLogout }) {
         </div>
 
         {/* Notification Bell */}
-        <div style={styles.iconContainer} onClick={() => setShowNotifications(!showNotifications)}>
-          <span style={styles.icon}>🔔</span>
+        <div 
+          style={styles.iconContainer} 
+          onClick={() => setShowNotifications(!showNotifications)}
+          aria-label="Notifications"
+          role="button"
+        >
+          <span style={styles.icon} aria-hidden="true">🔔</span>
           {notificationCount > 0 && (
             <span style={styles.notificationBadge}>{notificationCount}</span>
           )}
@@ -152,10 +157,13 @@ const styles = {
     gap: "12px"
   },
   badge: {
-    fontSize: "32px",
-    background: "rgba(255, 255, 255, 0.1)",
+    fontSize: "28px", // Slightly smaller for better proportions
+    background: "rgba(255, 255, 255, 0.15)", // Better contrast
     padding: "8px",
-    borderRadius: "8px"
+    borderRadius: "8px",
+    display: "flex",        // Ensures proper emoji centering
+    alignItems: "center",
+    justifyContent: "center"
   },
   title: {
     fontSize: "20px",
@@ -220,7 +228,9 @@ const styles = {
   },
   icon: {
     fontSize: "20px",
-    display: "block"
+    display: "flex",       // Better emoji alignment
+    alignItems: "center",
+    justifyContent: "center"
   },
   notificationBadge: {
     position: "absolute",
@@ -326,5 +336,15 @@ const styles = {
     height: "1px",
     backgroundColor: "#e5e7eb",
     margin: "4px 0"
+  },
+  // Add responsive adjustments for small screens
+  "@media (max-width: 768px)": {
+    badge: {
+      fontSize: "24px",    // Smaller on mobile
+      padding: "6px"
+    },
+    icon: {
+      fontSize: "18px"     // Smaller icons on mobile
+    }
   }
 };

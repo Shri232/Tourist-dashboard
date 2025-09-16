@@ -802,13 +802,13 @@ const styles = {
     flex: 1
   },
   title: {
-    fontSize: "32px",
-    fontWeight: "800",
+    fontSize: "38px", // Increased from 32px
+    fontWeight: "900",
     color: "#1f2937",
-    margin: "0 0 8px 0"
+    margin: "0 0 12px 0"
   },
   subtitle: {
-    fontSize: "16px",
+    fontSize: "20px", // Increased from 16px
     color: "#6b7280",
     margin: 0
   },
@@ -822,7 +822,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "8px",
-    fontSize: "14px",
+    fontSize: "18px", // Increased from 14px
     fontWeight: "600",
     cursor: "pointer"
   },
@@ -832,7 +832,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "8px",
-    fontSize: "14px",
+    fontSize: "18px", // Increased from 14px
     fontWeight: "600",
     cursor: "pointer",
     animation: "pulse 2s infinite"
@@ -843,7 +843,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "8px",
-    fontSize: "14px",
+    fontSize: "18px", // Increased from 14px
     fontWeight: "600",
     cursor: "pointer"
   },
@@ -864,7 +864,7 @@ const styles = {
     gap: "16px"
   },
   statIcon: {
-    fontSize: "32px",
+    fontSize: "40px", // Increased from 32px
     backgroundColor: "#f3f4f6",
     padding: "12px",
     borderRadius: "12px"
@@ -873,15 +873,15 @@ const styles = {
     flex: 1
   },
   statNumber: {
-    fontSize: "24px",
-    fontWeight: "800",
+    fontSize: "32px", // Increased from 24px
+    fontWeight: "900",
     color: "#1f2937",
     lineHeight: "1"
   },
   statLabel: {
-    fontSize: "14px",
+    fontSize: "18px", // Increased from 14px
     color: "#6b7280",
-    marginTop: "4px"
+    marginTop: "6px"
   },
   controlsSection: {
     backgroundColor: "white",
@@ -905,7 +905,7 @@ const styles = {
     border: "1px solid #e5e7eb",
     borderRadius: "8px",
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "18px", // Increased from 14px
     fontWeight: "500",
     color: "#6b7280",
     display: "flex",
@@ -922,7 +922,7 @@ const styles = {
     backgroundColor: "white",
     padding: "2px 8px",
     borderRadius: "12px",
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     fontWeight: "600",
     color: "white"
   },
@@ -936,7 +936,7 @@ const styles = {
     padding: "8px 12px",
     border: "1px solid #d1d5db",
     borderRadius: "6px",
-    fontSize: "14px",
+    fontSize: "16px", // Increased from 14px
     backgroundColor: "white",
     cursor: "pointer"
   },
@@ -951,8 +951,8 @@ const styles = {
     flexWrap: "wrap"
   },
   bulkActionsLabel: {
-    fontSize: "14px",
-    fontWeight: "600",
+    fontSize: "16px", // Increased from 14px
+    fontWeight: "700",
     color: "#dc2626"
   },
   bulkActionButton: {
@@ -961,7 +961,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "6px",
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     fontWeight: "500",
     cursor: "pointer"
   },
@@ -974,7 +974,7 @@ const styles = {
     gap: "12px"
   },
   incidentIcon: {
-    fontSize: "20px",
+    fontSize: "28px", // Increased from 20px
     backgroundColor: "#f3f4f6",
     padding: "8px",
     borderRadius: "50%",
@@ -982,18 +982,18 @@ const styles = {
     textAlign: "center"
   },
   incidentTitle: {
-    fontSize: "14px",
-    fontWeight: "600",
+    fontSize: "18px", // Increased from 14px
+    fontWeight: "700",
     color: "#1f2937"
   },
   incidentInfo: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   severityBadge: {
     padding: "4px 12px",
     borderRadius: "12px",
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     fontWeight: "600",
     display: "flex",
     alignItems: "center",
@@ -1002,11 +1002,11 @@ const styles = {
   statusBadge: {
     padding: "4px 12px",
     borderRadius: "12px",
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     fontWeight: "600"
   },
   affectedCount: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   actionButtons: {
@@ -1019,7 +1019,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "4px",
-    fontSize: "11px",
+    fontSize: "13px", // Increased from 11px
     cursor: "pointer"
   },
   responseButton: {
@@ -1028,7 +1028,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "4px",
-    fontSize: "11px",
+    fontSize: "13px", // Increased from 11px
     cursor: "pointer"
   },
   editButton: {
@@ -1037,7 +1037,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "4px",
-    fontSize: "11px",
+    fontSize: "13px", // Increased from 11px
     cursor: "pointer"
   },
   modalOverlay: {
@@ -1070,8 +1070,8 @@ const styles = {
     backgroundColor: "#f9fafb"
   },
   modalTitle: {
-    fontSize: "20px",
-    fontWeight: "700",
+    fontSize: "28px", // Increased from 20px
+    fontWeight: "800",
     color: "#1f2937",
     margin: 0
   },
@@ -1086,7 +1086,8 @@ const styles = {
   modalContent: {
     padding: "24px",
     maxHeight: "65vh",
-    overflowY: "auto"
+    overflowY: "auto",
+    fontSize: "17px" // Add for modal content
   },
   incidentDetailsGrid: {
     display: "grid",
@@ -1097,7 +1098,8 @@ const styles = {
   detailsSection: {
     backgroundColor: "#f9fafb",
     padding: "16px",
-    borderRadius: "8px"
+    borderRadius: "8px",
+    fontSize: "16px" // Add for modal details
   },
   detailItem: {
     display: "flex",
@@ -1107,13 +1109,13 @@ const styles = {
     borderBottom: "1px solid #e5e7eb"
   },
   detailLabel: {
-    fontSize: "14px",
-    fontWeight: "500",
+    fontSize: "16px", // Increased from 14px
+    fontWeight: "600",
     color: "#6b7280"
   },
   detailValue: {
-    fontSize: "14px",
-    fontWeight: "600",
+    fontSize: "16px", // Increased from 14px
+    fontWeight: "700",
     color: "#1f2937"
   },
   teamItem: {
@@ -1124,20 +1126,20 @@ const styles = {
     border: "1px solid #e5e7eb"
   },
   teamName: {
-    fontSize: "14px",
-    fontWeight: "600",
+    fontSize: "16px", // Increased from 14px
+    fontWeight: "700",
     color: "#1f2937"
   },
   teamStatus: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   teamEta: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   teamMembers: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   touristItem: {
@@ -1148,18 +1150,18 @@ const styles = {
     border: "1px solid #e5e7eb"
   },
   touristName: {
-    fontSize: "14px",
-    fontWeight: "600",
+    fontSize: "16px", // Increased from 14px
+    fontWeight: "700",
     color: "#1f2937"
   },
   touristDetails: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280"
   },
   touristStatus: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#dc2626",
-    fontWeight: "500"
+    fontWeight: "600"
   },
   descriptionSection: {
     backgroundColor: "#f9fafb",
@@ -1170,7 +1172,8 @@ const styles = {
   description: {
     margin: 0,
     color: "#374151",
-    lineHeight: "1.6"
+    lineHeight: "1.6",
+    fontSize: "16px" // Increased from default
   },
   timelineSection: {
     backgroundColor: "#f9fafb",
@@ -1189,13 +1192,13 @@ const styles = {
     borderBottom: "1px solid #e5e7eb"
   },
   timelineTime: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280",
     minWidth: "60px",
-    fontWeight: "600"
+    fontWeight: "700"
   },
   timelineEvent: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     flex: 1
   },
   communicationSection: {
@@ -1214,18 +1217,18 @@ const styles = {
     borderBottom: "1px solid #e5e7eb"
   },
   logTime: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#6b7280",
     minWidth: "60px"
   },
   logUser: {
-    fontSize: "12px",
-    fontWeight: "600",
+    fontSize: "14px", // Increased from 12px
+    fontWeight: "700",
     color: "#374151",
     minWidth: "120px"
   },
   logMessage: {
-    fontSize: "12px",
+    fontSize: "14px", // Increased from 12px
     color: "#374151",
     flex: 1
   },
@@ -1243,7 +1246,7 @@ const styles = {
     color: "white",
     border: "none",
     borderRadius: "6px",
-    fontSize: "14px",
+    fontSize: "16px", // Increased from 14px
     fontWeight: "500",
     cursor: "pointer"
   }

@@ -266,146 +266,215 @@ export default function AnalyticsReportingDashboard() {
     }
   ];
 
+  // Add state for help mode
+  const [showHelp, setShowHelp] = useState(false);
+  // Add state for selected view
+  const [activeView, setActiveView] = useState('charts');
+  
   return (
     <div style={styles.container}>
+      {/* Simplified header with help toggle */}
       <div style={styles.header}>
-        <h1 style={styles.title}>Analytics & Reporting Dashboard</h1>
+        <div style={styles.headerLeft}>
+          <h1 style={styles.title}>Analytics Dashboard</h1>
+          <p style={styles.subtitle}>
+            Tourist activity and risk assessment data
+            <button 
+              onClick={() => setShowHelp(!showHelp)} 
+              style={styles.helpToggle}
+              title={showHelp ? "Hide help text" : "Show help text"}
+            >
+              {showHelp ? "❌ Hide Help" : "❓ Show Help"}
+            </button>
+          </p>
+        </div>
         <div style={styles.headerActions}>
-          <button style={styles.dashboardBtn}>📊 Dashboard View</button>
-          <button style={styles.reportBtn}>📋 Generate Report</button>
+          <button style={styles.actionButton}>
+            📥 Export Report
+          </button>
         </div>
       </div>
 
-      {/* Charts Section */}
-      <div style={styles.chartsSection}>
-        <h2 style={styles.sectionTitle}>📈 Data Visualization</h2>
-        
-        {/* First Row - KPI Charts */}
-        <div style={styles.chartRow}>
-          <div style={styles.chartColumn}>
+      {/* Help text section - shows when help is enabled */}
+      {showHelp && (
+        <div style={styles.helpPanel}>
+          <h3 style={styles.helpTitle}>Dashboard Guide</h3>
+          <p>This dashboard shows tourist analytics and safety metrics.</p>
+          <ul style={styles.helpList}>
+            <li>Use the <strong>View Selector</strong> to switch between charts and reports</li>
+            <li>Hover over charts to see detailed information</li>
+            <li>Click on table headers to sort the data</li>
+            <li>Use the Export button to download reports as CSV or PDF</li>
+          </ul>
+        </div>
+      )}
+
+      {/* Simplified view selector */}
+      <div style={styles.viewSelector}>
+        <button 
+          onClick={() => setActiveView('charts')}
+          style={{
+            ...styles.viewButton,
+            ...(activeView === 'charts' ? styles.activeViewButton : {})
+          }}
+        >
+          📊 Charts & Visualization
+        </button>
+        <button 
+          onClick={() => setActiveView('tables')}
+          style={{
+            ...styles.viewButton,
+            ...(activeView === 'tables' ? styles.activeViewButton : {})
+          }}
+        >
+          📋 Data Tables
+        </button>
+        <button 
+          onClick={() => setActiveView('summary')}
+          style={{
+            ...styles.viewButton,
+            ...(activeView === 'summary' ? styles.activeViewButton : {})
+          }}
+        >
+          📈 Summary Stats
+        </button>
+      </div>
+
+      {/* Charts Section - only shown when charts view is active */}
+      {activeView === 'charts' && (
+        <div style={styles.chartsSection}>
+          <h2 style={styles.sectionTitle}>📊 Data Visualization</h2>
+          {showHelp && <p style={styles.helpText}>Charts show patterns and trends in tourist activity and incidents.</p>}
+          
+          {/* First Row - Key Charts */}
+          <div style={styles.chartRow}>
+            <div style={styles.chartCard}>
+              <LineChart 
+                data={touristTrafficData} 
+                title="Tourist Traffic Over Time"
+                color="#3b82f6"
+              />
+              {showHelp && <p style={styles.chartHelp}>Shows tourist traffic patterns by day of week</p>}
+            </div>
+            <div style={styles.chartCard}>
+              <BarChart 
+                data={incidentsByLocationData} 
+                title="Incidents by Location"
+                color="#ef4444"
+              />
+              {showHelp && <p style={styles.chartHelp}>Compares incidents across different zones</p>}
+            </div>
+          </div>
+
+          {/* Second Row - Simplified to just 2 important charts */}
+          <div style={styles.chartRow}>
+            <div style={styles.chartCard}>
+              <PieChart 
+                data={alertTypesData} 
+                title="Alert Types Distribution"
+              />
+              {showHelp && <p style={styles.chartHelp}>Shows breakdown of different alert categories</p>}
+            </div>
+            <div style={styles.chartCard}>
+              <HeatMap 
+                data={riskZoneHeatMapData} 
+                title="Risk Zone Analysis"
+              />
+              {showHelp && <p style={styles.chartHelp}>Visual representation of risk levels by area</p>}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Data Tables Section - only shown when tables view is active */}
+      {activeView === 'tables' && (
+        <div style={styles.tablesSection}>
+          <h2 style={styles.sectionTitle}>📋 Reporting Tables</h2>
+          {showHelp && <p style={styles.helpText}>
+            Tables show detailed incident and tourist data. Click column headers to sort.
+          </p>}
+          
+          {/* Simplified to just one table at a time with tabs */}
+          <div style={styles.tableTabs}>
+            <button style={styles.tableTab}>🚨 Incident Reports</button>
+            <button style={{...styles.tableTab, backgroundColor: '#f3f4f6', fontWeight: 'normal'}}>
+              👥 Tourist Registry
+            </button>
+          </div>
+          
+          {/* Single table with clearer layout */}
+          <div style={styles.tableContainer}>
+            <DataTable
+              data={incidentReportsData}
+              columns={incidentColumns}
+              showSearch={true}
+              showExport={true}
+              showDateRange={false}
+              itemsPerPage={10}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Summary Section - only shown when summary view is active */}
+      {activeView === 'summary' && (
+        <div style={styles.summarySection}>
+          <h2 style={styles.sectionTitle}>📊 Key Metrics</h2>
+          {showHelp && <p style={styles.helpText}>
+            At-a-glance summary of the most important tourist and safety metrics.
+          </p>}
+          
+          <div style={styles.summaryGrid}>
+            <div style={styles.summaryCard}>
+              <div style={styles.summaryIcon}>👥</div>
+              <div style={styles.summaryContent}>
+                <div style={styles.summaryValue}>1,247</div>
+                <div style={styles.summaryLabel}>Active Tourists</div>
+                <div style={styles.summaryTrend}>+12% this week</div>
+              </div>
+            </div>
+            
+            <div style={styles.summaryCard}>
+              <div style={styles.summaryIcon}>🚨</div>
+              <div style={styles.summaryContent}>
+                <div style={styles.summaryValue}>3</div>
+                <div style={styles.summaryLabel}>Open Incidents</div>
+                <div style={styles.summaryTrend}>-2 from yesterday</div>
+              </div>
+            </div>
+            
+            <div style={styles.summaryCard}>
+              <div style={styles.summaryIcon}>⏱️</div>
+              <div style={styles.summaryContent}>
+                <div style={styles.summaryValue}>3.2 min</div>
+                <div style={styles.summaryLabel}>Response Time</div>
+                <div style={styles.summaryTrend}>Target: 5 min</div>
+              </div>
+            </div>
+            
+            <div style={styles.summaryCard}>
+              <div style={styles.summaryIcon}>⭐</div>
+              <div style={styles.summaryContent}>
+                <div style={styles.summaryValue}>94%</div>
+                <div style={styles.summaryLabel}>Safety Rating</div>
+                <div style={styles.summaryTrend}>+2% improvement</div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Add a simple chart for context */}
+          <div style={{...styles.chartCard, marginTop: '24px'}}>
+            <h3 style={styles.chartTitle}>7-Day Trend</h3>
             <LineChart 
               data={touristTrafficData} 
-              title="Tourist Traffic Over Time"
+              title=""
               color="#3b82f6"
-            />
-          </div>
-          <div style={styles.chartColumn}>
-            <BarChart 
-              data={incidentsByLocationData} 
-              title="Incidents by Location"
-              color="#ef4444"
+              height={200}
+              showAxis={false}
             />
           </div>
         </div>
-
-        {/* Second Row - Analysis Charts */}
-        <div style={styles.chartRow}>
-          <div style={styles.chartColumn}>
-            <PieChart 
-              data={alertTypesData} 
-              title="Alert Types Distribution"
-            />
-          </div>
-          <div style={styles.chartColumn}>
-            <HeatMap 
-              data={riskZoneHeatMapData} 
-              title="Risk Zone Analysis"
-            />
-          </div>
-        </div>
-
-        {/* Third Row - Performance Charts */}
-        <div style={styles.chartRow}>
-          <div style={styles.chartColumn}>
-            <GaugeChart 
-              value={94} 
-              max={100} 
-              title="System Performance"
-              color="#10b981"
-            />
-          </div>
-          <div style={styles.chartColumn}>
-            <AreaChart 
-              data={resourceUtilizationData} 
-              title="Resource Utilization"
-              color="#8b5cf6"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Data Tables Section */}
-      <div style={styles.tablesSection}>
-        <h2 style={styles.sectionTitle}>📋 Reporting Tables</h2>
-        
-        {/* Incident Reports Table */}
-        <div style={styles.tableContainer}>
-          <DataTable
-            data={incidentReportsData}
-            columns={incidentColumns}
-            title="🚨 Incident Reports"
-            showSearch={true}
-            showExport={true}
-            showDateRange={true}
-            itemsPerPage={10}
-          />
-        </div>
-
-        {/* Tourist Registry Table */}
-        <div style={styles.tableContainer}>
-          <DataTable
-            data={touristRegistryData}
-            columns={touristColumns}
-            title="👥 Tourist Registry"
-            showSearch={true}
-            showExport={true}
-            showDateRange={true}
-            itemsPerPage={10}
-          />
-        </div>
-      </div>
-
-      {/* Summary Statistics */}
-      <div style={styles.summarySection}>
-        <h2 style={styles.sectionTitle}>📊 Summary Statistics</h2>
-        <div style={styles.summaryGrid}>
-          <div style={styles.summaryCard}>
-            <div style={styles.summaryIcon}>📈</div>
-            <div style={styles.summaryContent}>
-              <div style={styles.summaryValue}>1,247</div>
-              <div style={styles.summaryLabel}>Total Tourists</div>
-              <div style={styles.summaryTrend}>+12% this week</div>
-            </div>
-          </div>
-          
-          <div style={styles.summaryCard}>
-            <div style={styles.summaryIcon}>🚨</div>
-            <div style={styles.summaryContent}>
-              <div style={styles.summaryValue}>3</div>
-              <div style={styles.summaryLabel}>Active Incidents</div>
-              <div style={styles.summaryTrend}>-2 from yesterday</div>
-            </div>
-          </div>
-          
-          <div style={styles.summaryCard}>
-            <div style={styles.summaryIcon}>⏱️</div>
-            <div style={styles.summaryContent}>
-              <div style={styles.summaryValue}>3.2 min</div>
-              <div style={styles.summaryLabel}>Avg Response Time</div>
-              <div style={styles.summaryTrend}>Target: 5 min</div>
-            </div>
-          </div>
-          
-          <div style={styles.summaryCard}>
-            <div style={styles.summaryIcon}>⭐</div>
-            <div style={styles.summaryContent}>
-              <div style={styles.summaryValue}>94%</div>
-              <div style={styles.summaryLabel}>System Performance</div>
-              <div style={styles.summaryTrend}>+2% improvement</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -420,105 +489,121 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "32px",
+    marginBottom: "24px",
     paddingBottom: "16px",
-    borderBottom: "2px solid #e5e7eb"
+    borderBottom: "1px solid #e5e7eb"
   },
   title: {
-    fontSize: "32px",
-    fontWeight: "800",
+    fontSize: "28px",
+    fontWeight: "700",
     color: "#1f2937",
     margin: 0
   },
-  headerActions: {
+  subtitle: {
+    fontSize: "16px",
+    color: "#6b7280",
+    margin: "4px 0 0 0",
     display: "flex",
-    gap: "12px"
+    alignItems: "center",
+    gap: "10px"
   },
-  dashboardBtn: {
-    padding: "10px 20px",
+  helpToggle: {
+    background: "none",
+    border: "1px solid #d1d5db",
+    borderRadius: "15px",
+    padding: "3px 10px",
+    fontSize: "12px",
+    cursor: "pointer",
+    marginLeft: "10px"
+  },
+  helpPanel: {
+    backgroundColor: "#f0f9ff",
+    borderRadius: "8px",
+    padding: "16px",
+    marginBottom: "20px",
+    border: "1px solid #bfdbfe",
+    fontSize: "14px"
+  },
+  helpTitle: {
+    margin: "0 0 10px 0",
+    fontSize: "16px",
+    color: "#1e40af"
+  },
+  helpList: {
+    margin: "10px 0 0 0",
+    paddingLeft: "20px"
+  },
+  helpText: {
+    fontSize: "14px",
+    color: "#6b7280",
+    margin: "0 0 16px 0"
+  },
+  viewSelector: {
+    display: "flex",
+    gap: "10px",
+    marginBottom: "24px"
+  },
+  viewButton: {
+    padding: "10px 16px",
+    backgroundColor: "#f3f4f6",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "14px",
+    fontWeight: "500",
+    cursor: "pointer",
+    color: "#4b5563"
+  },
+  activeViewButton: {
+    backgroundColor: "#3b82f6",
+    color: "white",
+    fontWeight: "600"
+  },
+  chartCard: {
+    backgroundColor: "white",
+    borderRadius: "8px",
+    padding: "16px",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+    border: "1px solid #e5e7eb"
+  },
+  chartHelp: {
+    fontSize: "13px",
+    color: "#6b7280",
+    fontStyle: "italic",
+    margin: "10px 0 0 0",
+    textAlign: "center"
+  },
+  chartTitle: {
+    fontSize: "16px",
+    fontWeight: "600",
+    margin: "0 0 16px 0",
+    color: "#374151"
+  },
+  tableTabs: {
+    display: "flex",
+    gap: "10px",
+    marginBottom: "16px"
+  },
+  tableTab: {
+    padding: "10px 16px",
     backgroundColor: "#3b82f6",
     color: "white",
     border: "none",
     borderRadius: "8px",
     fontSize: "14px",
-    fontWeight: "500",
+    fontWeight: "600",
     cursor: "pointer"
   },
-  reportBtn: {
-    padding: "10px 20px",
+  actionButton: {
+    padding: "10px 16px",
     backgroundColor: "#10b981",
     color: "white",
     border: "none",
     borderRadius: "8px",
     fontSize: "14px",
-    fontWeight: "500",
-    cursor: "pointer"
-  },
-  chartsSection: {
-    marginBottom: "48px"
-  },
-  sectionTitle: {
-    fontSize: "24px",
-    fontWeight: "700",
-    color: "#1f2937",
-    marginBottom: "24px"
-  },
-  chartRow: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "24px",
-    marginBottom: "24px"
-  },
-  chartColumn: {
-    // Individual chart container
-  },
-  tablesSection: {
-    marginBottom: "48px"
-  },
-  tableContainer: {
-    marginBottom: "32px"
-  },
-  summarySection: {
-    marginBottom: "24px"
-  },
-  summaryGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px"
-  },
-  summaryCard: {
-    backgroundColor: "white",
-    borderRadius: "12px",
-    padding: "24px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    border: "1px solid #e5e7eb",
+    fontWeight: "600",
+    cursor: "pointer",
     display: "flex",
     alignItems: "center",
-    gap: "16px"
-  },
-  summaryIcon: {
-    fontSize: "32px",
-    backgroundColor: "#f3f4f6",
-    padding: "12px",
-    borderRadius: "12px"
-  },
-  summaryContent: {
-    flex: 1
-  },
-  summaryValue: {
-    fontSize: "28px",
-    fontWeight: "800",
-    color: "#1f2937",
-    lineHeight: "1"
-  },
-  summaryLabel: {
-    fontSize: "14px",
-    color: "#6b7280",
-    margin: "4px 0"
-  },
-  summaryTrend: {
-    fontSize: "12px",
-    color: "#10b981",
-    fontWeight: "600"
+    gap: "6px"
   }
 };

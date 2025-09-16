@@ -1,22 +1,147 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 
-export default function TouristRegistryManagement() {
-  const [selectedTab, setSelectedTab] = useState("active");
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [selectedTourist, setSelectedTourist] = useState(null);
-  const [showBulkActions, setShowBulkActions] = useState(false);
-  const [selectedTourists, setSelectedTourists] = useState([]);
-  const [filterOptions, setFilterOptions] = useState({
-    nationality: "all",
-    safetyLevel: "all",
-    status: "all",
-    zone: "all"
-  });
+// Function to generate large dataset of tourists
+const generateMockTouristData = (count = 1000) => {
+  const nationalities = ["USA", "UK", "France", "Germany", "Japan", "Canada", "Australia", 
+    "China", "India", "Brazil", "Mexico", "Spain", "Italy", "Russia", "South Korea"];
+  const maleFirstNames = ["John", "Michael", "Robert", "David", "James", "William", "Richard", 
+    "Thomas", "Charles", "Daniel", "Matthew", "Anthony", "Mark", "Donald", "Steven", "Paul", 
+    "Andrew", "Joshua", "Kenneth", "Kevin", "Brian", "George", "Timothy", "Ronald", "Jason"];
+  const femaleFirstNames = ["Mary", "Jennifer", "Linda", "Patricia", "Elizabeth", "Susan", 
+    "Jessica", "Sarah", "Karen", "Lisa", "Nancy", "Betty", "Sandra", "Margaret", "Ashley", 
+    "Kimberly", "Emily", "Donna", "Michelle", "Carol", "Amanda", "Dorothy", "Melissa", "Deborah"];
+  const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", 
+    "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", 
+    "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson", "White"];
+  const locations = ["Zone A-1", "Zone A-2", "Zone A-3", "Zone B-1", "Zone B-2", "Zone B-3", 
+    "Zone C-1", "Zone C-2", "Zone C-3", "Zone D-1", "Zone D-2", "Zone D-3", "Zone E-1", "Zone E-2"];
+  const accommodations = ["Hotel Grand Palace", "Resort Paradise", "Budget Inn", "Luxury Resort", 
+    "Traditional Inn", "Mountain View Lodge", "Seaside Resort", "City Center Hotel", 
+    "Traveler's Lodge", "Heritage Stay", "Backpacker's Hostel", "Executive Suites"];
+  const purposes = ["Tourism", "Business", "Cultural Exchange", "Education", "Medical", 
+    "Adventure Sports", "Religious Pilgrimage", "Family Visit", "Conference", "Research"];
+  const statuses = ["Active", "Active", "Active", "Active", "Check-in Pending", "Alert", "Checked Out"]; // Weighted for more active entries
+  const riskLevels = ["Low", "Low", "Low", "Medium", "Medium", "High"];
+  const insurances = ["Travel Guard Plus", "Global Health Cover", "EU Travel Insurance", 
+    "Premium Travel Cover", "Asia Travel Protection", "World Traveler Insurance", "SafeJourney Plan"];
+  const devices = ["GPS Tracker", "Emergency Button", "Medical Alert", "Satellite Phone", "Personal Locator"];
+  const specialNeeds = ["None", "None", "None", "Vegetarian meals", "Mobility assistance", 
+    "Language assistance", "Medical requirements", "Religious accommodation", "Allergy considerations"];
 
-  // Extended mock data for tourists
-  const [touristsData, setTouristsData] = useState([
+  const generateID = (index) => `TR-2025-${(1000 + index).toString().padStart(4, '0')}`;
+  
+  const generatePassport = (nationality) => {
+    const countryCode = nationality.substring(0, 2).toUpperCase();
+    const numbers = Math.floor(Math.random() * 90000000) + 10000000;
+    return `${countryCode}${numbers}`;
+  };
+  
+  const generateSafetyScore = (riskLevel) => {
+    if (riskLevel === "Low") return Math.floor(Math.random() * 15) + 85; // 85-99
+    if (riskLevel === "Medium") return Math.floor(Math.random() * 15) + 70; // 70-84
+    return Math.floor(Math.random() * 20) + 50; // 50-69 for High
+  };
+  
+  const generateDate = () => {
+    const start = new Date(2025, 8, 1); // Sept 1, 2025
+    const end = new Date(2025, 9, 15);  // Oct 15, 2025
+    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return randomDate.toISOString().split('T')[0];
+  };
+  
+  const generateCheckOutDate = (checkInDate) => {
+    const checkIn = new Date(checkInDate);
+    const stayDuration = Math.floor(Math.random() * 14) + 3; // 3-16 days stay
+    const checkOut = new Date(checkIn);
+    checkOut.setDate(checkOut.getDate() + stayDuration);
+    return checkOut.toISOString().split('T')[0];
+  };
+
+  const generateEmail = (firstName, lastName) => {
+    const domains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com"];
+    const domain = domains[Math.floor(Math.random() * domains.length)];
+    return `${firstName.toLowerCase()}.${lastName.toLowerCase()}@${domain}`;
+  };
+  
+  const generatePhoneNumber = (nationality) => {
+    const countryPrefixes = {
+      "USA": "+1",
+      "UK": "+44",
+      "France": "+33",
+      "Germany": "+49",
+      "Japan": "+81",
+      "Canada": "+1",
+      "Australia": "+61",
+      "China": "+86",
+      "India": "+91",
+      "Brazil": "+55",
+      "Mexico": "+52",
+      "Spain": "+34",
+      "Italy": "+39",
+      "Russia": "+7",
+      "South Korea": "+82"
+    };
+    const prefix = countryPrefixes[nationality] || "+1";
+    const number = Math.floor(Math.random() * 9000000000) + 1000000000;
+    return `${prefix}-${number.toString().substring(0, 3)}-${number.toString().substring(3, 6)}-${number.toString().substring(6)}`;
+  };
+  
+  const randomDeviceArray = () => {
+    const numDevices = Math.floor(Math.random() * 3) + 1;
+    const selectedDevices = [];
+    for (let i = 0; i < numDevices; i++) {
+      const device = devices[Math.floor(Math.random() * devices.length)];
+      if (!selectedDevices.includes(device)) selectedDevices.push(device);
+    }
+    return selectedDevices;
+  };
+
+  const tourists = [];
+  
+  for (let i = 0; i < count; i++) {
+    const gender = Math.random() > 0.5 ? "Male" : "Female";
+    const firstName = gender === "Male" 
+      ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)]
+      : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+    const nationality = nationalities[Math.floor(Math.random() * nationalities.length)];
+    const riskLevel = riskLevels[Math.floor(Math.random() * riskLevels.length)];
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const checkIn = generateDate();
+    const checkOut = generateCheckOutDate(checkIn);
+    const age = Math.floor(Math.random() * 50) + 18; // 18-67 years old
+    
+    tourists.push({
+      id: generateID(i),
+      name: `${firstName} ${lastName}`,
+      nationality: nationality,
+      passport: generatePassport(nationality),
+      checkIn: checkIn,
+      checkOut: checkOut,
+      location: locations[Math.floor(Math.random() * locations.length)],
+      safetyScore: generateSafetyScore(riskLevel),
+      contact: generatePhoneNumber(nationality),
+      email: generateEmail(firstName, lastName),
+      status: status,
+      emergencyContact: `${lastNames[Math.floor(Math.random() * lastNames.length)]} - ${generatePhoneNumber(nationality)}`,
+      accommodation: accommodations[Math.floor(Math.random() * accommodations.length)],
+      groupSize: Math.floor(Math.random() * 5) + 1,
+      purpose: purposes[Math.floor(Math.random() * purposes.length)],
+      lastSeen: `2025-09-${Math.floor(Math.random() * 14) + 1} ${Math.floor(Math.random() * 23)}:${Math.floor(Math.random() * 59).toString().padStart(2, '0')}`,
+      riskLevel: riskLevel,
+      violations: riskLevel === "Low" ? 0 : riskLevel === "Medium" ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 3) + 1,
+      age: age,
+      gender: gender,
+      specialNeeds: specialNeeds[Math.floor(Math.random() * specialNeeds.length)],
+      insurance: insurances[Math.floor(Math.random() * insurances.length)],
+      guidedTour: Math.random() > 0.6 ? "Yes" : "No",
+      devices: randomDeviceArray()
+    });
+  }
+  
+  // Add original sample tourists to ensure they're included
+  const originalTourists = [
     {
       id: "TR-2024-0891",
       name: "John Smith",
@@ -147,7 +272,27 @@ export default function TouristRegistryManagement() {
       guidedTour: "No",
       devices: ["GPS Tracker"]
     }
-  ]);
+  ];
+  
+  return [...originalTourists, ...tourists];
+};
+
+export default function TouristRegistryManagement() {
+  const [selectedTab, setSelectedTab] = useState("active");
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [selectedTourist, setSelectedTourist] = useState(null);
+  const [showBulkActions, setShowBulkActions] = useState(false);
+  const [selectedTourists, setSelectedTourists] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({
+    nationality: "all",
+    safetyLevel: "all",
+    status: "all",
+    zone: "all"
+  });
+
+  // Generate 1000+ tourists with many active ones
+  const [touristsData, setTouristsData] = useState(generateMockTouristData(1200));
 
   // Filter data based on selected tab and filters
   const filteredData = touristsData.filter(tourist => {
@@ -258,6 +403,25 @@ export default function TouristRegistryManagement() {
             value === "Alert" ? "#dc2626" :
             value === "Check-in Pending" ? "#d97706" : "#6b7280"
         }}>
+          {value}
+        </span>
+      )
+    },
+    { 
+      key: "riskLevel", 
+      label: "Risk Level", 
+      sortable: true,
+      render: (value) => (
+        <span style={{
+          ...styles.riskBadge,
+          backgroundColor: 
+            value === "Low" ? "#dcfce7" :
+            value === "Medium" ? "#fef3c7" : "#fef2f2",
+          color:
+            value === "Low" ? "#166534" :
+            value === "Medium" ? "#d97706" : "#dc2626"
+        }}>
+          {value === "Low" ? "🟢 " : value === "Medium" ? "🟡 " : "🔴 "}
           {value}
         </span>
       )
@@ -815,6 +979,15 @@ const styles = {
     borderRadius: "12px",
     fontSize: "12px",
     fontWeight: "600"
+  },
+  riskBadge: {
+    padding: "4px 12px",
+    borderRadius: "12px",
+    fontSize: "12px",
+    fontWeight: "600",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px"
   },
   actionButtons: {
     display: "flex",

@@ -1,563 +1,2498 @@
-/* Custom styles for heatmap visualization */
+/* ======================================
+   CORE LAYOUT & CONTAINERS
+   ====================================== */
 .map-container {
   position: relative;
   height: 100vh;
   width: 100%;
+  overflow: hidden;
+  /* Improve GPU performance */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
+/* ======================================
+   CONTROL PANEL
+   ====================================== */
 .map-controls {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 12px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  min-width: 220px;
-}
-
-.hex-grid-controls {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.form-range {
-  width: 100%;
-  margin: 8px 0;
-}
-
-.small-text {
-  font-size: 0.8rem;
-  color: #6c757d;
-  margin-top: 2px;
-  font-style: italic;
-}
-
-.restricted-legend-zone {
-  background-color: rgba(255, 0, 0, 0.25) !important;
-  border: 2px dashed #ff0000 !important;
-  border-radius: 3px !important;
-  width: 18px !important;
-  height: 18px !important;
-}
-
-.intensity-scale {
-  height: 20px;
-  margin: 10px 0 5px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, 
-    #0000ff 0%, 
-    #00ffff 20%, 
-    #00ff00 40%, 
-    #ffff00 60%, 
-    #ff8800 80%, 
-    #ff0000 100%
-  );
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-}
-
-.scale-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-/* Add tick marks to the intensity scale */
-.intensity-scale-with-ticks {
-  position: relative;
-  padding-bottom: 15px;
-  width: 100%;
-  height: 20px;
-  border-radius: 4px;
-  margin: 10px 0;
-  background: linear-gradient(to right, 
-    #000080 0%,    /* Very dark blue */
-    #0000ff 20%,   /* Blue */
-    #4b0082 30%,   /* Indigo */
-    #800080 40%,   /* Purple */
-    #990000 50%,   /* Dark red */
-    #cc0000 60%,   /* Medium red */
-    #ff0000 70%,   /* Bright red */
-    #990000 80%,   /* Dark red */
-    #660000 90%,   /* Deeper red */
-    #330000 100%   /* Very dark red */
-  );
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  position: relative;
-}
-
-.intensity-scale-with-ticks::after {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background-image: linear-gradient(90deg, 
-    #000 1px, transparent 1px,
-    transparent 19%, #000 19%, #000 21%, transparent 21%,
-    transparent 39%, #000 39%, #000 41%, transparent 41%,
-    transparent 59%, #000 59%, #000 61%, transparent 61%,
-    transparent 79%, #000 79%, #000 81%, transparent 81%,
-    transparent 99%, #000 99%
-  );
-}
-
-/* Forest restricted zones styling */
-/* Animation removed to make zones static */
-
-.restricted-forest-zone {
-  fill: rgba(255, 0, 0, 0.25);
-  stroke: #ff0000;
-  stroke-width: 2;
-  stroke-dasharray: 5, 5;
-  pointer-events: all;
-  /* Completely disable all transformations and animations */
-  transform: none !important; 
-  will-change: none !important;
-  transition: none !important;
-  animation: none !important;
-}
-
-.restricted-forest-zone:hover {
-  fill: rgba(255, 0, 0, 0.5);
-  stroke-width: 3;
-}
-
-.restricted-forest-label {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid #ff0000;
-  border-radius: 3px;
-  color: #ff0000;
-  font-weight: bold;
-  padding: 2px 6px;
-  font-size: 12px;
-  white-space: nowrap;
-  pointer-events: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-/* Static warning dots for forest boundaries */
-/* Animation and movement completely removed */
-
-.pulsating-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #ff0000;
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
-  /* prevent any type of movement or animation */
-  transform: none !important;
-  will-change: none !important;
-  transition: none !important;
-}
-
-/* New class for warning icon markers to ensure stability */
-.static-warning-icon {
-  margin: 0 !important;
-  padding: 0 !important;
-  transform: none !important;
-  transition: none !important;
-  will-change: none !important;
-}
-
-/* Info tooltip styling */
-.info-tooltip {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1500;
-  width: 90%;
-  max-width: 400px;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.info-tooltip-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  border-left: 5px solid #17a2b8;
-}
-
-.info-tooltip h4 {
-  color: #17a2b8;
-  margin-top: 0;
-}
-
-.info-tooltip ul {
-  padding-left: 20px;
-  margin-bottom: 15px;
-}
-
-.info-tooltip button {
-  margin-top: 10px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.map-controls h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.form-check {
-  margin-bottom: 8px;
-}
-
-.form-check-input {
-  margin-right: 6px;
-}
-
-.important-toggle:checked {
-  background-color: #ff0000 !important;
-  border-color: #ff0000 !important;
-}
-
-.important-toggle:not(:checked) {
-  border-color: #ff0000 !important;
-}
-
-.emergency-legend {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.legend-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  margin-right: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.intensity-scale {
-  margin-top: 10px;
-  height: 15px;
-  width: 100%;
-  background: linear-gradient(to right, blue, cyan, lime, yellow, orange, red);
-  border-radius: 2px;
-  position: relative;
-}
-
-.scale-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  margin-top: 2px;
-}
-
-.custom-marker {
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-/* Improve popup styles */
-.leaflet-popup-content {
-  min-width: 200px;
-}
-
-.leaflet-popup-content strong {
-  display: inline-block;
-  width: 120px;
-}
-
-/* Additional fixes to ensure map renders correctly */
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-}
-
-/* Map controls visibility - fixed version */
-.map-controls {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  background: white;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-  max-height: 80vh;
-  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.98); /* Increased opacity for better readability */
+  padding: 18px;
+  border-radius: 12px; /* Increased rounding */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
   width: 300px;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  opacity: 1;
+  max-height: 85vh;
+  overflow-y: auto;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); /* Enhanced animation timing */
   transform: translateX(0);
+  opacity: 1;
+  /* Add scroll styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(203, 213, 225, 0.4) transparent;
+}
+
+/* Optimize scroll behavior */
+.map-controls::-webkit-scrollbar {
+  width: 6px;
+}
+
+.map-controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.map-controls::-webkit-scrollbar-thumb {
+  background-color: rgba(203, 213, 225, 0.4);
+  border-radius: 6px;
+  border: 2px solid transparent;
 }
 
 .map-controls.hidden {
-  transform: translateX(320px);
+  transform: translateX(340px);
   opacity: 0;
   pointer-events: none;
-}
-
-.map-controls.visible {
-  transform: translateX(0);
-  opacity: 1;
-  display: block !important;
 }
 
 .map-controls-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Heading typography */
+.map-controls h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: -0.01em;
+}
+
+.map-controls h4 {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+  letter-spacing: -0.01em;
+}
+
+/* ======================================
+   INSTRUCTIONS & GUIDANCE
+   ====================================== */
+.map-instructions {
+  padding: 12px 14px;
+  background-color: #f0f9ff;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: #0c4a6e; /* Better contrast */
+  line-height: 1.5;
+  border-left: 4px solid #0ea5e9;
+}
+
+.map-instructions p {
+  margin: 0 0 10px 0;
+}
+
+.map-instructions p:last-child {
+  margin: 0;
+}
+
+.instructions-list {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.instructions-list li {
+  margin-bottom: 6px;
+}
+
+.instructions-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ======================================
+   CONTROL SECTIONS
+   ====================================== */
+.controls-section {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e5e7eb;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.controls-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* ======================================
+   INTERACTIVE CONTROLS
+   ====================================== */
+/* Mode toggle buttons */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
-.btn-close {
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 18px;
+.mode-btn {
+  flex: 1;
+  padding: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
   cursor: pointer;
-  padding: 0;
-  width: 28px;
-  height: 28px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.mode-btn:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.mode-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+/* Intensity slider - improved for better touch */
+.intensity-slider {
+  width: 100%;
+  height: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(to right, #bfdbfe, #3b82f6);
+  outline: none;
+  border-radius: 5px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.intensity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+}
+
+.intensity-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.intensity-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+}
+
+.intensity-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6b7280;
+  padding: 0 2px;
+  margin-top: 5px;
+}
+
+/* ======================================
+   LEGENDS & DATA VISUALIZATION
+   ====================================== */
+.legend-container {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 8px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #f3f4f6;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #4b5563;
+  transition: all 0.15s ease;
+}
+
+.legend-row:hover {
+  color: #111827;
+  transform: translateX(2px);
+}
+
+.legend-row:last-child {
+  margin-bottom: 0;
+}
+
+.legend-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  margin-right: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.legend-row:hover .legend-color {
+  transform: scale(1.1);
+}
+
+/* ======================================
+   BUTTONS & NAVIGATION
+   ====================================== */
+/* Focus buttons */
+.focus-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.focus-button {
+  padding: 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.8;
-  font-weight: bold;
-  color: #555;
+  gap: 8px;
 }
 
-.btn-close:hover {
-  opacity: 1;
-  background: #eaeaea;
-  color: #333;
+.focus-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
+.focus-button:active {
+  transform: translateY(0);
+}
+
+.focus-button.secondary {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  box-shadow: 0 2px 10px rgba(75, 85, 99, 0.15);
+}
+
+.focus-button.secondary:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  box-shadow: 0 4px 12px rgba(75, 85, 99, 0.25);
+}
+
+/* Show controls button */
 .show-controls-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 1001; /* Higher than controls to ensure visibility */
+  z-index: 999;
   background: white;
   border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  padding: 8px 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  width: auto;
-  height: auto;
-  font-weight: bold;
+  transition: all 0.25s ease;
 }
 
 .show-controls-btn:hover {
-  background: #f0f0f0;
-  transform: scale(1.05);
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .controls-icon {
-  font-style: normal;
-  margin-right: 5px;
+  font-size: 18px;
 }
 
-.controls-text {
-  display: inline-block;
-}
-
-/* Fix for polygon rendering */
-.leaflet-pane svg path {
-  pointer-events: auto !important;
-  vector-effect: non-scaling-stroke;
-}
-
-/* Prevent all animations on leaflet elements */
-.leaflet-tile,
-.leaflet-marker-icon,
-.leaflet-marker-shadow,
-.leaflet-image-layer,
-.leaflet-pane > svg path {
-  transition: none !important;
-  animation: none !important;
-}
-
-/* Custom styles for the drawing tools */
-.leaflet-draw-toolbar a {
-  background-color: white;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-  border-radius: 4px;
-}
-
-.leaflet-draw-toolbar a:hover {
-  background-color: #f4f4f4;
-}
-
-.leaflet-draw-tooltip {
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 12px;
-}
-
-.edit-zone-btn {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  padding: 4px 8px;
-  font-size: 12px;
-  cursor: pointer;
-  margin-top: 8px;
-}
-
-.edit-zone-btn:hover {
-  background-color: #2563eb;
-}
-
-/* Pulsating warning markers for high-restriction zones */
-.pulsating-dot {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: rgba(255, 0, 0, 0.8);
-  position: relative;
-}
-
-/* Static warning markers */
-.static-warning-icon {
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-}
-
-/* Legend styles for restricted zones */
-.restricted-legend-zone {
-  border: 2px dashed #ff0000;
-  background-color: rgba(255, 0, 0, 0.2);
-}
-
-/* Loading indicator styles */
-.ms-2 {
-  margin-left: 0.5rem;
-}
-
-.text-muted {
-  color: #6c757d;
-}
-
-.small {
-  font-size: 0.875rem;
-}
-
-/* Global styles to enforce controls visibility */
-body.controls-enabled .map-controls.visible {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: translateX(0) !important;
-}
-
-/* Ensure map container allows positioning */
-.map-container {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Updated intensity scale with vibrant colors */
-.intensity-scale-with-ticks {
-  width: 100%;
-  height: 20px;
-  border-radius: 4px;
-  margin: 10px 0;
-  background: linear-gradient(to right, 
-    rgba(0, 0, 255, 0.5) 0%,    /* Transparent blue */
-    rgba(0, 255, 255, 0.5) 20%, /* Cyan */
-    rgba(0, 255, 0, 0.5) 40%,   /* Green */
-    rgba(255, 255, 0, 0.7) 60%, /* Yellow */
-    rgba(255, 128, 0, 0.8) 80%, /* Orange */
-    rgba(255, 0, 0, 0.9) 100%   /* Red */
-  );
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  position: relative;
-}
-
-/* Remove the tick marks */
-.intensity-scale-with-ticks::after {
-  display: none;
-}
-
-/* Hide the scale labels */
-.intensity-scale-container h3 {
-  display: none;
-}
-
-.scale-labels {
-  display: none;
-}
-
-/* Error display styles */
-.map-error-overlay {
+/* Back to dashboard button */
+.back-to-dashboard-btn {
   position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  color: #1f2937;
+}
+
+.back-to-dashboard-btn:hover {
+  background-color: #f9fafb;
+  transform: translateX(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.back-icon {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* ======================================
+   POPUPS & TOOLTIPS
+   ====================================== */
+/* Enhanced popups */
+.custom-popup {
+  padding: 10px;
+  max-width: 280px;
+}
+
+.custom-popup h3 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 8px;
+}
+
+.popup-category {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.risk-popup .popup-category {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.cluster-popup .popup-category {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.popup-value {
+  font-weight: 600;
+  margin-top: 12px;
+  text-align: right;
+  font-size: 14px;
+  padding-top: 8px;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Improved tooltips */
+.custom-tooltip {
+  background-color: rgba(0, 0, 0, 0.85);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  pointer-events: none;
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+/* ======================================
+   LOADING STATES
+   ====================================== */
+/* Loading spinner */
+.map-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 24px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.map-loading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ======================================
+   OVERLAYS & MODALS
+   ====================================== */
+/* Guide overlay */
+.guide-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.guide-content {
+  background-color: white;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.guide-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.guide-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.guide-steps li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  font-size: 15px;
+  color: #374151;
+}
+
+.guide-steps li:last-child {
+  margin-bottom: 0;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+  margin-right: 12px;
+  flex-shrink: 0;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+}
+
+.guide-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.guide-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.guide-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Error handling */
+.map-error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .map-error-content {
   background-color: white;
-  border-radius: 5px;
-  padding: 20px;
-  max-width: 400px;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 450px;
+  width: 100%;
   text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Ensure the info tooltip is visible */
-.info-tooltip {
+.map-error-content h3 {
+  color: #ef4444;
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.map-error-content p {
+  margin: 16px 0;
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.error-retry-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.error-retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* ======================================
+   ATTRIBUTION & INFO
+   ====================================== */
+/* Map attribution overlay */
+.map-attribution {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 990;
+  pointer-events: none;
+}
+
+.map-mode-indicator {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-weight: 600;
+  font-size: 15px;
+  color: #1f2937;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tourist-popup {
+  min-width: 220px;
+}
+
+.tourist-popup h4 {
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ======================================
+   REGION SELECTION STYLES
+   ====================================== */
+.region-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.region-btn {
+  padding: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.region-btn:hover {
+  background: #f3f4f6;
+  transform: translateX(5px);
+}
+
+.region-btn.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.region-icon {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* ======================================
+   NORTHEAST INDIA SPECIFIC STYLES
+   ====================================== */
+.northeast-legend {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.northeast-legend h5 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Risk types */
+.border-risk {
+  background-color: #ef4444;
+}
+
+.ethnic-risk {
+  background-color: #8b5cf6;
+}
+
+.infra-risk {
+  background-color: #f59e0b;
+}
+
+/* Tourist attraction types */
+.nature-spot {
+  background-color: #10b981;
+}
+
+.culture-spot {
+  background-color: #8b5cf6;
+}
+
+.festival-spot {
+  background-color: #f59e0b;
+}
+
+/* Themed buttons for Northeast */
+.nature-button {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+}
+
+.culture-button {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+}
+
+.festival-button {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+/* Region info box for additional context */
+.region-info-box {
+  background-color: #f0f9ff;
+  border-radius: 10px;
+  padding: 14px;
+  border-left: 4px solid #0ea5e9;
+}
+
+.region-info-box h4 {
+  margin: 0 0 8px 0;
+  color: #0c4a6e;
+  font-size: 14px;
+}
+
+.region-info-text {
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Remove bottom border from last section */
+.controls-section.no-border {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ======================================
+   ENHANCED POPUP STYLES
+   ====================================== */
+/* Updated popup to show state information */
+.popup-state {
+  font-size: 12px;
+  color: #4b5563;
+  margin-top: 6px;
+  font-style: italic;
+  padding-top: 6px;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ======================================
+   RESPONSIVE ADAPTATIONS
+   ====================================== */
+@media (max-width: 768px) {
+  .map-controls {
+    width: 280px;
+    padding: 16px;
+  }
+  
+  .guide-content {
+    padding: 24px;
+  }
+  
+  .guide-content h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .map-controls {
+    min-width: unset;
+    width: 85%;
+    max-width: 320px;
+  }
+  
+  .mode-toggle {
+    flex-direction: column;
+  }
+  
+  .back-to-dashboard-btn,
+  .show-controls-btn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .guide-content {
+    padding: 20px;
+    max-width: 100%;
+  }
+  
+  .guide-steps li {
+    font-size: 14px;
+  }
+  
+  .map-mode-indicator {
+    bottom: 20px;
+    left: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+/* ======================================
+   ANIMATIONS & EFFECTS
+   ====================================== */
+/* Animation for the map button */
+@keyframes pulse {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); 
+  }
+  70% { 
+    box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); 
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); 
+  }
+}
+
+/* Apply pulse animation to buttons */
+.focus-button.primary {
+  animation: pulse 2s infinite;
+}
+
+/* ======================================
+   ACCESSIBILITY IMPROVEMENTS
+   ====================================== */
+/* Focus styles for keyboard navigation */
+.mode-btn:focus-visible,
+.focus-button:focus-visible,
+.guide-button:focus-visible,
+.back-to-dashboard-btn:focus-visible,
+.show-controls-btn:focus-visible,
+.error-retry-btn:focus-visible,
+.intensity-slider:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .mode-btn.active,
+  .focus-button,
+  .guide-button {
+    forced-color-adjust: none;
+    background: ButtonText !important;
+    color: ButtonFace !important;
+  }
+}
+
+/* ======================================
+   TOURIST CLUSTER VISUALIZATION
+   ====================================== */
+.tourist-cluster-label {
+  pointer-events: none; /* Ensure clicks go through to the map */
+  z-index: 1000;
+}
+
+.cluster-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(59, 130, 246, 0.9);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+  transition: all 0.2s ease;
+  transform: scale(1);
+  animation: pulse-label 2s infinite;
+}
+
+.cluster-count:hover {
+  transform: scale(1.1);
+}
+
+.cluster-count.very-high {
+  background-color: rgba(76, 29, 149, 0.9); /* Purple for highest density */
+  font-size: 16px;
+  width: 46px;
+  height: 46px;
+}
+
+.cluster-count.high {
+  background-color: rgba(91, 33, 182, 0.9); /* Violet for high density */
+}
+
+.cluster-count.medium {
+  background-color: rgba(37, 99, 235, 0.9); /* Blue for medium density */
+}
+
+.cluster-count.low {
+  background-color: rgba(14, 165, 233, 0.9); /* Light blue for low density */
+  font-size: 13px;
+}
+
+@keyframes pulse-label {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.cluster-count-legend {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(203, 213, 225, 0.6);
+}
+
+.sample-count {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(76, 29, 149, 0.9);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+  margin-right: 10px;
+}
+
+/* Control styles for cluster options */
+.control-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+.control-checkbox {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+}
+
+.small-help-text {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+  margin-left: 26px;
+  font-style: italic;
+}
+
+/* ======================================
+   RESPONSIVE STYLES FOR CLUSTER LABELS
+   ====================================== */
+@media (max-width: 768px) {
+  .cluster-count {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+  
+  .cluster-count.very-high {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+/* ======================================
+   HEATMAP LAYER STYLES
+   ====================================== */
+.heatmap-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.heatmap-intensity {
+  transition: all 0.3s ease;
+}
+
+/* ======================================
+   MAP STYLES
+   ====================================== */
+.leaflet-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.leaflet-control {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+.leaflet-control a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.leaflet-control a:hover {
+  color: #2563eb;
+}
+
+.leaflet-popup {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #111827;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-popup h3 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  color: #1f2937;
+}
+
+.leaflet-popup p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+}
+
+.leaflet-popup a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.leaflet-popup a:hover {
+  text-decoration: underline;
+}
+
+/* ======================================
+   MAP INTERACTION STYLES
+   ====================================== */
+.leaflet-interactive {
+  cursor: pointer;
+}
+
+.leaflet-interactive:hover {
+  opacity: 0.8;
+}
+
+.leaflet-marker-icon {
+  transition: transform 0.3s ease;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.1);
+}
+
+/* ======================================
+   MAP LEGEND STYLES
+   ====================================== */
+.map-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.map-legend h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.map-legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.map-legend-label {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* ======================================
+   MAP ZOOM CONTROL STYLES
+   ====================================== */
+.leaflet-control-zoom {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.leaflet-control-zoom button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-zoom button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-zoom .leaflet-control-zoom-in {
+  color: #3b82f6;
+}
+
+.leaflet-control-zoom .leaflet-control-zoom-out {
+  color: #ef4444;
+}
+
+/* ======================================
+   MAP SCALE CONTROL STYLES
+   ====================================== */
+.leaflet-control-scale {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-scale .leaflet-control-scale-line {
+  background: #3b82f6;
+  height: 2px;
+  margin: 0;
+}
+
+.leaflet-control-scale .leaflet-control-scale-line.leaflet-control-scale-line-sm {
+  background: #2563eb;
+  height: 3px;
+}
+
+/* ======================================
+   MAP CREDITS STYLES
+   ====================================== */
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.leaflet-control-attribution a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.leaflet-control-attribution a:hover {
+  text-decoration: underline;
+}
+
+/* ======================================
+   MAP ANNOTATIONS STYLES
+   ====================================== */
+.annotation {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  max-width: 200px;
+  z-index: 2000;
+}
+
+.annotation h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.annotation p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ======================================
+   MAP DIRECTION CONTROL STYLES
+   ====================================== */
+.leaflet-control-direction {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-direction button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-direction button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-direction .leaflet-control-direction-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP LOCATION CONTROL STYLES
+   ====================================== */
+.leaflet-control-locate {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-locate button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-locate button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-locate .leaflet-control-locate-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP DRAW CONTROL STYLES
+   ====================================== */
+.leaflet-control-draw {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-draw button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-draw button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-draw .leaflet-control-draw-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP EDIT CONTROL STYLES
+   ====================================== */
+.leaflet-control-edit {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-edit button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-edit button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-edit .leaflet-control-edit-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP REMOVE CONTROL STYLES
+   ====================================== */
+.leaflet-control-remove {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-remove button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-remove button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-remove .leaflet-control-remove-icon {
+  color: #ef4444;
+}
+
+/* ======================================
+   MAP PRINT CONTROL STYLES
+   ====================================== */
+.leaflet-control-print {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-print button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-print button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-print .leaflet-control-print-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP LAYER CONTROL STYLES
+   ====================================== */
+.leaflet-control-layers {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-layers label {
+  margin-bottom: 8px;
+  display: block;
+}
+
+.leaflet-control-layers input {
+  margin-right: 8px;
+}
+
+/* ======================================
+   MAP GEOLOCATION CONTROL STYLES
+   ====================================== */
+.leaflet-control-geolocation {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.leaflet-control-geolocation button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.leaflet-control-geolocation button:hover {
+  transform: scale(1.1);
+}
+
+.leaflet-control-geolocation .leaflet-control-geolocation-icon {
+  color: #3b82f6;
+}
+
+/* ======================================
+   MAP ZOOM ANIMATION STYLES
+   ====================================== */
+.leaflet-zoom-animation {
+  transition: transform 0.3s ease;
+}
+
+/* ======================================
+   MAP DRAGGING STYLES
+   ====================================== */
+.leaflet-dragging {
+  cursor: grab;
+}
+
+.leaflet-dragging.leaflet-grab {
+  cursor: grabbing;
+}
+
+/* ======================================
+   MAP RESIZE STYLES
+   ====================================== */
+.leaflet-container {
+  transition: height 0.3s ease;
+}
+
+/* ======================================
+   MAP ERROR STYLES
+   ====================================== */
+.leaflet-error {
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaflet-error svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================
+   MAP SUCCESS STYLES
+   ====================================== */
+.leaflet-success {
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaflet-success svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================
+   MAP WARNING STYLES
+   ====================================== */
+.leaflet-warning {
+  background: rgba(249, 59, 59, 0.9);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaflet-warning svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================
+   MAP INFO STYLES
+   ====================================== */
+.leaflet-info {
+  background: rgba(3, 102, 252, 0.9);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaflet-info svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================
+   MAP DEBUG STYLES
+   ====================================== */
+.leaflet-debug {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaflet-debug svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================================
+   MAP TIMELINE STYLES
+   ====================================== */
+.timeline-control {
   position: absolute;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  max-width: 500px;
-  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.info-tooltip-content {
-  background-color: white;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.timeline-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-button:hover {
+  background: #f3f4f6;
+}
+
+.timeline-icon {
+  font-size: 18px;
+}
+
+/* ======================================
+   MAP ANIMATION TIMING
+   ====================================== */
+@keyframes mapEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mapExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ======================================
+   MAP TRANSITION EFFECTS
+   ====================================== */
+.leaflet-container {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ======================================
+   MAP INITIAL LOAD STYLES
+   ====================================== */
+.map-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.95);
+  transition: opacity 0.3s ease;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(229, 229, 229, 0.6);
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.map-loading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* ======================================
+   MAP ERROR BOUNDARY STYLES
+   ====================================== */
+.map-error-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-error-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-error-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-error-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-error-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-error-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP SUCCESS BOUNDARY STYLES
+   ====================================== */
+.map-success-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-success-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-success-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-success-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-success-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-success-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP WARNING BOUNDARY STYLES
+   ====================================== */
+.map-warning-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(249, 59, 59, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-warning-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-warning-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-warning-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-warning-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-warning-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP INFO BOUNDARY STYLES
+   ====================================== */
+.map-info-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 102, 252, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-info-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-info-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-info-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-info-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-info-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP DEBUG BOUNDARY STYLES
+   ====================================== */
+.map-debug-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-debug-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.map-debug-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.map-debug-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-debug-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-debug-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE CONTROL STYLES
+   ====================================== */
+.timeline-control {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeline-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-button:hover {
+  background: #f3f4f6;
+}
+
+.timeline-icon {
+  font-size: 18px;
+}
+
+/* ======================================
+   MAP TIMELINE ANIMATION
+   ====================================== */
+@keyframes timelineEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes timelineExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ======================================
+   MAP TIMELINE TRANSITION EFFECTS
+   ====================================== */
+.leaflet-container {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ======================================
+   MAP TIMELINE INITIAL LOAD STYLES
+   ====================================== */
+.map-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.95);
+  transition: opacity 0.3s ease;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(229, 229, 229, 0.6);
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+.map-loading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* ======================================
+   MAP TIMELINE ERROR BOUNDARY STYLES
+   ====================================== */
+.map-error-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-error-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-error-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-error-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-error-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-error-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE SUCCESS BOUNDARY STYLES
+   ====================================== */
+.map-success-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-success-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-success-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-success-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-success-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-success-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE WARNING BOUNDARY STYLES
+   ====================================== */
+.map-warning-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(249, 59, 59, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-warning-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-warning-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-warning-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-warning-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-warning-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE INFO BOUNDARY STYLES
+   ====================================== */
+.map-info-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 102, 252, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-info-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.map-info-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #f3f4f6;
+}
+
+.map-info-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-info-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-info-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE DEBUG BOUNDARY STYLES
+   ====================================== */
+.map-debug-boundary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+.map-debug-boundary h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.map-debug-boundary p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.map-debug-boundary button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-debug-boundary button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.map-debug-boundary button:active {
+  transform: translateY(0);
+}
+
+/* ======================================
+   MAP TIMELINE CONTROL STYLES
+   ====================================== */
+.timeline-control {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeline-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-button:hover {
+  background: #f3f4f6;
+}
+
+.timeline-icon {
+  font-size: 18px;
 }
