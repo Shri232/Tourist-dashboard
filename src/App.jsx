@@ -2,7 +2,23 @@ import React, { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import AdminLogin from "./pages/AdminLogin";
 import "leaflet/dist/leaflet.css";
+import NavigationDebugger from "./components/NavigationDebugger";
 
+// Improved global navigation helper with better path handling
+window.navigateTo = (path) => {
+  // Handle different route patterns
+  const baseUrl = window.location.origin;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  // If we're using hash routing
+  if (window.location.href.includes("#/")) {
+    window.location.href = `${baseUrl}/#${cleanPath}`;
+    return;
+  }
+
+  // Standard routing
+  window.location.href = `${baseUrl}${cleanPath}`;
+};
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -36,6 +52,9 @@ export default function App() {
 
   return (
     <>
+      {/* Add debugging component */}
+      <NavigationDebugger />
+
       {isAuthenticated ? (
         <Dashboard onLogout={handleLogout} />
       ) : (
@@ -52,7 +71,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundColor: "#f9fafb"
+    backgroundColor: "#f9fafb",
   },
   loader: {
     width: "40px",
@@ -60,11 +79,11 @@ const styles = {
     border: "4px solid #f3f4f6",
     borderTop: "4px solid #3b82f6",
     borderRadius: "50%",
-    animation: "spin 1s linear infinite"
+    animation: "spin 1s linear infinite",
   },
   loadingText: {
     marginTop: "16px",
     color: "#6b7280",
-    fontSize: "16px"
-  }
+    fontSize: "16px",
+  },
 };

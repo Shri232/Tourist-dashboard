@@ -4,6 +4,40 @@ import AlertStatusWidget from "./AlertStatusWidget";
 import QuickStatisticsPanel from "./QuickStatisticsPanel";
 
 export default function DashboardOverview() {
+  // Debug-enhanced navigation function
+  const handleMapNavigation = (e) => {
+    e.preventDefault();
+    
+    // Debug information
+    console.log("Navigation attempted");
+    console.log("Current URL:", window.location.href);
+    console.log("Origin:", window.location.origin);
+    console.log("Pathname:", window.location.pathname);
+    
+    try {
+      // Check if there's a dashboard route structure to follow
+      const pathSegments = window.location.pathname.split('/');
+      console.log("Path segments:", pathSegments);
+      
+      // If we're already at /dashboard, navigate to /dashboard/map
+      if(pathSegments.includes("dashboard")) {
+        const basePathIndex = pathSegments.indexOf("dashboard");
+        const basePath = pathSegments.slice(0, basePathIndex + 1).join('/');
+        const newUrl = `${window.location.origin}${basePath}/map`;
+        console.log("Navigating to:", newUrl);
+        window.location.href = newUrl;
+        return;
+      }
+      
+      // Check for route pattern in the app structure (test both with and without slash)
+      window.location.href = `${window.location.origin}/map`;
+      console.log("Navigating to standard path:", `${window.location.origin}/map`);
+    } catch (err) {
+      console.error("Navigation error:", err);
+      alert("Navigation error - please check console for details");
+    }
+  };
+
   return (
     <div style={styles.container}>
       {/* Decorative elements */}
@@ -45,6 +79,20 @@ export default function DashboardOverview() {
           <QuickStatisticsPanel />
         </div>
       </div>
+      
+      {/* Map Navigation Button with debug info */}
+      <a 
+        href="#" 
+        onClick={handleMapNavigation} 
+        style={styles.mapNavButton}
+        aria-label="Go to Map View"
+        id="mapNavigationButton"
+      >
+        <div style={styles.mapNavButtonInner}>
+          <span style={styles.mapIcon}>🗺️</span>
+          <span style={styles.mapText}>Map View</span>
+        </div>
+      </a>
     </div>
   );
 }
@@ -179,6 +227,67 @@ const styles = {
     zIndex: 0
   },
   
+  // Map Navigation Button - Enhanced fixed positioning
+  mapNavButton: {
+    position: "fixed",
+    bottom: "30px",
+    right: "30px",
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    backgroundColor: "#0ea5e9",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    boxShadow: "0 4px 14px rgba(14, 165, 233, 0.4), 0 2px 6px rgba(0, 0, 0, 0.1)",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    zIndex: 9999, // Increased z-index to ensure visibility
+    border: "2px solid rgba(255, 255, 255, 0.8)",
+    padding: 0,
+    outline: "none",
+    overflow: "hidden",
+    textDecoration: "none",
+    color: "white",
+    transform: "translateZ(0)", // Force hardware acceleration
+    willChange: "transform", // Optimizes animations
+    backfaceVisibility: "hidden", // Prevents flickering
+    webkitBackfaceVisibility: "hidden",
+    mozBackfaceVisibility: "hidden"
+  },
+  mapNavButtonInner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    padding: "0 10px"
+  },
+  mapIcon: {
+    fontSize: "28px",
+    color: "white"
+  },
+  mapText: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: "16px",
+    marginLeft: "8px",
+    opacity: "0",
+    transition: "opacity 0.3s ease",
+    whiteSpace: "nowrap"
+  },
+  // Separate container for ripple effect
+  rippleContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflow: "hidden",
+    borderRadius: "inherit",
+    pointerEvents: "none" // Make sure clicks pass through to the button
+  },
+  
   // Responsive design with improved breakpoints
   "@media (max-width: 1280px)": {
     container: {
@@ -214,6 +323,17 @@ const styles = {
     title: {
       fontSize: "26px",
       marginBottom: "10px"
+    },
+    mapNavButton: {
+      bottom: "20px",
+      right: "20px",
+      width: "60px",
+      height: "60px",
+      position: "fixed !important" // Enforce fixed position on mobile
+    },
+    mapIcon: {
+      fontSize: "24px"
     }
   }
 };
+ 

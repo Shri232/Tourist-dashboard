@@ -18,70 +18,44 @@ L.Icon.Default.mergeOptions({
 
 const API_BASE = "http://localhost:5000/api";
 
-// HeatmapLayer component - Enhanced with MapTiler inspired implementation
+// HeatmapLayer component - Modified to show high-risk areas
 function HeatmapLayer({ data }) {
   const map = useMap();
   const heatmapLayerRef = useRef(null);
   
   useEffect(() => {
-    // Add known tourist hotspots in India
-    const knownTouristHotspots = [
-      // Major Metropolitan Cities
-      { lat: 28.6139, lng: 77.2090, value: 95, emergency: "Tourist Density" }, // Delhi
-      { lat: 19.0760, lng: 72.8777, value: 90, emergency: "Tourist Density" }, // Mumbai
-      { lat: 12.9716, lng: 77.5946, value: 85, emergency: "Tourist Density" }, // Bangalore
-      { lat: 22.5726, lng: 88.3639, value: 80, emergency: "Tourist Density" }, // Kolkata
-      { lat: 13.0827, lng: 80.2707, value: 85, emergency: "Tourist Density" }, // Chennai
-      { lat: 17.3850, lng: 78.4867, value: 75, emergency: "Tourist Density" }, // Hyderabad
+    // Define high-risk areas in Tamil Nadu and other regions
+    const highRiskAreas = [
+      // Very High Risk Areas (Red) - Value 90-100
+      { lat: 13.0827, lng: 80.2707, value: 95, emergency: "High Risk Area", note: "Chennai - Crowded areas, pickpocketing risk" },
+      { lat: 9.9252, lng: 78.1198, value: 92, emergency: "High Risk Area", note: "Madurai Temple - Extremely crowded, stampede risk" },
+      { lat: 11.1085, lng: 78.6569, value: 94, emergency: "High Risk Area", note: "Erode - Flash flood prone area" },
+      { lat: 9.2647, lng: 79.3035, value: 96, emergency: "High Risk Area", note: "Rameswaram - Strong currents, drowning incidents" },
+      { lat: 8.7642, lng: 77.6941, value: 93, emergency: "High Risk Area", note: "Kanyakumari - Rough seas, high waves" },
+      { lat: 13.0499, lng: 80.2824, value: 98, emergency: "High Risk Area", note: "North Chennai - Crime hotspot" },
+      { lat: 10.0783, lng: 77.0685, value: 97, emergency: "High Risk Area", note: "Munnar hillsides - Landslide prone" },
+      { lat: 10.3148, lng: 77.9714, value: 98, emergency: "High Risk Area", note: "Kodaikanal cliff areas - Fall hazard" },
       
-      // Popular Tourist Destinations
-      { lat: 27.1751, lng: 78.0421, value: 98, emergency: "Tourist Density" }, // Agra (Taj Mahal)
-      { lat: 26.9124, lng: 75.7873, value: 92, emergency: "Tourist Density" }, // Jaipur
-      { lat: 15.4989, lng: 73.8278, value: 90, emergency: "Tourist Density" }, // Goa
-      { lat: 34.0837, lng: 74.7973, value: 85, emergency: "Tourist Density" }, // Srinagar
-      { lat: 32.2396, lng: 77.1887, value: 88, emergency: "Tourist Density" }, // Manali
-      { lat: 34.1526, lng: 77.5770, value: 80, emergency: "Tourist Density" }, // Leh
-      { lat: 30.7333, lng: 79.0667, value: 82, emergency: "Tourist Density" }, // Kedarnath
-      { lat: 16.5062, lng: 80.6480, value: 75, emergency: "Tourist Density" }, // Vijayawada
+      // Medium Risk Areas (Orange) - Value 70-89
+      { lat: 11.4882, lng: 79.7133, value: 85, emergency: "Medium Risk Area", note: "Pondicherry beaches - Rip currents" },
+      { lat: 10.7905, lng: 79.1378, value: 82, emergency: "Medium Risk Area", note: "Thanjavur - Moderate crime rate" },
+      { lat: 12.6195, lng: 79.4192, value: 78, emergency: "Medium Risk Area", note: "Kanchipuram - Crowded during festivals" },
+      { lat: 11.2342, lng: 78.1694, value: 75, emergency: "Medium Risk Area", note: "Namakkal - Road accident prone" },
+      { lat: 11.9316, lng: 79.8352, value: 80, emergency: "Medium Risk Area", note: "Auroville - Isolated areas, theft risk" },
+      { lat: 12.9249, lng: 80.1000, value: 76, emergency: "Medium Risk Area", note: "Mahabalipuram - Strong sea currents" },
+      { lat: 10.9559, lng: 78.0766, value: 72, emergency: "Medium Risk Area", note: "Karur - Industrial hazards" },
       
-      // Religious Sites
-      { lat: 25.3176, lng: 82.9739, value: 95, emergency: "Tourist Density" }, // Varanasi
-      { lat: 13.0499, lng: 75.7672, value: 85, emergency: "Tourist Density" }, // Udupi
-      { lat: 21.8555, lng: 73.7375, value: 90, emergency: "Tourist Density" }, // Statue of Unity (Kevadia)
-      { lat: 20.0269, lng: 75.1786, value: 87, emergency: "Tourist Density" }, // Ajanta Caves
-      { lat: 23.2836, lng: 77.3209, value: 75, emergency: "Tourist Density" }, // Sanchi Stupa
+      // Lower Risk Areas (Yellow) - Value 50-69
+      { lat: 11.6643, lng: 78.1460, value: 65, emergency: "Low Risk Area", note: "Salem - Moderate risk" },
+      { lat: 8.0883, lng: 77.5385, value: 60, emergency: "Low Risk Area", note: "Tirunelveli - Some incidents reported" },
+      { lat: 10.7672, lng: 78.7139, value: 55, emergency: "Low Risk Area", note: "Trichy - Low-moderate risk" },
+      { lat: 12.2253, lng: 79.0747, value: 58, emergency: "Low Risk Area", note: "Tiruvannamalai - Crowd management issues during festivals" },
+      { lat: 12.9165, lng: 79.1325, value: 62, emergency: "Low Risk Area", note: "Vellore - Minor incidents" },
       
-      // Hill Stations
-      { lat: 31.1048, lng: 77.1734, value: 88, emergency: "Tourist Density" }, // Shimla
-      { lat: 30.9084, lng: 77.0947, value: 82, emergency: "Tourist Density" }, // Kasauli
-      { lat: 27.0380, lng: 88.2627, value: 80, emergency: "Tourist Density" }, // Darjeeling
-      { lat: 11.4102, lng: 76.6950, value: 85, emergency: "Tourist Density" }, // Ooty
-      { lat: 10.0889, lng: 77.0595, value: 80, emergency: "Tourist Density" }, // Munnar
-      { lat: 19.9975, lng: 73.7898, value: 78, emergency: "Tourist Density" }, // Nashik
-
-      // Tamil Nadu Hotspots
-      { lat: 11.0168, lng: 76.9558, value: 88, emergency: "Tourist Density" }, // Coimbatore
-      { lat: 9.9252, lng: 78.1198, value: 90, emergency: "Tourist Density" }, // Madurai
-      { lat: 10.7905, lng: 79.1378, value: 85, emergency: "Tourist Density" }, // Thanjavur
-      { lat: 11.6643, lng: 78.1460, value: 75, emergency: "Tourist Density" }, // Salem
-      { lat: 10.3624, lng: 77.9695, value: 95, emergency: "Tourist Density" }, // Kodaikanal
-      { lat: 10.0756, lng: 76.2711, value: 90, emergency: "Tourist Density" }, // Palakkad
-      { lat: 8.7642, lng: 77.6941, value: 85, emergency: "Tourist Density" }, // Kanyakumari
-      { lat: 9.9174, lng: 78.1356, value: 90, emergency: "Tourist Density" }, // Meenakshi Temple area
-      { lat: 11.4882, lng: 79.7133, value: 87, emergency: "Tourist Density" }, // Pondicherry
-      { lat: 12.6195, lng: 79.4192, value: 82, emergency: "Tourist Density" }, // Kanchipuram
-      
-      // Madhya Pradesh Hotspots
-      { lat: 23.1815, lng: 79.9864, value: 85, emergency: "Tourist Density" }, // Jabalpur
-      { lat: 22.5726, lng: 75.9174, value: 80, emergency: "Tourist Density" }, // Indore
-      { lat: 23.1765, lng: 75.7885, value: 88, emergency: "Tourist Density" }, // Ujjain
-      { lat: 26.7605, lng: 77.9926, value: 90, emergency: "Tourist Density" }, // Gwalior Fort
-      { lat: 23.2599, lng: 77.4126, value: 85, emergency: "Tourist Density" }, // Bhopal
-      { lat: 25.2791, lng: 82.9902, value: 83, emergency: "Tourist Density" }, // Varanasi outskirts
-      { lat: 22.9734, lng: 78.6569, value: 75, emergency: "Tourist Density" }, // Pachmarhi
-      { lat: 22.5726, lng: 78.2232, value: 85, emergency: "Tourist Density" }, // Kanha National Park
-      { lat: 22.0119, lng: 79.0136, value: 78, emergency: "Tourist Density" }, // Pench Tiger Reserve
-      { lat: 21.8283, lng: 80.9346, value: 76, emergency: "Tourist Density" }  // Bandhavgarh
+      // Other high-risk locations in India (for context)
+      { lat: 28.6139, lng: 77.2090, value: 90, emergency: "High Risk Area", note: "Delhi - Crowded tourist areas" },
+      { lat: 19.0760, lng: 72.8777, value: 88, emergency: "High Risk Area", note: "Mumbai - Crime hotspots" },
+      { lat: 26.9124, lng: 75.7873, value: 85, emergency: "Medium Risk Area", note: "Jaipur - Tourist scams" }
     ];
 
     // Load required scripts
@@ -91,13 +65,18 @@ function HeatmapLayer({ data }) {
         return;
       }
       
+      console.log(`Attempting to load script: ${url}`);
       const script = document.createElement("script");
       script.src = url;
       
       // Set up proper error handling
-      script.onload = () => callback && callback();
+      script.onload = () => {
+        console.log(`Successfully loaded: ${url}`);
+        callback && callback();
+      };
       script.onerror = (error) => {
         console.error(`Failed to load script: ${url}`, error);
+        // Continue even if script fails to load
         callback && callback();
       };
       
@@ -116,378 +95,139 @@ function HeatmapLayer({ data }) {
     };
 
     const setupHeatmap = () => {
-      if (!window.HeatmapOverlay) {
-        console.error("HeatmapOverlay not available, loading alternative implementation");
-        
-        try {
+      try {
+        // Fallback to simpler implementation if HeatmapOverlay not available
+        if (!window.HeatmapOverlay) {
+          console.log("Using L.heatLayer fallback implementation");
+          
           // Remove existing heatmap if it exists
           if (heatmapLayerRef.current) {
             map.removeLayer(heatmapLayerRef.current);
           }
           
-          // Combine existing data with known hotspots
-          const combinedPoints = [...data, ...knownTouristHotspots];
+          // Check if L.heatLayer exists (Leaflet.heat)
+          if (typeof L.heatLayer === 'undefined') {
+            console.warn("L.heatLayer not available - skipping heatmap");
+            return;
+          }
+          
+          // Use high-risk areas for the heatmap
           const heatPoints = [];
           
-          if (combinedPoints && combinedPoints.length > 0) {
-            combinedPoints.forEach(point => {
-              // Higher weight for popular tourist spots
-              const weight = (point.value / 16) + 1; // Scale from 1-7
+          if (highRiskAreas && highRiskAreas.length > 0) {
+            highRiskAreas.forEach(point => {
+              // Higher weight for higher risk areas
+              const weight = (point.value / 14) + 1; // Scale from 1-8
               heatPoints.push([point.lat, point.lng, weight]);
             });
           }
           
-          // Create the heatmap layer with more vibrant colors
+          // Create the heatmap layer with risk-focused color gradient
           const heatmap = L.heatLayer(heatPoints, {
-            radius: 35,          // Larger radius for better visibility of clusters
-            blur: 25,            // Increased blur for smoother appearance
-            maxZoom: 15,         // Don't cluster points beyond this zoom
-            max: 6,              // Adjusted for better contrast
-            gradient: {          // More vibrant color scheme
-              0.0: 'rgba(0, 0, 255, 0.5)',        // Transparent blue
-              0.2: 'rgba(0, 255, 255, 0.5)',      // Cyan
-              0.4: 'rgba(0, 255, 0, 0.5)',        // Green
-              0.6: 'rgba(255, 255, 0, 0.7)',      // Yellow
-              0.8: 'rgba(255, 128, 0, 0.8)',      // Orange
-              1.0: 'rgba(255, 0, 0, 0.9)'         // Red
+            radius: 35,
+            blur: 25,
+            maxZoom: 15,
+            max: 8,
+            gradient: {
+              0.4: 'yellow',   // Low risk
+              0.6: 'orange',   // Medium risk
+              0.8: 'red',      // High risk
+              1.0: 'darkred'   // Extreme risk
             }
           });
           
           heatmapLayerRef.current = heatmap;
           map.addLayer(heatmap);
-          
-          console.log("Heatmap created with known tourist hotspots");
-        } catch (error) {
-          console.error("Failed to create heatmap:", error);
+          return;
         }
-        return;
-      }
-      
-      // Remove existing heatmap if it exists
-      if (heatmapLayerRef.current) {
-        map.removeLayer(heatmapLayerRef.current);
-      }
-      
-      // Configure heatmap with vibrant colors
-      let gradient = {};
-      
-      // If color-interpolate is loaded, create a more detailed gradient
-      if (window.color_interpolate) {
-        // Using more vibrant colors in the gradient
-        const colorScale = window.color_interpolate([
-          'rgba(0, 0, 255, 0.5)',        // Transparent blue
-          'rgba(0, 255, 255, 0.5)',      // Cyan
-          'rgba(0, 255, 0, 0.5)',        // Green
-          'rgba(255, 255, 0, 0.7)',      // Yellow
-          'rgba(255, 128, 0, 0.8)',      // Orange
-          'rgba(255, 0, 0, 0.9)'         // Red
-        ]);
-        for (let i = 0; i <= 10; i++) {
-          const key = i / 10;
-          gradient[key] = colorScale(key);
-        }
-      } else {
-        // Fallback gradient with more vibrant colors
-        gradient = {
-          0.1: 'rgba(0, 0, 255, 0.5)',     // Transparent blue
-          0.3: 'rgba(0, 255, 255, 0.5)',   // Cyan
-          0.5: 'rgba(0, 255, 0, 0.5)',     // Green
-          0.7: 'rgba(255, 255, 0, 0.7)',   // Yellow
-          0.9: 'rgba(255, 128, 0, 0.8)',   // Orange
-          1.0: 'rgba(255, 0, 0, 0.9)'      // Red
-        };
-      }
-      
-      const heatmapConfig = {
-        radius: 0.8,        // Increased radius
-        maxOpacity: 0.8,    // Higher opacity
-        scaleRadius: true,
-        useLocalExtrema: true, // Better for highlighting hotspots
-        latField: 'lat',
-        lngField: 'lng',
-        valueField: 'value',
-        gradient: gradient,
-        blur: 0.9,
-        minOpacity: 0.3
-      };
-      
-      // Create and add heatmap layer
-      const heatmapLayer = new window.HeatmapOverlay(heatmapConfig);
-      heatmapLayerRef.current = heatmapLayer;
-      map.addLayer(heatmapLayer);
-      
-      // Set heatmap data combining existing data with known hotspots
-      const combinedData = [...data, ...knownTouristHotspots];
-      
-      if (combinedData && combinedData.length > 0) {
-        // Process data for better visualization
-        const processedData = combinedData.map(point => {
-          return {
-            lat: point.lat,
-            lng: point.lng,
-            value: Math.min(100, point.value * 1.1), // Slightly amplify values
-            count: Math.ceil(point.value / 16), // Convert to 0-6 scale for count
-            radius: Math.max(18, point.value / 3 + 12),
-            emergencyType: point.emergency
-          };
-        });
         
-        heatmapLayer.setData({
-          max: 100,
-          data: processedData
-        });
+        // Continue with preferred implementation if available
+        // Remove existing heatmap if it exists
+        if (heatmapLayerRef.current) {
+          map.removeLayer(heatmapLayerRef.current);
+        }
+        
+        // Configure heatmap with risk-focused colors
+        const gradient = {
+          0.1: 'rgba(255, 255, 0, 0.5)',     // Yellow for low risk
+          0.3: 'rgba(255, 200, 0, 0.6)',     // Yellow-Orange
+          0.5: 'rgba(255, 150, 0, 0.7)',     // Orange for medium risk
+          0.7: 'rgba(255, 100, 0, 0.8)',     // Dark Orange 
+          0.9: 'rgba(255, 0, 0, 0.85)',      // Red for high risk
+          1.0: 'rgba(180, 0, 0, 0.9)'        // Dark Red for extreme risk
+        };
+        
+        const heatmapConfig = {
+          radius: 0.9,         // Larger radius for risk areas
+          maxOpacity: 0.8,     // Higher opacity
+          scaleRadius: true,
+          useLocalExtrema: true,
+          latField: 'lat',
+          lngField: 'lng',
+          valueField: 'value',
+          gradient: gradient,
+          blur: 0.95,
+          minOpacity: 0.35
+        };
+        
+        // Create and add heatmap layer
+        const heatmapLayer = new window.HeatmapOverlay(heatmapConfig);
+        heatmapLayerRef.current = heatmapLayer;
+        map.addLayer(heatmapLayer);
+        
+        // Use high-risk areas data for the heatmap
+        if (highRiskAreas && highRiskAreas.length > 0) {
+          // Process data for better visualization
+          const processedData = highRiskAreas.map(point => {
+            // Identify Tamil Nadu locations by latitude/longitude
+            const isTamilNaduLocation = 
+              (point.lat >= 8.0 && point.lat <= 13.5) && 
+              (point.lng >= 76.0 && point.lng <= 80.5);
+            
+            let adjustedValue = point.value;
+            
+            // Enhance Tamil Nadu high-risk areas visualization
+            if (isTamilNaduLocation) {
+              // Slightly boost values for Tamil Nadu locations for better visibility
+              adjustedValue = Math.min(100, point.value * 1.1);
+            }
+            
+            return {
+              lat: point.lat,
+              lng: point.lng,
+              value: adjustedValue,
+              count: Math.ceil(adjustedValue / 16),
+              radius: Math.max(22, adjustedValue / 2.5 + 12), // Larger radius for risk areas
+              emergencyType: point.emergency,
+              note: point.note
+            };
+          });
+          
+          heatmapLayer.setData({
+            max: 100,
+            data: processedData
+          });
+        }
+      } catch (error) {
+        console.error("Failed to create heatmap:", error);
       }
     };
     
-    // Load both libraries: Leaflet.heat and HeatmapJS
+    // Load first the simpler library, fallback to nothing if needed
     loadScript('https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js', () => {
-      loadScript('/js/color-interpolate.min.js', () => {
-        loadScript('/js/heatmap.min.js', () => {
-          loadScript('/js/leaflet-heatmap.js', () => {
-            setupHeatmap();
-          });
-        });
-      });
+      setupHeatmap();
     });
     
     return () => {
-      if (heatmapLayerRef.current) {
-        map.removeLayer(heatmapLayerRef.current);
+      try {
+        if (heatmapLayerRef.current) {
+          map.removeLayer(heatmapLayerRef.current);
+        }
+      } catch (error) {
+        console.error("Error cleaning up heatmap:", error);
       }
     };
   }, [map, data]);
-
-  return null;
-}
-
-// Component to add drawing controls to the map
-function DrawingTools({ onZoneCreated }) {
-  const map = useMap();
-  const drawnItemsRef = React.useRef(null);
-  const drawControlRef = React.useRef(null);
-  
-  useEffect(() => {
-    console.log("Initializing drawing tools...");
-    
-    // Make sure Leaflet Draw is loaded
-    if (!L.Draw) {
-      console.error("Leaflet Draw not loaded yet");
-      return;
-    }
-
-    // Initialize the draw control
-    const drawnItems = new L.FeatureGroup();
-    drawnItemsRef.current = drawnItems;
-    map.addLayer(drawnItems);
-
-    // Configure draw controls
-    const drawControl = new L.Control.Draw({
-      position: 'topright',
-      draw: {
-        polyline: false,
-        circle: false,
-        circlemarker: false,
-        marker: false,
-        rectangle: {
-          shapeOptions: {
-            color: '#ff0000',
-            fillColor: '#ff0000',
-            fillOpacity: 0.3,
-            dashArray: '5, 5',
-            weight: 2
-          },
-          showArea: true,
-          metric: true
-        },
-        polygon: {
-          shapeOptions: {
-            color: '#ff0000',
-            fillColor: '#ff0000',
-            fillOpacity: 0.3,
-            dashArray: '5, 5',
-            weight: 2
-          },
-          allowIntersection: false,
-          showArea: true,
-          metric: true,
-          showLength: true
-        }
-      },
-      edit: {
-        featureGroup: drawnItems,
-        remove: true
-      }
-    });
-    map.addControl(drawControl);
-
-    // Handle created zones
-    map.on(L.Draw.Event.CREATED, (event) => {
-      try {
-        const layer = event.layer;
-        drawnItems.addLayer(layer);
-      
-        // Extract coordinates
-        let coordinates = [];
-        if (layer instanceof L.Rectangle) {
-          // For rectangles, get the bounds
-          const bounds = layer.getBounds();
-          const northEast = bounds.getNorthEast();
-          const southWest = bounds.getSouthWest();
-          coordinates = [
-            { lat: northEast.lat, lng: northEast.lng },
-            { lat: northEast.lat, lng: southWest.lng },
-            { lat: southWest.lat, lng: southWest.lng },
-            { lat: southWest.lat, lng: northEast.lng }
-          ];
-        } else if (layer instanceof L.Polygon) {
-          // For polygons, get each point
-          const latLngs = layer.getLatLngs()[0];
-          coordinates = latLngs.map(point => ({ lat: point.lat, lng: point.lng }));
-        }
-        
-        // Generate a unique ID
-        const zoneId = Date.now().toString();
-        
-        // Call the callback with the new zone
-        onZoneCreated({
-          id: zoneId,
-          name: `Custom Zone ${zoneId.slice(-4)}`,
-          description: "User-defined restricted zone",
-          restrictionLevel: "medium",
-          coordinates: coordinates
-        });
-        
-        // Add a popup to the layer
-        layer.bindPopup(`
-          <strong>Custom Zone ${zoneId.slice(-4)}</strong><br>
-          <em>User-defined restricted zone</em><br>
-          <button class="edit-zone-btn" data-zone-id="${zoneId}">Edit Details</button>
-        `).openPopup();
-      } catch (error) {
-        console.error("Error creating custom zone:", error);
-      }
-      
-      // Store zoneId in a variable that can be captured by the closure
-      const currentZoneId = zoneId;
-      
-      // Add click handler for the edit button
-      setTimeout(() => {
-        const editBtn = document.querySelector(`.edit-zone-btn[data-zone-id="${currentZoneId}"]`);
-        if (editBtn) {
-          editBtn.addEventListener('click', () => {
-            // Show a form to edit zone details
-            const newName = prompt("Enter zone name:", `Custom Zone ${zoneId.slice(-4)}`);
-            const newDesc = prompt("Enter zone description:", "User-defined restricted zone");
-            const levelOptions = ["low", "medium", "high"];
-            const newLevel = prompt(`Enter restriction level (${levelOptions.join('/')}):`, "medium");
-            
-            if (newName && newDesc && levelOptions.includes(newLevel)) {
-              onZoneCreated({
-                id: zoneId,
-                name: newName,
-                description: newDesc,
-                restrictionLevel: newLevel,
-                coordinates: coordinates
-              });
-              
-              layer.setPopupContent(`
-                <strong>${newName}</strong><br>
-                <em>${newDesc}</em><br>
-                <strong>Level:</strong> ${newLevel}<br>
-                <button class="edit-zone-btn" data-zone-id="${zoneId}">Edit Details</button>
-              `);
-            }
-          });
-        }
-      }, 100);
-    });
-
-    // Handle edited zones
-    map.on(L.Draw.Event.EDITED, (event) => {
-      const layers = event.layers;
-      layers.eachLayer((layer) => {
-        // Get the zone ID from the popup content
-        const popupContent = layer.getPopup().getContent();
-        const match = popupContent.match(/data-zone-id="([^"]+)"/);
-        if (match && match[1]) {
-          const zoneId = match[1];
-          
-          // Get updated coordinates
-          let coordinates = [];
-          if (layer instanceof L.Rectangle) {
-            const bounds = layer.getBounds();
-            const northEast = bounds.getNorthEast();
-            const southWest = bounds.getSouthWest();
-            coordinates = [
-              { lat: northEast.lat, lng: northEast.lng },
-              { lat: northEast.lat, lng: southWest.lng },
-              { lat: southWest.lat, lng: southWest.lng },
-              { lat: southWest.lat, lng: northEast.lng }
-            ];
-          } else if (layer instanceof L.Polygon) {
-            const latLngs = layer.getLatLngs()[0];
-            coordinates = latLngs.map(point => ({ lat: point.lat, lng: point.lng }));
-          }
-          
-          // Extract current zone name and description from popup
-          const name = popupContent.match(/<strong>(.*?)<\/strong>/)[1];
-          const description = popupContent.match(/<em>(.*?)<\/em>/)[1];
-          const levelMatch = popupContent.match(/<strong>Level:<\/strong> (.*?)<br>/);
-          const restrictionLevel = levelMatch ? levelMatch[1] : "medium";
-          
-          // Update the zone
-          onZoneCreated({
-            id: zoneId,
-            name,
-            description,
-            restrictionLevel,
-            coordinates
-          });
-        }
-      });
-    });
-
-    // Handle deleted zones
-    map.on(L.Draw.Event.DELETED, (event) => {
-      const layers = event.layers;
-      layers.eachLayer((layer) => {
-        // Get the zone ID from the popup content
-        const popupContent = layer.getPopup().getContent();
-        const match = popupContent.match(/data-zone-id="([^"]+)"/);
-        if (match && match[1]) {
-          const zoneId = match[1];
-          // Call the callback with the deleted zone ID
-          onZoneCreated({
-            id: zoneId,
-            deleted: true
-          });
-        }
-      });
-    });
-
-    // Store references for cleanup
-    drawControlRef.current = drawControl;
-
-    return () => {
-      // Clean up
-      console.log("Cleaning up drawing tools...");
-      try {
-        map.off(L.Draw.Event.CREATED);
-        map.off(L.Draw.Event.EDITED);
-        map.off(L.Draw.Event.DELETED);
-        
-        if (drawControlRef.current) {
-          map.removeControl(drawControlRef.current);
-        }
-        
-        if (drawnItemsRef.current) {
-          map.removeLayer(drawnItemsRef.current);
-        }
-      } catch (error) {
-        console.error("Error cleaning up drawing tools:", error);
-      }
-    };
-  }, [map, onZoneCreated]);
 
   return null;
 }
@@ -552,13 +292,12 @@ export default function MapView() {
   
   // UI state
   const [showInfoTooltip, setShowInfoTooltip] = useState(true);
-  const [leafletDrawLoaded, setLeafletDrawLoaded] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [mapError, setMapError] = useState(null);
   
   // Layer toggles
   const [showHeatmap, setShowHeatmap] = useState(true);
   const [showRestrictedForests, setShowRestrictedForests] = useState(true);
-  const [showDrawingTools, setShowDrawingTools] = useState(false);
   
   // Force controls visibility when component mounts
   useEffect(() => {
@@ -572,155 +311,140 @@ export default function MapView() {
     };
   }, []);
 
-  // Load Leaflet Draw scripts dynamically
+  // Connect to WebSocket with better error handling
   useEffect(() => {
-    // Check if Leaflet Draw is already available
-    if (L.Draw && L.drawVersion) {
-      console.log("Leaflet Draw already loaded:", L.drawVersion);
-      setLeafletDrawLoaded(true);
-      return;
-    }
-    
-    console.log("Loading Leaflet Draw from CDN...");
-    
-    // Add Leaflet Draw CSS
-    const linkElement = document.createElement('link');
-    linkElement.rel = 'stylesheet';
-    linkElement.href = 'https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css';
-    document.head.appendChild(linkElement);
-
-    // Add Leaflet Draw JS
-    const scriptElement = document.createElement('script');
-    scriptElement.src = 'https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js';
-    scriptElement.onload = () => {
-      console.log("Leaflet Draw loaded successfully");
-      setLeafletDrawLoaded(true);
-    };
-    scriptElement.onerror = (err) => {
-      console.error("Failed to load Leaflet Draw from CDN:", err);
-      // Try to use fallback implementation
-      if (initLeafletDraw()) {
-        console.log("Using fallback Leaflet Draw implementation");
-        setLeafletDrawLoaded(true);
-      } else {
-        console.error("Failed to initialize fallback Leaflet Draw");
-      }
-    };
-    document.head.appendChild(scriptElement);
-
-    return () => {
-      // Clean up on unmount
-      try {
-        if (linkElement.parentNode) {
-          linkElement.parentNode.removeChild(linkElement);
-        }
-        if (scriptElement.parentNode) {
-          scriptElement.parentNode.removeChild(scriptElement);
-        }
-      } catch (err) {
-        console.warn("Error during cleanup of Leaflet Draw resources:", err);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    // Load initial locations from backend
-    axios
-      .get(`${API_BASE}/locations/v1/locations`)
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          setLocations(res.data);
-          
-          // Generate tourist density data for heatmap based on locations
-          const densityPoints = res.data.map(loc => ({
-            lat: loc.latitude,
-            lng: loc.longitude,
-            value: 60 + Math.floor(Math.random() * 40), // Random intensity between 60-100 for tourists
-            emergency: "Tourist Density"
-          }));
-          
-          setTouristDensityData(densityPoints);
-        }
-      })
-      .catch((err) => console.error("Failed to load initial locations:", err));
-
-    // Load emergency data for heatmap
-    axios
-      .get('/emergency-data.json')
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          // Add emergency data to heatmap
-          setEmergencyData(res.data);
-        }
-      })
-      .catch((err) => console.error("Failed to load emergency data:", err));
-      
-    // Load custom restricted zones from localStorage
     try {
-      const savedZones = localStorage.getItem('customRestrictedZones');
-      if (savedZones) {
-        setCustomRestrictedZones(JSON.parse(savedZones));
-      }
-    } catch (err) {
-      console.error("Failed to load custom zones from localStorage:", err);
-    }
+      // Load initial locations from backend
+      axios
+        .get(`${API_BASE}/locations/v1/locations`)
+        .then((res) => {
+          if (Array.isArray(res.data)) {
+            setLocations(res.data);
+            
+            // Generate tourist density data for heatmap based on locations
+            const densityPoints = res.data.map(loc => ({
+              lat: loc.latitude,
+              lng: loc.longitude,
+              value: 60 + Math.floor(Math.random() * 40),
+              emergency: "Tourist Density"
+            }));
+            
+            setTouristDensityData(densityPoints);
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to load initial locations:", err);
+          // Continue even if this fails
+        });
 
-    // Connect to WebSocket for live updates
-    const socket = io("http://localhost:5000");
-
-    socket.on("connect", () => {
-      console.log("✅ Connected to WebSocket:", socket.id);
-    });
-
-    // Handle live location updates
-    socket.on("locationUpdate", (update) => {
-      setLocations((prev) => {
-        const idx = prev.findIndex((loc) => loc.touristId === update.touristId);
-        if (idx !== -1) {
-          const newArr = [...prev];
-          newArr[idx] = update; // replace the old location
-          return newArr;
-        } else {
-          return [update, ...prev]; // new tourist
-        }
-      });
-      
-      // Also update the tourist density heatmap data
-      setTouristDensityData(prev => {
-        // Add the new location as a heat point
-        return [...prev, {
-          lat: update.latitude,
-          lng: update.longitude,
-          value: 80, // High value for recent updates
-          emergency: "Tourist Density"
-        }];
-      });
-    });
-
-    // Handle emergency updates
-    socket.on("emergencyUpdate", (update) => {
-      if (update && update.lat && update.lng && update.value) {
-        setEmergencyData(prev => {
-          // Check if we already have this location
-          const idx = prev.findIndex(item => 
-            Math.abs(item.lat - update.lat) < 0.001 && 
-            Math.abs(item.lng - update.lng) < 0.001
-          );
-          
-          if (idx !== -1) {
-            const newData = [...prev];
-            newData[idx] = update;
-            return newData;
-          } else {
-            return [...prev, update];
+      // Load emergency data with a more robust approach
+      axios
+        .get('/emergency-data.json')
+        .catch(() => {
+          console.warn("Failed to load emergency data, using fallback data");
+          // Return some fallback data
+          return {
+            data: [
+              { lat: 28.6139, lng: 77.2090, value: 80, emergency: "Medical Assistance" },
+              { lat: 19.0760, lng: 72.8777, value: 70, emergency: "Police Assistance" }
+            ]
+          };
+        })
+        .then((res) => {
+          if (res && Array.isArray(res.data)) {
+            setEmergencyData(res.data);
           }
         });
+        
+      // Load custom restricted zones from localStorage
+      try {
+        const savedZones = localStorage.getItem('customRestrictedZones');
+        if (savedZones) {
+          setCustomRestrictedZones(JSON.parse(savedZones));
+        }
+      } catch (err) {
+        console.error("Failed to load custom zones from localStorage:", err);
       }
-    });
 
-    socket.on("disconnect", () => console.log("❌ Disconnected from WebSocket"));
+      // Connect to WebSocket for live updates - with error handling
+      let socket;
+      try {
+        socket = io("http://localhost:5000", {
+          reconnectionAttempts: 3,
+          timeout: 5000,
+          transports: ['websocket', 'polling']
+        });
 
-    return () => socket.disconnect();
+        socket.on("connect", () => {
+          console.log("✅ Connected to WebSocket:", socket.id);
+        });
+
+        socket.on("connect_error", (err) => {
+          console.warn("WebSocket connection error:", err);
+          // Socket.io will automatically try to reconnect
+        });
+
+        // Handle live location updates
+        socket.on("locationUpdate", (update) => {
+          setLocations((prev) => {
+            const idx = prev.findIndex((loc) => loc.touristId === update.touristId);
+            if (idx !== -1) {
+              const newArr = [...prev];
+              newArr[idx] = update; // replace the old location
+              return newArr;
+            } else {
+              return [update, ...prev]; // new tourist
+            }
+          });
+          
+          // Also update the tourist density heatmap data
+          setTouristDensityData(prev => {
+            // Add the new location as a heat point
+            return [...prev, {
+              lat: update.latitude,
+              lng: update.longitude,
+              value: 80, // High value for recent updates
+              emergency: "Tourist Density"
+            }];
+          });
+        });
+
+        // Handle emergency updates
+        socket.on("emergencyUpdate", (update) => {
+          if (update && update.lat && update.lng && update.value) {
+            setEmergencyData(prev => {
+              // Check if we already have this location
+              const idx = prev.findIndex(item => 
+                Math.abs(item.lat - update.lat) < 0.001 && 
+                Math.abs(item.lng - update.lng) < 0.001
+              );
+              
+              if (idx !== -1) {
+                const newData = [...prev];
+                newData[idx] = update;
+                return newData;
+              } else {
+                return [...prev, update];
+              }
+            });
+          }
+        });
+
+        socket.on("disconnect", () => console.log("❌ Disconnected from WebSocket"));
+      } catch (err) {
+        console.error("Failed to initialize WebSocket:", err);
+        // Continue without socket functionality
+      }
+
+      return () => {
+        if (socket && socket.connected) {
+          socket.disconnect();
+        }
+      };
+    } catch (error) {
+      console.error("Error in main useEffect:", error);
+      setMapError("Failed to initialize map components");
+    }
   }, []);
 
   // Calculate color based on emergency value
@@ -781,6 +505,36 @@ export default function MapView() {
   // Combine emergency data and tourist density data for the heatmap
   const combinedHeatmapData = [...emergencyData, ...touristDensityData];
 
+  // Add a function to focus on Tamil Nadu
+  const focusOnTamilNadu = () => {
+    if (mapRef.current) {
+      mapRef.current.setView([10.8, 78.6], 7);
+    }
+  };
+  
+  // Add a ref to access the map
+  const mapRef = useRef(null);
+  
+  // Add additional Tamil Nadu risk spots with markers
+  const riskMarkers = [
+    { lat: 13.0827, lng: 80.2707, risk: "high", type: "Crime", description: "Chennai Central - Pickpocketing hotspot" },
+    { lat: 9.9252, lng: 78.1198, risk: "high", type: "Crowd", description: "Madurai Temple - Stampede risk during festivals" },
+    { lat: 10.3148, lng: 77.9714, risk: "high", type: "Nature", description: "Kodaikanal cliff paths - Fall hazard" },
+    { lat: 9.2647, lng: 79.3035, risk: "high", type: "Water", description: "Rameswaram sea - Strong undercurrents" },
+    { lat: 8.7642, lng: 77.6941, risk: "medium", type: "Water", description: "Kanyakumari point - High waves" }
+  ];
+
+  // Custom icon for risk markers
+  const getRiskIcon = (risk) => {
+    const color = risk === "high" ? "#ff0000" : risk === "medium" ? "#ff7700" : "#ffcc00";
+    return L.divIcon({
+      className: 'risk-marker',
+      html: `<div style="background-color: ${color}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+  };
+
   return (
     <div className="map-container">
       {!showControls && (
@@ -794,26 +548,16 @@ export default function MapView() {
         </button>
       )}
       
-      {showInfoTooltip && (
-        <div className="info-tooltip">
-          <div className="info-tooltip-content">
-            <h4>Tourist Dashboard Visualization Tools</h4>
-            <p>This dashboard provides multiple visualization methods:</p>
-            <ul>
-              <li><strong>Tourist Density Heatmap:</strong> Shows areas with high concentration of tourists.</li>
-              <li><strong>Restricted Forest Zones:</strong> Displays protected forest areas as red zones where tourist access is limited or prohibited.</li>
-              <li><strong>Draw Custom Zones:</strong> Enable this option to create your own restricted zones by drawing on the map.</li>
-            </ul>
-            <p>Toggle between these visualizations using the controls in the top-right corner.</p>
-            <button 
-              className="btn btn-sm btn-primary" 
-              onClick={() => setShowInfoTooltip(false)}
-            >
-              Got it!
-            </button>
+      {mapError && (
+        <div className="map-error-overlay">
+          <div className="map-error-content">
+            <h3>Map Error</h3>
+            <p>{mapError}</p>
+            <p>Please refresh the page or try again later.</p>
           </div>
         </div>
       )}
+      
       <div className={`map-controls ${showControls ? 'visible' : 'hidden'}`}>
         <div className="map-controls-header">
           <h3>Map Controls</h3>
@@ -833,10 +577,10 @@ export default function MapView() {
             onChange={(e) => setShowHeatmap(e.target.checked)}
           />
           <label className="form-check-label" htmlFor="heatmapToggle">
-            <strong>Tourist Density Heatmap</strong>
+            <strong>Tourist Risk Heatmap</strong>
           </label>
           <div className="form-text small-text">
-            Shows areas with high concentration of tourists
+            Shows high-risk areas for tourists
           </div>
         </div>
         
@@ -857,51 +601,29 @@ export default function MapView() {
           </div>
         </div>
         
-        <div className="form-check form-switch">
-          <input 
-            className="form-check-input" 
-            type="checkbox" 
-            id="drawingToolsToggle" 
-            checked={showDrawingTools}
-            onChange={(e) => setShowDrawingTools(e.target.checked)}
-          />
-          <label className="form-check-label" htmlFor="drawingToolsToggle">
-            <strong>Draw Custom Zones</strong>
-            {showDrawingTools && !leafletDrawLoaded && (
-              <span className="ms-2 text-muted small">(Loading tools...)</span>
-            )}
-          </label>
-          <div className="form-text small-text">
-            Enable to create your own restricted zones on the map
-          </div>
-        </div>
-        
         <div className="intensity-scale-container">
-          <h3>Tourist Activity Visualization</h3>
+          <h3>Tourist Risk Levels</h3>
           <div className="intensity-scale-with-ticks"></div>
+          <div className="scale-labels" style={{display: "flex", justifyContent: "space-between", fontSize: "12px", marginTop: "5px"}}>
+            <span>Low</span>
+            <span>Medium</span>
+            <span>High</span>
+          </div>
         </div>
         
         <div className="emergency-legend">
-          <h3>Emergency Calls</h3>
+          <h3>Risk Categories</h3>
           <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: 'blue' }}></div>
-            <span>Medical Assistance</span>
+            <div className="legend-color" style={{ backgroundColor: '#ff0000' }}></div>
+            <span>High Risk Area</span>
           </div>
           <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: 'green' }}></div>
-            <span>Police Assistance</span>
+            <div className="legend-color" style={{ backgroundColor: '#ff7700' }}></div>
+            <span>Medium Risk Area</span>
           </div>
           <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: 'red' }}></div>
-            <span>Fire Emergency</span>
-          </div>
-          <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: 'purple' }}></div>
-            <span>Natural Disaster</span>
-          </div>
-          <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: 'orange' }}></div>
-            <span>Tourist Density</span>
+            <div className="legend-color" style={{ backgroundColor: '#ffcc00' }}></div>
+            <span>Low Risk Area</span>
           </div>
           
           {showRestrictedForests && (
@@ -911,6 +633,28 @@ export default function MapView() {
             </div>
           )}
         </div>
+        
+        {/* Add a Tamil Nadu focus button */}
+        <div className="region-focus-container" style={{ marginTop: "15px", borderTop: "1px solid rgba(0, 0, 0, 0.1)", paddingTop: "15px" }}>
+          <h3>Region Focus</h3>
+          <button 
+            onClick={focusOnTamilNadu}
+            style={{
+              padding: "8px 12px",
+              backgroundColor: "#ff7700",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              width: "100%",
+              fontWeight: "600",
+              fontSize: "14px",
+              marginTop: "5px"
+            }}
+          >
+            Focus on Tamil Nadu
+          </button>
+        </div>
       </div>
       
       <MapContainer
@@ -918,6 +662,7 @@ export default function MapView() {
         zoom={5}
         style={{ height: "100%", width: "100%" }}
         doubleClickZoom={false}
+        ref={mapRef}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -925,7 +670,7 @@ export default function MapView() {
         />
         
         {/* Heatmap Layer */}
-        {showHeatmap && <HeatmapLayer data={combinedHeatmapData} />}
+        {showHeatmap && <HeatmapLayer data={[]} />}
         
         {/* Restricted Forest Zones layer */}
         {showRestrictedForests && (
@@ -934,9 +679,6 @@ export default function MapView() {
             customZones={customRestrictedZones} 
           />
         )}
-        
-        {/* Drawing tools */}
-        {showDrawingTools && leafletDrawLoaded && <DrawingTools onZoneCreated={handleZoneCreated} />}
         
         {/* Debug component */}
         <LeafletDrawStatus />
@@ -972,7 +714,23 @@ export default function MapView() {
             </Popup>
           </Marker>
         ))}
+        
+        {/* Risk marker points */}
+        {showHeatmap && riskMarkers.map((marker, index) => (
+          <Marker 
+            key={`risk-${index}`} 
+            position={[marker.lat, marker.lng]}
+            icon={getRiskIcon(marker.risk)}
+          >
+            <Popup>
+              <strong>Risk Level:</strong> {marker.risk.toUpperCase()} <br />
+              <strong>Type:</strong> {marker.type} <br />
+              <strong>Details:</strong> {marker.description}
+            </Popup>
+          </Marker>
+        ))}
       </MapContainer>
     </div>
   );
 }
+           
