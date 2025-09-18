@@ -406,8 +406,22 @@ export default function ActiveIncidentsEmergency() {
         </span>
       )
     },
-    { key: "createdAt", label: "Reported", sortable: true },
-    { key: "reportedBy", label: "Reported By", sortable: true },
+    { 
+      key: "createdAt", 
+      label: "Reported", 
+      sortable: true,
+      sortFunction: (a, b) => {
+        // Parse as date, descending (latest first)
+        const dateA = new Date(a.createdAt.replace(/-/g, '/'));
+        const dateB = new Date(b.createdAt.replace(/-/g, '/'));
+        return dateA - dateB;
+      }
+    },
+    { 
+      key: "reportedBy", 
+      label: "Reported By", 
+      sortable: true 
+    },
     { 
       key: "involvedTourists", 
       label: "Affected", 

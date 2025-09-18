@@ -264,7 +264,17 @@ export default function AlertsNotificationCenter() {
         </span>
       )
     },
-    { key: "createdAt", label: "Created", sortable: true },
+    { 
+      key: "createdAt", 
+      label: "Created", 
+      sortable: true,
+      sortFunction: (a, b) => {
+        // Accepts both string or row object
+        const dateA = new Date(typeof a === "object" ? a.createdAt : a);
+        const dateB = new Date(typeof b === "object" ? b.createdAt : b);
+        return dateB - dateA; // Descending: latest first
+      }
+    },
     { key: "assignedTo", label: "Assigned To", sortable: true },
     { 
       key: "affectedTourists", 
