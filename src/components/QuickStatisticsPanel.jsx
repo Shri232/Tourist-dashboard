@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
-const QuickStatisticsPanel = () => {
-  const statsData = {
+const statsByPeriod = {
+  today: {
     touristsPerState: [
       { name: "Madhya Pradesh", value: 2543, color: "#3b82f6" },
       { name: "Tamil Nadu", value: 1876, color: "#f59e0b" },
@@ -21,7 +21,54 @@ const QuickStatisticsPanel = () => {
       { time: "09:48 AM", event: "New restricted zone created in Tamil Nadu" },
       { time: "09:22 AM", event: "Weather alert issued for Manali region" }
     ]
-  };
+  },
+  week: {
+    touristsPerState: [
+      { name: "Madhya Pradesh", value: 15432, color: "#3b82f6" },
+      { name: "Tamil Nadu", value: 12876, color: "#f59e0b" },
+      { name: "Kerala", value: 9245, color: "#10b981" },
+      { name: "Rajasthan", value: 7945, color: "#8b5cf6" },
+      { name: "Goa", value: 5721, color: "#ec4899" }
+    ],
+    trafficSources: [
+      { source: "Direct", percentage: 38 },
+      { source: "Website", percentage: 32 },
+      { source: "Partner Apps", percentage: 20 },
+      { source: "Social Media", percentage: 10 }
+    ],
+    recentActivity: [
+      { time: "Yesterday", event: "VIP visit at Jaipur Palace" },
+      { time: "2 days ago", event: "Cyclone warning for Odisha coast" },
+      { time: "3 days ago", event: "Tourist group rescued in Sikkim" },
+      { time: "4 days ago", event: "Medical camp organized in Kerala" }
+    ]
+  },
+  month: {
+    touristsPerState: [
+      { name: "Madhya Pradesh", value: 65432, color: "#3b82f6" },
+      { name: "Tamil Nadu", value: 52876, color: "#f59e0b" },
+      { name: "Kerala", value: 39245, color: "#10b981" },
+      { name: "Rajasthan", value: 27945, color: "#8b5cf6" },
+      { name: "Goa", value: 15721, color: "#ec4899" }
+    ],
+    trafficSources: [
+      { source: "Direct", percentage: 35 },
+      { source: "Website", percentage: 34 },
+      { source: "Partner Apps", percentage: 21 },
+      { source: "Social Media", percentage: 10 }
+    ],
+    recentActivity: [
+      { time: "Last week", event: "Festival crowd at Kumbh Mela" },
+      { time: "2 weeks ago", event: "Heatwave alert in Rajasthan" },
+      { time: "3 weeks ago", event: "Tourist influx in Goa beaches" },
+      { time: "4 weeks ago", event: "Wildlife sighting in Bandipur" }
+    ]
+  }
+};
+
+const QuickStatisticsPanel = () => {
+  const [period, setPeriod] = useState("today");
+  const statsData = statsByPeriod[period];
 
   // Format large numbers with commas
   const formatNumber = (num) => {
@@ -36,9 +83,24 @@ const QuickStatisticsPanel = () => {
       <div style={styles.header}>
         <h2 style={styles.title}>Quick Statistics</h2>
         <div style={styles.timeFilter}>
-          <button style={{...styles.timeButton, ...styles.timeButtonActive}}>Today</button>
-          <button style={styles.timeButton}>Week</button>
-          <button style={styles.timeButton}>Month</button>
+          <button
+            style={{ ...styles.timeButton, ...(period === "today" ? styles.timeButtonActive : {}) }}
+            onClick={() => setPeriod("today")}
+          >
+            Today
+          </button>
+          <button
+            style={{ ...styles.timeButton, ...(period === "week" ? styles.timeButtonActive : {}) }}
+            onClick={() => setPeriod("week")}
+          >
+            Week
+          </button>
+          <button
+            style={{ ...styles.timeButton, ...(period === "month" ? styles.timeButtonActive : {}) }}
+            onClick={() => setPeriod("month")}
+          >
+            Month
+          </button>
         </div>
       </div>
 
@@ -51,11 +113,11 @@ const QuickStatisticsPanel = () => {
             {statsData.touristsPerState.map((state, index) => (
               <div key={index} style={styles.stateRow}>
                 <div style={styles.stateNameContainer}>
-                  <div style={{...styles.colorDot, backgroundColor: state.color}}></div>
+                  <div style={{ ...styles.colorDot, backgroundColor: state.color }}></div>
                   <span style={styles.stateName}>{state.name}</span>
                 </div>
                 <div style={styles.barContainer}>
-                  <div 
+                  <div
                     style={{
                       ...styles.bar,
                       width: `${(state.value / maxTouristValue) * 100}%`,

@@ -122,11 +122,14 @@ export default function Sidebar({ selected, setSelected }) {
       )}
       
       {/* Help section */}
-      <div style={{
-        ...styles.helpSection,
-        padding: collapsed ? "15px 0" : "15px 20px",
-        justifyContent: collapsed ? "center" : "flex-start"
-      }}>
+      <div
+        style={{
+          ...styles.helpSection,
+          padding: collapsed ? "15px 0" : "15px 20px",
+          justifyContent: collapsed ? "center" : "flex-start"
+        }}
+        onClick={() => setSelected("Help & Support")}
+      >
         <span style={styles.helpIcon}>❓</span>
         {!collapsed && <span style={styles.helpText}>Help & Support</span>}
       </div>

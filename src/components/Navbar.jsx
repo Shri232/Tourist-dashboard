@@ -46,6 +46,36 @@ export default function Navbar({ onLogout }) {
     });
   };
 
+  // Google Translate integration
+  useEffect(() => {
+    // Only add script if not already present
+    if (!window.googleTranslateElementInit) {
+      window.googleTranslateElementInit = function () {
+        /* 
+          If you have an API key for Google Translate, 
+          you can add it in the script src as a query param: 
+          ...element.js?cb=googleTranslateElementInit&key=YOUR_API_KEY 
+        */
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,gu,ta,te,ml,kn,pa,or,bn,mr,ur", // English + 10+ Indian languages
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+          },
+          "google_translate_element"
+        );
+      };
+
+      const script = document.createElement("script");
+      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    } else if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+      window.googleTranslateElementInit();
+    }
+  }, []);
+
   return (
     <nav style={styles.navbar}>
       {/* Left Section - Logo and System Status */}
@@ -66,7 +96,7 @@ export default function Navbar({ onLogout }) {
       {/* Right Section - Controls and Info */}
       <div style={styles.rightSection}>
         {/* Real-time Clock */}
-        <div style={styles.clockContainer}>
+        <div className="clock-container">
           <div style={styles.time}>{formatTime(currentTime)}</div>
           <div style={styles.date}>{formatDate(currentTime)}</div>
         </div>
@@ -96,12 +126,8 @@ export default function Navbar({ onLogout }) {
           <span style={styles.icon}>⚙️</span>
         </div>
 
-        {/* Language Selector */}
-        <select style={styles.select}>
-          <option>🇺🇸 EN</option>
-          <option>🇮🇳 HI</option>
-          <option>🇮🇳 GU</option>
-        </select>
+        {/* Google Translate Widget */}
+        <div id="google_translate_element" style={{ minWidth: 120, marginRight: 10 }}></div>
 
         {/* User Profile Dropdown */}
         <div style={styles.profileContainer}>

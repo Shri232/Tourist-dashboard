@@ -67,10 +67,46 @@ function EnhancedHeatmapLayer({ data, mapMode, intensityFactor = 1, regionFilter
       { lat: 8.0883, lng: 77.5385, value: 60, type: "Low Risk", category: "General", note: "Tirunelveli - Some incidents reported", details: "Minor theft incidents, good police presence." },
       { lat: 10.7672, lng: 78.7139, value: 55, type: "Low Risk", category: "General", note: "Trichy - Low-moderate risk", details: "Well-monitored tourist areas with emergency services." },
       { lat: 12.2253, lng: 79.0747, value: 58, type: "Low Risk", category: "Crowd", note: "Tiruvannamalai - Minor crowd issues", details: "Occasionally crowded during full moon days." },
-      { lat: 12.9165, lng: 79.1325, value: 62, type: "Low Risk", category: "General", note: "Vellore - Minor incidents", details: "Occasional petty crime reported near bus stations." }
+      { lat: 12.9165, lng: 79.1325, value: 62, type: "Low Risk", category: "General", note: "Vellore - Minor incidents", details: "Occasional petty crime reported near bus stations." },
+      
+      // --- New All-India High Risk Zones ---
+      { lat: 28.6139, lng: 77.2090, value: 97, type: "High Risk", category: "Crowd", note: "Delhi Connaught Place", details: "Extremely crowded, pickpocketing and stampede risk during events." },
+      { lat: 19.0760, lng: 72.8777, value: 95, type: "High Risk", category: "Crime", note: "Mumbai CST", details: "Major railway station, theft and crowd risk." },
+      { lat: 22.5726, lng: 88.3639, value: 92, type: "High Risk", category: "Water", note: "Kolkata Howrah Bridge", details: "Dense traffic, river accident risk." },
+      { lat: 26.9124, lng: 75.7873, value: 90, type: "High Risk", category: "Crowd", note: "Jaipur Pink City", details: "Tourist crowding, traffic, and heat stroke risk." },
+      { lat: 23.0225, lng: 72.5714, value: 91, type: "High Risk", category: "Industrial", note: "Ahmedabad Industrial Belt", details: "Chemical exposure and accident risk." },
+      { lat: 12.9716, lng: 77.5946, value: 89, type: "Medium Risk", category: "General", note: "Bangalore MG Road", details: "Crowd and traffic risk, moderate theft." },
+      { lat: 18.5204, lng: 73.8567, value: 85, type: "Medium Risk", category: "Crowd", note: "Pune Railway Station", details: "Crowded, moderate theft and accident risk." },
+      { lat: 21.1702, lng: 72.8311, value: 80, type: "Medium Risk", category: "Water", note: "Surat Tapi Riverfront", details: "Flooding risk during monsoon." },
+      { lat: 25.5941, lng: 85.1376, value: 83, type: "Medium Risk", category: "General", note: "Patna Ganga Ghats", details: "Flood and crowd risk during festivals." },
+      { lat: 13.0827, lng: 80.2707, value: 78, type: "Medium Risk", category: "Crowd", note: "Chennai Egmore", details: "Moderate crowding, theft risk." },
+      { lat: 17.3850, lng: 78.4867, value: 75, type: "Medium Risk", category: "General", note: "Hyderabad Charminar", details: "Crowded, moderate theft and accident risk." },
+      { lat: 15.2993, lng: 74.1240, value: 70, type: "Medium Risk", category: "Water", note: "Goa Baga Beach", details: "Drowning and theft risk during peak season." },
+      { lat: 27.1767, lng: 78.0081, value: 95, type: "High Risk", category: "Crowd", note: "Agra Taj Mahal", details: "Extreme crowding, heat stroke, and theft risk." },
+      { lat: 29.9457, lng: 78.1642, value: 90, type: "High Risk", category: "Crowd", note: "Haridwar Ganga Ghats", details: "Stampede and drowning risk during Kumbh Mela." },
+      { lat: 30.7333, lng: 76.7794, value: 65, type: "Low Risk", category: "General", note: "Chandigarh Rock Garden", details: "Low risk, well-managed tourist area." },
+      { lat: 31.1048, lng: 77.1734, value: 60, type: "Low Risk", category: "General", note: "Shimla Mall Road", details: "Low risk, minor crowding." },
+      { lat: 32.7266, lng: 74.8570, value: 68, type: "Low Risk", category: "General", note: "Jammu City Center", details: "Low risk, good security presence." },
+      { lat: 25.3176, lng: 82.9739, value: 88, type: "Medium Risk", category: "Crowd", note: "Varanasi Ghats", details: "Crowd and drowning risk during festivals." },
+      { lat: 26.8467, lng: 80.9462, value: 82, type: "Medium Risk", category: "General", note: "Lucknow Hazratganj", details: "Moderate crowding, minor theft." },
+      { lat: 28.4089, lng: 77.3178, value: 70, type: "Medium Risk", category: "General", note: "Gurgaon Cyber Hub", details: "Moderate risk, traffic and crowd." },
+      // --- More All-India Zones ---
+      { lat: 23.2599, lng: 77.4126, value: 85, type: "Medium Risk", category: "General", note: "Bhopal Upper Lake", details: "Drowning and boating accident risk." },
+      { lat: 26.8467, lng: 80.9462, value: 80, type: "Medium Risk", category: "General", note: "Lucknow Charbagh", details: "Crowded railway station, moderate theft." },
+      { lat: 24.5854, lng: 73.7125, value: 88, type: "Medium Risk", category: "Crowd", note: "Udaipur City Palace", details: "Tourist crowding, minor theft." },
+      { lat: 11.0168, lng: 76.9558, value: 75, type: "Medium Risk", category: "General", note: "Coimbatore Gandhipuram", details: "Bus stand, moderate crowd and theft." },
+      { lat: 23.1765, lng: 75.7885, value: 70, type: "Medium Risk", category: "General", note: "Ujjain Mahakaleshwar", details: "Pilgrimage crowd, stampede risk during festivals." },
+      { lat: 22.7196, lng: 75.8577, value: 80, type: "Medium Risk", category: "General", note: "Indore Rajwada", details: "Crowded market, moderate theft." },
+      { lat: 21.1458, lng: 79.0882, value: 78, type: "Medium Risk", category: "General", note: "Nagpur Sitabuldi", details: "Crowded area, minor theft." },
+      { lat: 13.6288, lng: 79.4192, value: 85, type: "Medium Risk", category: "Crowd", note: "Tirupati Temple", details: "Pilgrimage crowd, stampede risk." },
+      { lat: 22.3072, lng: 73.1812, value: 70, type: "Medium Risk", category: "General", note: "Vadodara Laxmi Vilas Palace", details: "Tourist crowd, minor theft." },
+      { lat: 23.8315, lng: 91.2868, value: 65, type: "Low Risk", category: "General", note: "Agartala Ujjayanta Palace", details: "Low risk, well-managed." },
+      { lat: 15.3173, lng: 75.7139, value: 60, type: "Low Risk", category: "General", note: "Hubli-Dharwad", details: "Low risk, minor crowding." },
+      { lat: 24.5854, lng: 73.7125, value: 70, type: "Medium Risk", category: "General", note: "Udaipur Lake Pichola", details: "Boating accident risk, moderate crowd." },
+      { lat: 25.5941, lng: 85.1376, value: 75, type: "Medium Risk", category: "General", note: "Patna Gandhi Maidan", details: "Crowd and minor theft." },
+      { lat: 12.2958, lng: 76.6394, value: 68, type: "Low Risk", category: "General", note: "Mysore Palace", details: "Low risk, well-managed." }
     ];
 
-    // Define tourist clusters - separate from risk zones
     const touristClusters = [
       // Major Tourist Hotspots (high density)
       { lat: 13.0827, lng: 80.2707, count: 450, type: "Tourist Cluster", category: "High Density", note: "Chennai Central Area", details: "Major transport hub with continuous tourist flow" },
@@ -88,7 +124,34 @@ function EnhancedHeatmapLayer({ data, mapMode, intensityFactor = 1, regionFilter
       // Lower density areas
       { lat: 12.2253, lng: 79.0747, count: 120, type: "Tourist Cluster", category: "Low Density", note: "Tiruvannamalai Temple", details: "Spiritual site with distributed visitor patterns" },
       { lat: 10.7905, lng: 79.1378, count: 100, type: "Tourist Cluster", category: "Low Density", note: "Thanjavur Palace", details: "Historical site with manageable visitor numbers" },
-      { lat: 11.2342, lng: 78.1694, count: 90, type: "Tourist Cluster", category: "Low Density", note: "Namakkal Fort", details: "Off-beat destination with lower footfall" }
+      { lat: 11.2342, lng: 78.1694, count: 90, type: "Tourist Cluster", category: "Low Density", note: "Namakkal Fort", details: "Off-beat destination with lower footfall" },
+      
+      // --- New All-India Tourist Clusters ---
+      { lat: 28.6139, lng: 77.2090, count: 600, type: "Tourist Cluster", category: "High Density", note: "Delhi India Gate", details: "Major tourist attraction, very high crowd year-round" },
+      { lat: 27.1767, lng: 78.0081, count: 700, type: "Tourist Cluster", category: "High Density", note: "Agra Taj Mahal", details: "World Heritage site, extremely high visitor count" },
+      { lat: 19.0760, lng: 72.8777, count: 550, type: "Tourist Cluster", category: "High Density", note: "Mumbai Gateway of India", details: "Major tourist and local crowd, high density" },
+      { lat: 22.5726, lng: 88.3639, count: 480, type: "Tourist Cluster", category: "High Density", note: "Kolkata Victoria Memorial", details: "Historic site, high tourist density" },
+      { lat: 25.3176, lng: 82.9739, count: 430, type: "Tourist Cluster", category: "High Density", note: "Varanasi Ghats", details: "Pilgrimage and tourism, very high crowd" },
+      { lat: 15.2993, lng: 74.1240, count: 400, type: "Tourist Cluster", category: "High Density", note: "Goa Baga Beach", details: "Peak season beach crowd, high density" },
+      { lat: 31.1048, lng: 77.1734, count: 350, type: "Tourist Cluster", category: "High Density", note: "Shimla Mall Road", details: "Hill station, high tourist density in summer" },
+      { lat: 32.7266, lng: 74.8570, count: 200, type: "Tourist Cluster", category: "Medium Density", note: "Jammu Vaishno Devi", details: "Pilgrimage, moderate crowd" },
+      { lat: 26.9124, lng: 75.7873, count: 300, type: "Tourist Cluster", category: "High Density", note: "Jaipur Amer Fort", details: "Historic fort, high tourist density" },
+      { lat: 23.0225, lng: 72.5714, count: 220, type: "Tourist Cluster", category: "Medium Density", note: "Ahmedabad Sabarmati Ashram", details: "Historic site, moderate crowd" },
+      { lat: 17.3850, lng: 78.4867, count: 250, type: "Tourist Cluster", category: "Medium Density", note: "Hyderabad Charminar", details: "Historic monument, moderate crowd" },
+      { lat: 18.5204, lng: 73.8567, count: 210, type: "Tourist Cluster", category: "Medium Density", note: "Pune Shaniwar Wada", details: "Historic fort, moderate crowd" },
+      { lat: 26.8467, lng: 80.9462, count: 150, type: "Tourist Cluster", category: "Low Density", note: "Lucknow Bara Imambara", details: "Historic site, low-moderate crowd" },
+      { lat: 21.1702, lng: 72.8311, count: 120, type: "Tourist Cluster", category: "Low Density", note: "Surat Dumas Beach", details: "Beach, low-moderate crowd" },
+      { lat: 30.7333, lng: 76.7794, count: 110, type: "Tourist Cluster", category: "Low Density", note: "Chandigarh Rock Garden", details: "Art garden, low crowd" },
+      // --- More All-India Tourist Clusters ---
+      { lat: 23.2599, lng: 77.4126, count: 180, type: "Tourist Cluster", category: "Medium Density", note: "Bhopal Upper Lake", details: "Boating and lakeside tourism" },
+      { lat: 24.5854, lng: 73.7125, count: 220, type: "Tourist Cluster", category: "Medium Density", note: "Udaipur City Palace", details: "Historic palace, moderate crowd" },
+      { lat: 13.6288, lng: 79.4192, count: 350, type: "Tourist Cluster", category: "High Density", note: "Tirupati Temple", details: "Pilgrimage, very high crowd" },
+      { lat: 12.2958, lng: 76.6394, count: 200, type: "Tourist Cluster", category: "Medium Density", note: "Mysore Palace", details: "Historic palace, moderate crowd" },
+      { lat: 21.1458, lng: 79.0882, count: 160, type: "Tourist Cluster", category: "Medium Density", note: "Nagpur Sitabuldi", details: "Market and fort, moderate crowd" },
+      { lat: 22.3072, lng: 73.1812, count: 120, type: "Tourist Cluster", category: "Low Density", note: "Vadodara Laxmi Vilas Palace", details: "Historic palace, low crowd" },
+      { lat: 23.8315, lng: 91.2868, count: 90, type: "Tourist Cluster", category: "Low Density", note: "Agartala Ujjayanta Palace", details: "Royal palace, low crowd" },
+      { lat: 11.0168, lng: 76.9558, count: 140, type: "Tourist Cluster", category: "Low Density", note: "Coimbatore Marudamalai", details: "Temple, low crowd" },
+      { lat: 23.1765, lng: 75.7885, count: 110, type: "Tourist Cluster", category: "Low Density", note: "Ujjain Mahakaleshwar", details: "Pilgrimage, low crowd" }
     ];
 
     // Get Northeast India data

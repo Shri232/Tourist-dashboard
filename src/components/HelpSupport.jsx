@@ -19,7 +19,7 @@ export default function HelpSupport() {
     { key: "user-guide", label: "User Guide", icon: "📚" },
     { key: "faq", label: "FAQ", icon: "❓" },
     { key: "troubleshooting", label: "Troubleshooting", icon: "🔧" },
-    { key: "api-docs", label: "API Documentation", icon: "⚡" },
+    // { key: "api-docs", label: "API Documentation", icon: "⚡" },
     { key: "contact", label: "Contact Support", icon: "📞" },
     { key: "resources", label: "Resources", icon: "📋" }
   ];
@@ -431,82 +431,6 @@ export default function HelpSupport() {
             </div>
           )}
 
-          {activeSection === "api-docs" && (
-            <div style={styles.section}>
-              <h2 style={styles.sectionTitle}>⚡ API Documentation</h2>
-              
-              <div style={styles.apiSection}>
-                <div style={styles.apiOverview}>
-                  <h3>API Overview</h3>
-                  <p>The Tourist Safety Dashboard provides RESTful APIs for integration with external systems.</p>
-                  
-                  <div style={styles.apiDetails}>
-                    <div style={styles.apiDetailItem}>
-                      <strong>Base URL:</strong> https://api.touristsafety.com/v1
-                    </div>
-                    <div style={styles.apiDetailItem}>
-                      <strong>Authentication:</strong> Bearer Token (JWT)
-                    </div>
-                    <div style={styles.apiDetailItem}>
-                      <strong>Rate Limiting:</strong> 1000 requests per hour
-                    </div>
-                    <div style={styles.apiDetailItem}>
-                      <strong>Data Format:</strong> JSON
-                    </div>
-                  </div>
-                </div>
-
-                <div style={styles.apiEndpoints}>
-                  <h3>Main Endpoints</h3>
-                  
-                  <div style={styles.endpointCard}>
-                    <div style={styles.endpointHeader}>
-                      <span style={styles.httpMethod}>GET</span>
-                      <span style={styles.endpointPath}>/tourists</span>
-                    </div>
-                    <p>Retrieve list of registered tourists with optional filtering</p>
-                    <div style={styles.codeBlock}>
-                      <code>curl -H "Authorization: Bearer YOUR_TOKEN" https://api.touristsafety.com/v1/tourists</code>
-                    </div>
-                  </div>
-
-                  <div style={styles.endpointCard}>
-                    <div style={styles.endpointHeader}>
-                      <span style={styles.httpMethod}>POST</span>
-                      <span style={styles.endpointPath}>/incidents</span>
-                    </div>
-                    <p>Create a new incident report</p>
-                    <div style={styles.codeBlock}>
-                      <code>curl -X POST -H "Authorization: Bearer YOUR_TOKEN" -d '{JSON_DATA}' https://api.touristsafety.com/v1/incidents</code>
-                    </div>
-                  </div>
-
-                  <div style={styles.endpointCard}>
-                    <div style={styles.endpointHeader}>
-                      <span style={styles.httpMethod}>POST</span>
-                      <span style={styles.endpointPath}>/alerts</span>
-                    </div>
-                    <p>Send emergency alert to registered tourists</p>
-                    <div style={styles.codeBlock}>
-                      <code>curl -X POST -H "Authorization: Bearer YOUR_TOKEN" -d '{JSON_DATA}' https://api.touristsafety.com/v1/alerts</code>
-                    </div>
-                  </div>
-                </div>
-
-                <div style={styles.apiResources}>
-                  <h3>Additional Resources</h3>
-                  <ul>
-                    <li><a href="#" style={styles.apiLink}>Complete API Reference</a></li>
-                    <li><a href="#" style={styles.apiLink}>Authentication Guide</a></li>
-                    <li><a href="#" style={styles.apiLink}>Code Examples</a></li>
-                    <li><a href="#" style={styles.apiLink}>SDK Downloads</a></li>
-                    <li><a href="#" style={styles.apiLink}>Webhook Documentation</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
           {activeSection === "contact" && (
             <div style={styles.section}>
               <h2 style={styles.sectionTitle}>📞 Contact Support</h2>
@@ -671,7 +595,7 @@ export default function HelpSupport() {
                 <div style={styles.resourceCard}>
                   <h3>🔧 Technical Resources</h3>
                   <ul style={styles.resourceList}>
-                    <li><a href="#" style={styles.resourceLink}>API Documentation</a></li>
+                    {/* <li><a href="#" style={styles.resourceLink}>API Documentation</a></li> */}
                     <li><a href="#" style={styles.resourceLink}>Integration Guide</a></li>
                     <li><a href="#" style={styles.resourceLink}>System Requirements</a></li>
                     <li><a href="#" style={styles.resourceLink}>Troubleshooting Guide</a></li>
@@ -986,77 +910,6 @@ const styles = {
   },
   troubleshootingSteps: {
     marginTop: "16px"
-  },
-  apiSection: {
-    backgroundColor: "#f9fafb",
-    borderRadius: "12px",
-    padding: "24px",
-    border: "1px solid #e5e7eb"
-  },
-  apiOverview: {
-    marginBottom: "32px"
-  },
-  apiDetails: {
-    backgroundColor: "white",
-    padding: "16px",
-    borderRadius: "8px",
-    border: "1px solid #e5e7eb",
-    marginTop: "16px"
-  },
-  apiDetailItem: {
-    padding: "8px 0",
-    borderBottom: "1px solid #f3f4f6",
-    fontSize: "14px"
-  },
-  apiEndpoints: {
-    marginBottom: "32px"
-  },
-  endpointCard: {
-    backgroundColor: "white",
-    padding: "16px",
-    borderRadius: "8px",
-    border: "1px solid #e5e7eb",
-    marginBottom: "16px"
-  },
-  endpointHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginBottom: "8px"
-  },
-  httpMethod: {
-    backgroundColor: "#10b981",
-    color: "white",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    fontSize: "12px",
-    fontWeight: "600"
-  },
-  endpointPath: {
-    fontFamily: "monospace",
-    fontSize: "14px",
-    fontWeight: "600"
-  },
-  codeBlock: {
-    backgroundColor: "#1f2937",
-    color: "#f9fafb",
-    padding: "12px",
-    borderRadius: "6px",
-    fontFamily: "monospace",
-    fontSize: "12px",
-    marginTop: "8px",
-    overflow: "auto"
-  },
-  apiResources: {
-    backgroundColor: "white",
-    padding: "16px",
-    borderRadius: "8px",
-    border: "1px solid #e5e7eb"
-  },
-  apiLink: {
-    color: "#3b82f6",
-    textDecoration: "none",
-    fontWeight: "500"
   },
   contactGrid: {
     display: "grid",
